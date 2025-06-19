@@ -649,6 +649,146 @@ const MarketMapApp = () => {
           </div>
         )}
 
+        {/* Executive Summary Section - Moved to Top */}
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-lg p-8 border border-blue-100">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3">Executive Summary</h3>
+                <div className="w-24 h-1 bg-blue-500 mx-auto"></div>
+                <p className="text-gray-600 mt-3">Strategic Overview and Key Insights</p>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                {/* Key Market Metrics */}
+                <div className="bg-white rounded-lg p-6 shadow-sm border">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <span className="w-3 h-3 bg-blue-500 rounded-full mr-3"></span>
+                    Market Opportunity
+                  </h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Total Market Size:</span>
+                      <span className="font-semibold text-blue-600">{formatCurrency(analysis.market_map.total_market_size)}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Growth Rate:</span>
+                      <span className="font-semibold text-green-600">{(analysis.market_map.market_growth_rate * 100).toFixed(1)}% CAGR</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Serviceable Market:</span>
+                      <span className="font-semibold text-orange-600">{formatCurrency(analysis.market_map.total_market_size * 0.3)}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Target Revenue:</span>
+                      <span className="font-semibold text-purple-600">{formatCurrency(analysis.market_map.total_market_size * 0.03)}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Competitive Landscape */}
+                <div className="bg-white rounded-lg p-6 shadow-sm border">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <span className="w-3 h-3 bg-orange-500 rounded-full mr-3"></span>
+                    Competitive Dynamics
+                  </h4>
+                  <div className="space-y-3">
+                    {analysis.market_map.competitors.slice(0, 4).map((competitor, index) => (
+                      <div key={index} className="flex justify-between items-center">
+                        <span className="text-sm text-gray-700 font-medium">{competitor.name}</span>
+                        <span className="text-xs bg-gray-100 px-2 py-1 rounded">
+                          {competitor.market_share ? `${(competitor.market_share * 100).toFixed(0)}%` : 'N/A'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-gray-100">
+                    <p className="text-xs text-gray-600">
+                      Market features {analysis.market_map.competitors.length} key players with opportunities for differentiation
+                    </p>
+                  </div>
+                </div>
+
+                {/* Strategic Priorities */}
+                <div className="bg-white rounded-lg p-6 shadow-sm border">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <span className="w-3 h-3 bg-green-500 rounded-full mr-3"></span>
+                    Key Drivers & Trends
+                  </h4>
+                  <div className="space-y-3">
+                    {analysis.market_map.key_drivers.slice(0, 4).map((driver, index) => (
+                      <div key={index} className="flex items-start">
+                        <span className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="text-sm text-gray-700">{driver}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-gray-100">
+                    <p className="text-xs text-gray-600">
+                      Primary growth driven by {analysis.market_input.demand_driver}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Detailed Executive Summary Text */}
+              {analysis.market_map && analysis.market_map.executive_summary ? (
+                <div className="bg-white rounded-lg p-8 shadow-sm border">
+                  <div className="prose prose-lg max-w-none">
+                    <div className="text-gray-700 leading-relaxed whitespace-pre-line text-base">
+                      {analysis.market_map.executive_summary}
+                    </div>
+                  </div>
+                  
+                  {/* Analysis Metadata */}
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                      <div>
+                        <span className="font-medium text-gray-600">Analysis Date:</span>
+                        <span className="ml-2 text-gray-700">
+                          {new Date(analysis.market_map.timestamp).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-600">Confidence Level:</span>
+                        <span className={`ml-2 px-2 py-1 rounded text-xs font-medium ${
+                          analysis.market_map.confidence_level === 'high' ? 'bg-green-100 text-green-700' :
+                          analysis.market_map.confidence_level === 'medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'
+                        }`}>
+                          {analysis.market_map.confidence_level.toUpperCase()}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-600">Data Sources:</span>
+                        <div className="ml-2 space-y-1">
+                          {analysis.market_map.data_sources.map((source, index) => (
+                            <div key={index}>
+                              {source.url ? (
+                                <a 
+                                  href={source.url} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:text-blue-800 underline text-xs"
+                                >
+                                  {source.name}
+                                </a>
+                              ) : (
+                                <span className="text-gray-700 text-xs">{source}</span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-white rounded-lg p-8 shadow-sm border">
+                  <div className="text-gray-600 italic text-center py-8">
+                    Executive summary will be generated with the market analysis
+                  </div>
+                </div>
+              )}
+            </div>
+
         {/* Results Step - Market Map */}
         {currentStep === 4 && analysis && (
           <div className="space-y-8">

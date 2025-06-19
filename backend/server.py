@@ -559,9 +559,9 @@ class MarketIntelligenceAgent:
             },
             "segmentation": {
                 "by_geographics": [
-                    {"name": "North America", "description": "Primary market in US and Canada", "size": fallback_tam * 0.4, "growth": 0.06, "key_players": ["Market Leader A", "Company B"]},
-                    {"name": "Europe", "description": "European market segment", "size": fallback_tam * 0.3, "growth": 0.08, "key_players": ["Company C", "Leader D"]},
-                    {"name": "Asia-Pacific", "description": "Growing APAC markets", "size": fallback_tam * 0.3, "growth": 0.12, "key_players": ["Enterprise Corp", "Big Co"]}
+                    {"name": "Major Metro Areas", "description": "Top 20 US metro markets including NYC (DMA 501), LA (DMA 803), Chicago (DMA 602) with urban density >2500/sq mi", "size": fallback_tam * 0.45, "growth": 0.07, "key_players": ["Market Leader A", "Company B"]},
+                    {"name": "Suburban Growth Markets", "description": "Expanding suburban areas in TX, FL, AZ, NC with household income >$75K and density 1000-2500/sq mi", "size": fallback_tam * 0.35, "growth": 0.09, "key_players": ["Company C", "Leader D"]},
+                    {"name": "Secondary Cities & Rural", "description": "Mid-size cities (100K-500K population) and rural areas with growing broadband adoption", "size": fallback_tam * 0.20, "growth": 0.11, "key_players": ["Enterprise Corp", "Regional Co"]}
                 ],
                 "by_demographics": [
                     {"name": "Young Adults", "description": "Tech-savvy professionals 25-35", "size": fallback_tam * 0.4, "growth": 0.10, "key_players": ["Leader 1", "Company 2"]},

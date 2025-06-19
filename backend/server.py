@@ -562,9 +562,10 @@ class VisualMapGenerator:
     def generate_visual_market_map(market_data: Dict[str, Any], product_name: str) -> Dict[str, Any]:
         """Generate professional visual market map with segments and styling"""
         # Extract segmentation data
-        functional_segments = market_data.get("segmentation", {}).get("by_function", [])
-        user_segments = market_data.get("segmentation", {}).get("by_user", [])
-        price_segments = market_data.get("segmentation", {}).get("by_price", [])
+        geographic_segments = market_data.get("segmentation", {}).get("by_geographics", [])
+        demographic_segments = market_data.get("segmentation", {}).get("by_demographics", [])
+        psychographic_segments = market_data.get("segmentation", {}).get("by_psychographics", [])
+        behavioral_segments = market_data.get("segmentation", {}).get("by_behavioral", [])
 
         # Create visual market map structure
         visual_map = {
@@ -576,14 +577,14 @@ class VisualMapGenerator:
             "market_overview": market_data.get("market_overview", {})
         }
 
-        # Process functional segments
-        for i, segment in enumerate(functional_segments):
-            icon = "🔧" if i == 0 else "⚡" if i == 1 else "🏥" if i == 2 else "🔬"
-            color = "orange" if i == 0 else "blue" if i == 1 else "green" if i == 2 else "purple"
+        # Process geographic segments
+        for i, segment in enumerate(geographic_segments):
+            icon = "🌍" if i == 0 else "🏙️" if i == 1 else "🌆" if i == 2 else "🏞️"
+            color = "blue" if i == 0 else "green" if i == 1 else "teal" if i == 2 else "indigo"
             
-            visual_map["functional_segments"].append({
-                "name": segment.get("name", f"Segment {i+1}"),
-                "description": segment.get("description", "Market segment"),
+            visual_map["geographic_segments"].append({
+                "name": segment.get("name", f"Geographic Segment {i+1}"),
+                "description": segment.get("description", "Geographic market segment"),
                 "size": segment.get("size", 1000000000),
                 "growth": segment.get("growth", 0.05),
                 "icon": icon,
@@ -591,14 +592,14 @@ class VisualMapGenerator:
                 "key_players": segment.get("key_players", [])
             })
 
-        # Process user segments
-        for i, segment in enumerate(user_segments):
-            icon = "👥" if i == 0 else "🏃" if i == 1 else "👴" if i == 2 else "👨‍💼"
-            color = "teal" if i == 0 else "red" if i == 1 else "indigo" if i == 2 else "gray"
+        # Process demographic segments
+        for i, segment in enumerate(demographic_segments):
+            icon = "👥" if i == 0 else "👨‍💼" if i == 1 else "👩‍🎓" if i == 2 else "👨‍👩‍👧‍👦"
+            color = "orange" if i == 0 else "red" if i == 1 else "purple" if i == 2 else "pink"
             
-            visual_map["user_segments"].append({
-                "name": segment.get("name", f"User Segment {i+1}"),
-                "description": segment.get("description", "User segment"),
+            visual_map["demographic_segments"].append({
+                "name": segment.get("name", f"Demographic Segment {i+1}"),
+                "description": segment.get("description", "Demographic market segment"),
                 "size": segment.get("size", 500000000),
                 "growth": segment.get("growth", 0.06),
                 "icon": icon,
@@ -606,16 +607,31 @@ class VisualMapGenerator:
                 "key_players": segment.get("key_players", [])
             })
 
-        # Process price segments
-        for i, segment in enumerate(price_segments):
-            icon = "💰" if i == 0 else "💎" if i == 1 else "👑" if i == 2 else "🏆"
-            color = "green" if i == 0 else "blue" if i == 1 else "purple" if i == 2 else "gold"
+        # Process psychographic segments
+        for i, segment in enumerate(psychographic_segments):
+            icon = "🧠" if i == 0 else "💭" if i == 1 else "🎯" if i == 2 else "💡"
+            color = "yellow" if i == 0 else "amber" if i == 1 else "lime" if i == 2 else "emerald"
             
-            visual_map["price_segments"].append({
-                "name": segment.get("name", f"Price Tier {i+1}"),
-                "description": segment.get("description", "Price segment"),
+            visual_map["psychographic_segments"].append({
+                "name": segment.get("name", f"Psychographic Segment {i+1}"),
+                "description": segment.get("description", "Psychographic market segment"),
                 "size": segment.get("size", 800000000),
                 "growth": segment.get("growth", 0.07),
+                "icon": icon,
+                "color": color,
+                "key_players": segment.get("key_players", [])
+            })
+
+        # Process behavioral segments
+        for i, segment in enumerate(behavioral_segments):
+            icon = "🛒" if i == 0 else "🔄" if i == 1 else "📈" if i == 2 else "⚡"
+            color = "violet" if i == 0 else "cyan" if i == 1 else "rose" if i == 2 else "slate"
+            
+            visual_map["behavioral_segments"].append({
+                "name": segment.get("name", f"Behavioral Segment {i+1}"),
+                "description": segment.get("description", "Behavioral market segment"),
+                "size": segment.get("size", 600000000),
+                "growth": segment.get("growth", 0.08),
                 "icon": icon,
                 "color": color,
                 "key_players": segment.get("key_players", [])

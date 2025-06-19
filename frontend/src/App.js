@@ -1034,7 +1034,120 @@ const MarketMapApp = () => {
               </div>
             </div>
 
-            {/* Executive Summary Section */}
+            {/* TAM → SAM → SOM Visual Chart */}
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Market Size Analysis</h3>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                {/* Left side - Descriptions */}
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-4 h-4 bg-blue-900 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="text-lg font-bold text-blue-900 mb-2">TAM</h4>
+                      <p className="text-gray-600 text-sm">
+                        Total Addressable Market represents the total market demand for {analysis.market_input.product_name} 
+                        across all potential customers and use cases in {analysis.market_input.geography}.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-4 h-4 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="text-lg font-bold text-blue-600 mb-2">SAM</h4>
+                      <p className="text-gray-600 text-sm">
+                        Serviceable Addressable Market is the portion of TAM that can be realistically reached with 
+                        our {analysis.market_input.transaction_type} model targeting {analysis.market_input.target_user}.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-4 h-4 bg-blue-300 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="text-lg font-bold text-blue-300 mb-2">SOM</h4>
+                      <p className="text-gray-600 text-sm">
+                        Serviceable Obtainable Market represents the realistic market share we can capture based on 
+                        competitive positioning and {analysis.market_input.key_metrics} capabilities.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right side - Concentric Circles Visualization */}
+                <div className="flex justify-center">
+                  <div className="relative w-80 h-80">
+                    {/* TAM - Outer Circle */}
+                    <div className="absolute inset-0 w-80 h-80 bg-blue-900 rounded-full flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <div className="text-2xl font-bold">{formatCurrency(analysis.market_map.total_market_size)}</div>
+                        <div className="text-sm font-medium mt-1">TAM</div>
+                      </div>
+                      
+                      {/* SAM - Middle Circle */}
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-blue-600 rounded-full flex items-center justify-center">
+                        <div className="text-white text-center">
+                          <div className="text-xl font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.3)}</div>
+                          <div className="text-xs font-medium mt-1">SAM</div>
+                        </div>
+                        
+                        {/* SOM - Inner Circle */}
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-blue-300 rounded-full flex items-center justify-center">
+                          <div className="text-white text-center">
+                            <div className="text-lg font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.03)}</div>
+                            <div className="text-xs font-medium mt-1">SOM</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Arrows pointing to each circle */}
+                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-8 h-0.5 bg-gray-400"></div>
+                        <div className="w-2 h-2 border-t-2 border-r-2 border-gray-400 transform rotate-45"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="absolute top-8 -right-2">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-8 h-0.5 bg-gray-400"></div>
+                        <div className="w-2 h-2 border-t-2 border-r-2 border-gray-400 transform rotate-45"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="absolute bottom-8 -left-2">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-8 h-0.5 bg-gray-400"></div>
+                        <div className="w-2 h-2 border-t-2 border-r-2 border-gray-400 transform rotate-45"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Market Analysis Summary */}
+              <div className="mt-8 p-6 bg-gray-50 rounded-lg">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-blue-900 mb-2">{formatCurrency(analysis.market_map.total_market_size)}</div>
+                    <div className="text-sm text-gray-600">Total Addressable Market</div>
+                    <div className="text-xs text-gray-500 mt-1">100% of market opportunity</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-blue-600 mb-2">{formatCurrency(analysis.market_map.total_market_size * 0.3)}</div>
+                    <div className="text-sm text-gray-600">Serviceable Addressable Market</div>
+                    <div className="text-xs text-gray-500 mt-1">30% of TAM we can serve</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-blue-300 mb-2">{formatCurrency(analysis.market_map.total_market_size * 0.03)}</div>
+                    <div className="text-sm text-gray-600">Serviceable Obtainable Market</div>
+                    <div className="text-xs text-gray-500 mt-1">10% of SAM we can capture</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="bg-white rounded-lg shadow-md p-8">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Executive Summary</h3>

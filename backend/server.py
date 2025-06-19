@@ -832,9 +832,10 @@ async def get_analysis(analysis_id: str):
         # Generate visual map using the existing segmentation data
         visual_map = VisualMapGenerator.generate_visual_market_map({
             "segmentation": {
-                "by_function": market_map["segmentation_by_function"],
-                "by_user": market_map["segmentation_by_user"],
-                "by_price": market_map["segmentation_by_price"]
+                "by_geographics": market_map["segmentation_by_geographics"],
+                "by_demographics": market_map["segmentation_by_demographics"],
+                "by_psychographics": market_map["segmentation_by_psychographics"],
+                "by_behavioral": market_map["segmentation_by_behavioral"]
             }
         }, market_input["product_name"])
 

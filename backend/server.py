@@ -347,6 +347,64 @@ class MarketIntelligenceAgent:
                     content = content[:-3]
                 
                 ai_analysis = json.loads(content)
+                # After getting the initial analysis, generate an executive summary
+                try:
+                    summary_prompt = f"""
+                    Based on the comprehensive market analysis for {market_input.product_name}, write a professional executive summary that synthesizes all findings into a cohesive strategic overview.
+
+                    MARKET DATA TO SYNTHESIZE:
+                    - Total Market Size: {ai_analysis.get('market_overview', {}).get('total_market_size', 'N/A')}
+                    - Growth Rate: {ai_analysis.get('market_overview', {}).get('growth_rate', 'N/A')}
+                    - Key Competitors: {[comp.get('name', 'N/A') for comp in ai_analysis.get('competitors', [])]}
+                    - Geographic Segments: {[seg.get('name', 'N/A') for seg in ai_analysis.get('segmentation', {}).get('by_geographics', [])]}
+                    - Target Users: {market_input.target_user}
+                    - Market Drivers: {ai_analysis.get('market_overview', {}).get('key_drivers', [])}
+
+                    Write a 300-400 word executive summary following this structure:
+
+                    **MARKET OPPORTUNITY OVERVIEW**
+                    Start with a compelling opening about the market opportunity size and growth potential.
+
+                    **COMPETITIVE LANDSCAPE**
+                    Summarize the competitive dynamics and key players' positioning.
+
+                    **MARKET SEGMENTATION INSIGHTS**
+                    Highlight the most attractive market segments and why they represent opportunities.
+
+                    **STRATEGIC RECOMMENDATIONS**
+                    Conclude with 2-3 high-impact strategic priorities for market entry/expansion.
+
+                    Write in a professional, consulting-style tone suitable for C-level executives. Use specific data points and avoid generic statements. Focus on actionable insights and strategic implications.
+                    """
+
+                    summary_response = await asyncio.to_thread(
+                        openai_client.chat.completions.create,
+                        model="gpt-4",
+                        messages=[{"role": "user", "content": summary_prompt}],
+                        temperature=0.1,
+                        max_tokens=600
+                    )
+                    
+                    executive_summary = summary_response.choices[0].message.content.strip()
+                    ai_analysis["executive_summary"] = executive_summary
+                    logger.info("Executive summary generated successfully")
+                    
+                except Exception as e:
+                    logger.error(f"Error generating executive summary: {e}")
+                    ai_analysis["executive_summary"] = f"""
+                    **MARKET OPPORTUNITY OVERVIEW**
+                    The {market_input.product_name} market represents a significant opportunity driven by {market_input.demand_driver}. With a total addressable market and strong growth trajectory, this sector presents compelling investment potential for organizations targeting {market_input.target_user}.
+
+                    **COMPETITIVE LANDSCAPE**
+                    The market features established players alongside emerging competitors, creating opportunities for differentiation through {market_input.key_metrics} optimization and strategic positioning in underserved segments.
+
+                    **MARKET SEGMENTATION INSIGHTS**
+                    Geographic and demographic segmentation reveals distinct opportunities across various market segments, with particular strength in areas experiencing rapid adoption of {market_input.transaction_type} models.
+
+                    **STRATEGIC RECOMMENDATIONS**
+                    Key priorities include focused market entry in high-growth segments, strategic partnerships with established players, and investment in capabilities that leverage {market_input.demand_driver} trends to capture market share.
+                    """
+
                 logger.info(f"AI analysis completed for {market_input.product_name}")
                 return ai_analysis
                 

@@ -21,14 +21,15 @@ const MarketMapApp = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState({
     currentStep: 0,
-    totalSteps: 4,
+    totalSteps: 5,
     stepName: '',
     estimatedTimeLeft: 0,
     steps: [
-      { name: 'Analyzing Market Landscape with AI', duration: 20 },
-      { name: 'Processing Competitive Intelligence', duration: 8 },
-      { name: 'Generating Market Segmentation', duration: 7 },
-      { name: 'Creating Visual Market Map', duration: 5 }
+      { name: 'Analyzing Market Landscape with AI', duration: 25 },
+      { name: 'Processing Competitive Intelligence', duration: 15 },
+      { name: 'Generating Market Segmentation', duration: 10 },
+      { name: 'Creating Executive Summary', duration: 20 },
+      { name: 'Finalizing Visual Market Map', duration: 10 }
     ]
   });
   const [analysis, setAnalysis] = useState(null);

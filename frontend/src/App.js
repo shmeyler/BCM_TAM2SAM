@@ -548,10 +548,10 @@ const MarketMapApp = () => {
                     )}
                   </button>
 
-                  {/* Progress Indicator */}
+                  {/* Progress Indicator - Full Width */}
                   {isAnalyzing && (
-                    <div className="mt-6 w-full max-w-md">
-                      <div className="bg-white p-6 rounded-lg shadow-lg border">
+                    <div className="mt-6 w-full">
+                      <div className="bg-white p-6 rounded-lg shadow-lg border max-w-2xl mx-auto">
                         <div className="text-center mb-4">
                           <h4 className="text-lg font-semibold text-gray-900 mb-2">Market Analysis in Progress</h4>
                           <p className="text-sm text-gray-600">
@@ -605,6 +605,26 @@ const MarketMapApp = () => {
                               <span>{step.name}</span>
                             </div>
                           ))}
+                        </div>
+
+                        {/* Cancel Button - Proper Button Style */}
+                        <div className="mt-6 pt-4 border-t border-gray-100 text-center">
+                          <button
+                            onClick={() => {
+                              if (window.confirm('Are you sure you want to cancel the analysis? This will stop the current process.')) {
+                                setIsAnalyzing(false);
+                                setAnalysisProgress(prev => ({
+                                  ...prev,
+                                  currentStep: 0,
+                                  stepName: '',
+                                  estimatedTimeLeft: 0
+                                }));
+                              }
+                            }}
+                            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+                          >
+                            Cancel Analysis
+                          </button>
                         </div>
 
                         {/* Subtle help text */}

@@ -676,15 +676,59 @@ class ComprehensiveAnalysisEngine:
                     price_range=comp.get("price_range", "$100-$250")
                 ))
 
+            # Initialize empty segment lists if not present in segmentation
+            geographic_segments = []
+            demographic_segments = []
+            psychographic_segments = []
+            behavioral_segments = []
+            
+            # Convert segments if they exist in the segmentation data
+            for seg in segmentation.get("by_geographics", []):
+                geographic_segments.append(MarketSegment(
+                    name=seg.get("name", "Geographic Segment"),
+                    description=seg.get("description", "Geographic segment"),
+                    size_estimate=float(seg.get("size", 1000000000)),
+                    growth_rate=float(seg.get("growth", 0.05)),
+                    key_players=seg.get("key_players", ["Company A", "Company B"])
+                ))
+            
+            for seg in segmentation.get("by_demographics", []):
+                demographic_segments.append(MarketSegment(
+                    name=seg.get("name", "Demographic Segment"),
+                    description=seg.get("description", "Demographic segment"),
+                    size_estimate=float(seg.get("size", 1000000000)),
+                    growth_rate=float(seg.get("growth", 0.05)),
+                    key_players=seg.get("key_players", ["Company A", "Company B"])
+                ))
+            
+            for seg in segmentation.get("by_psychographics", []):
+                psychographic_segments.append(MarketSegment(
+                    name=seg.get("name", "Psychographic Segment"),
+                    description=seg.get("description", "Psychographic segment"),
+                    size_estimate=float(seg.get("size", 1000000000)),
+                    growth_rate=float(seg.get("growth", 0.05)),
+                    key_players=seg.get("key_players", ["Company A", "Company B"])
+                ))
+            
+            for seg in segmentation.get("by_behavioral", []):
+                behavioral_segments.append(MarketSegment(
+                    name=seg.get("name", "Behavioral Segment"),
+                    description=seg.get("description", "Behavioral segment"),
+                    size_estimate=float(seg.get("size", 1000000000)),
+                    growth_rate=float(seg.get("growth", 0.05)),
+                    key_players=seg.get("key_players", ["Company A", "Company B"])
+                ))
+
             return MarketMap(
                 id=str(uuid.uuid4()),
                 market_input_id=market_input.id,
                 total_market_size=float(market_overview.get("total_market_size", 5000000000)),
                 market_growth_rate=float(market_overview.get("growth_rate", 0.08)),
                 key_drivers=market_overview.get("key_drivers", ["Digital transformation", "Consumer demand"]),
-                segmentation_by_function=functional_segments,
-                segmentation_by_user=user_segments,
-                segmentation_by_price=price_segments,
+                segmentation_by_geographics=geographic_segments,
+                segmentation_by_demographics=demographic_segments,
+                segmentation_by_psychographics=psychographic_segments,
+                segmentation_by_behavioral=behavioral_segments,
                 competitors=competitor_objects,
                 opportunities=opportunities,
                 threats=threats,

@@ -243,7 +243,7 @@ const MarketMapApp = () => {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
-                <span className="text-2xl font-bold text-orange-500">MM</span>
+                <span className="text-2xl font-bold text-orange-500">BCM</span>
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">Market Map Generator</h1>

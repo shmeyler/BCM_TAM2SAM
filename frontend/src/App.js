@@ -242,7 +242,7 @@ const MarketMapApp = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4 p-2">
+              <div className="w-12 h-12 flex items-center justify-center mr-4">
                 <img 
                   src="https://www.beebyclarkmeyler.com/hs-fs/hubfs/BCM_2024_Logo_Update_White.png?width=2550&height=3300&name=BCM_2024_Logo_Update_White.png" 
                   alt="BCM Logo" 

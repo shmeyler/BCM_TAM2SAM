@@ -862,6 +862,7 @@ class ComprehensiveAnalysisEngine:
                 data_sources=ai_analysis.get("data_sources", ["Industry reports", "Market research", "Public data"]),
                 confidence_level=ai_analysis.get("confidence_level", "medium"),
                 methodology=ai_analysis.get("methodology", "AI-powered analysis with market research"),
+                executive_summary=ai_analysis.get("executive_summary", "Executive summary not available"),
                 timestamp=datetime.utcnow()
             )
 

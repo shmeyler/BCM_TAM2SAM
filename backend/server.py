@@ -426,25 +426,28 @@ class MarketIntelligenceAgent:
                 "segmentation": {
                     "by_geographics": [
                         {
-                            "name": f"North America",
-                            "description": f"Primary geographic market in North America",
+                            "name": f"Major US Metro Areas",
+                            "description": f"Urban markets in NYC, LA, Chicago, SF, Boston metro areas with high population density",
                             "size": int(sam * 0.4),
-                            "growth": curated_data['growth_rate'] * 0.8,
-                            "key_players": curated_data['competitors'][:2]
+                            "growth": curated_data['growth_rate'] * 0.9,
+                            "key_players": curated_data['competitors'][:2],
+                            "geographic_factors": ["NYC DMA 501", "LA DMA 803", "Chicago DMA 602", "Urban density >3000/sq mi"]
                         },
                         {
-                            "name": f"Europe",
-                            "description": f"European market segment",
-                            "size": int(sam * 0.3),
-                            "growth": curated_data['growth_rate'],
-                            "key_players": curated_data['competitors'][1:3]
+                            "name": f"Suburban Growth Markets",
+                            "description": f"Suburban areas in TX, FL, AZ, NC with expanding populations and disposable income",
+                            "size": int(sam * 0.35),
+                            "growth": curated_data['growth_rate'] * 1.1,
+                            "key_players": curated_data['competitors'][1:3],
+                            "geographic_factors": ["Dallas-Fort Worth", "Miami-Dade", "Phoenix", "Charlotte", "Suburban density 1000-3000/sq mi"]
                         },
                         {
-                            "name": f"Asia-Pacific",
-                            "description": f"Emerging Asia-Pacific markets",
-                            "size": int(sam * 0.3),
+                            "name": f"Secondary Cities & Rural",
+                            "description": f"Mid-size cities and rural areas with growing digital adoption",
+                            "size": int(sam * 0.25),
                             "growth": curated_data['growth_rate'] * 1.2,
-                            "key_players": curated_data['competitors'][:2]
+                            "key_players": curated_data['competitors'][:3],
+                            "geographic_factors": ["Cities 100K-500K population", "Rural areas", "ZIP codes 30000-99999", "Density <1000/sq mi"]
                         }
                     ],
                     "by_demographics": [

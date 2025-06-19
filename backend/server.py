@@ -232,9 +232,11 @@ class MarketIntelligenceAgent:
 
             CRITICAL REQUIREMENTS:
             1. Use REALISTIC market sizes - avoid $500B defaults
-            2. Research REAL companies that exist in this market
+            2. Research REAL companies that exist in this market - MINIMUM 4 COMPETITORS ALWAYS
             3. Provide SPECIFIC growth rates based on actual industry data
             4. Use credible data sources and methodology
+            5. Geographic segmentation must be GRANULAR - include urban/suburban, specific states, DMA codes, metro areas
+            6. Strategic recommendations must be ACTIONABLE and SPECIFIC
 
             MARKET SIZE GUIDELINES BY CATEGORY:
             - Software niches: $1B-$50B TAM

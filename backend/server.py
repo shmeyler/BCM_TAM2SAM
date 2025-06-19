@@ -103,6 +103,8 @@ class MarketMap(BaseModel):
     opportunities: List[str]
     threats: List[str]
     strategic_recommendations: List[str]
+    # Executive Summary
+    executive_summary: str
     # Sources and Methodology
     data_sources: List[str]
     confidence_level: str

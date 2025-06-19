@@ -766,23 +766,23 @@ async def get_analysis_history():
 async def test_integrations():
     """Test endpoint to verify all integrations are working"""
     try:
-        # Test OpenAI based on which client version is available
+        # Test OpenAI
         openai_status = "Failed"
         try:
-            if hasattr(openai_client, 'chat') and callable(getattr(openai_client.chat, 'completions', None)):
-                # New OpenAI client - test with a simple API call
+            if openai_client is not None:
+                # Test with a simple API call
                 openai_test = await asyncio.to_thread(
                     openai_client.chat.completions.create,
                     model="gpt-4",
-                    messages=[{"role": "user", "content": "Say 'Market Map API working'"}],
-                    max_tokens=10
+                    messages=[{"role": "user", "content": "Say 'OK'"}],
+                    max_tokens=5
                 )
                 if openai_test.choices[0].message.content:
                     openai_status = "OK"
                 else:
                     openai_status = "Failed - No response"
             else:
-                openai_status = "Failed - Client not available"
+                openai_status = "Failed - Client not initialized"
         except Exception as e:
             logger.error(f"Error testing OpenAI: {e}")
             openai_status = f"Failed - {str(e)}"

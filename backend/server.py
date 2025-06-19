@@ -93,9 +93,10 @@ class MarketMap(BaseModel):
     market_growth_rate: float
     key_drivers: List[str]
     # Market Segmentation
-    segmentation_by_function: List[MarketSegment]
-    segmentation_by_user: List[MarketSegment]
-    segmentation_by_price: List[MarketSegment]
+    segmentation_by_geographics: List[MarketSegment]
+    segmentation_by_demographics: List[MarketSegment]
+    segmentation_by_psychographics: List[MarketSegment]
+    segmentation_by_behavioral: List[MarketSegment]
     # Competitive Analysis
     competitors: List[Competitor]
     # Strategic Analysis

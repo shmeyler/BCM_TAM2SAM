@@ -404,73 +404,96 @@ class MarketIntelligenceAgent:
                     "som_estimation": f"10% of SAM with realistic market capture: ${som:,}"
                 },
                 "segmentation": {
-                    "by_function": [
+                    "by_geographics": [
                         {
-                            "name": f"Basic {market_input.product_name}",
-                            "description": f"Entry-level {market_input.product_name} solutions",
+                            "name": f"North America",
+                            "description": f"Primary geographic market in North America",
                             "size": int(sam * 0.4),
                             "growth": curated_data['growth_rate'] * 0.8,
                             "key_players": curated_data['competitors'][:2]
                         },
                         {
-                            "name": f"Professional {market_input.product_name}",
-                            "description": f"Mid-tier {market_input.product_name} with advanced features",
-                            "size": int(sam * 0.4),
+                            "name": f"Europe",
+                            "description": f"European market segment",
+                            "size": int(sam * 0.3),
                             "growth": curated_data['growth_rate'],
                             "key_players": curated_data['competitors'][1:3]
                         },
                         {
-                            "name": f"Enterprise {market_input.product_name}",
-                            "description": f"Enterprise-grade {market_input.product_name}",
-                            "size": int(sam * 0.2),
+                            "name": f"Asia-Pacific",
+                            "description": f"Emerging Asia-Pacific markets",
+                            "size": int(sam * 0.3),
                             "growth": curated_data['growth_rate'] * 1.2,
                             "key_players": curated_data['competitors'][:2]
                         }
                     ],
-                    "by_user": [
+                    "by_demographics": [
                         {
-                            "name": f"Primary {market_input.target_user}",
-                            "description": f"Core {market_input.target_user} segment",
-                            "size": int(sam * 0.6),
-                            "growth": curated_data['growth_rate'],
+                            "name": f"Young Adults (25-35)",
+                            "description": f"Tech-savvy young professionals",
+                            "size": int(sam * 0.4),
+                            "growth": curated_data['growth_rate'] * 1.1,
                             "key_players": curated_data['competitors'][:3]
                         },
                         {
-                            "name": f"Secondary Markets",
-                            "description": f"Adjacent market segments",
-                            "size": int(sam * 0.3),
-                            "growth": curated_data['growth_rate'] * 0.7,
+                            "name": f"Middle-aged (36-50)",
+                            "description": f"Established professionals with disposable income",
+                            "size": int(sam * 0.4),
+                            "growth": curated_data['growth_rate'],
                             "key_players": curated_data['competitors'][1:]
                         },
                         {
-                            "name": f"Emerging Segments",
-                            "description": f"New market opportunities",
-                            "size": int(sam * 0.1),
-                            "growth": curated_data['growth_rate'] * 1.5,
+                            "name": f"Seniors (51+)",
+                            "description": f"Health-conscious seniors",
+                            "size": int(sam * 0.2),
+                            "growth": curated_data['growth_rate'] * 0.8,
                             "key_players": curated_data['competitors'][::2]
                         }
                     ],
-                    "by_price": [
+                    "by_psychographics": [
                         {
-                            "name": "Budget Tier",
-                            "description": f"Affordable {market_input.product_name} solutions",
-                            "size": int(sam * 0.3),
-                            "growth": curated_data['growth_rate'] * 0.6,
-                            "key_players": curated_data['competitors'][2:]
+                            "name": f"Health Enthusiasts",
+                            "description": f"Consumers focused on health and wellness",
+                            "size": int(sam * 0.5),
+                            "growth": curated_data['growth_rate'] * 1.2,
+                            "key_players": curated_data['competitors'][:3]
                         },
                         {
-                            "name": "Mid-Market",
-                            "description": f"Mid-tier {market_input.product_name} offerings",
-                            "size": int(sam * 0.5),
-                            "growth": curated_data['growth_rate'],
+                            "name": f"Tech Early Adopters",
+                            "description": f"Technology enthusiasts and early adopters",
+                            "size": int(sam * 0.3),
+                            "growth": curated_data['growth_rate'] * 1.3,
                             "key_players": curated_data['competitors'][1:3]
                         },
                         {
-                            "name": "Premium",
-                            "description": f"High-end {market_input.product_name} solutions",
+                            "name": f"Budget-Conscious",
+                            "description": f"Value-oriented consumers",
                             "size": int(sam * 0.2),
-                            "growth": curated_data['growth_rate'] * 1.3,
+                            "growth": curated_data['growth_rate'] * 0.7,
+                            "key_players": curated_data['competitors'][2:]
+                        }
+                    ],
+                    "by_behavioral": [
+                        {
+                            "name": f"Regular Users",
+                            "description": f"Daily and frequent users",
+                            "size": int(sam * 0.4),
+                            "growth": curated_data['growth_rate'],
                             "key_players": curated_data['competitors'][:2]
+                        },
+                        {
+                            "name": f"Occasional Users",
+                            "description": f"Periodic and casual users", 
+                            "size": int(sam * 0.4),
+                            "growth": curated_data['growth_rate'] * 0.8,
+                            "key_players": curated_data['competitors'][1:3]
+                        },
+                        {
+                            "name": f"First-time Buyers",
+                            "description": f"New customers entering the market",
+                            "size": int(sam * 0.2),
+                            "growth": curated_data['growth_rate'] * 1.4,
+                            "key_players": curated_data['competitors'][:3]
                         }
                     ]
                 },

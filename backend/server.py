@@ -770,25 +770,25 @@ async def test_integrations():
     """Test endpoint to verify all integrations are working"""
     try:
         # Test OpenAI based on which client version is available
+        openai_status = "Failed"
         try:
             if hasattr(openai_client, 'chat') and callable(getattr(openai_client.chat, 'completions', None)):
-                # New OpenAI client
-                try:
-                    openai_test = await asyncio.to_thread(
-                        openai_client.chat.completions.create,
-                        model="gpt-4",
-                        messages=[{"role": "user", "content": "Say 'Market Map API working'"}],
-                        max_tokens=10
-                    )
-                    openai_status = "OK" if openai_test.choices[0].message.content else "Failed"
-                except Exception as e:
-                    logger.error(f"Error with global OpenAI client: {e}")
-                    openai_status = "Failed - API Key needed"
+                # New OpenAI client - test with a simple API call
+                openai_test = await asyncio.to_thread(
+                    openai_client.chat.completions.create,
+                    model="gpt-4",
+                    messages=[{"role": "user", "content": "Say 'Market Map API working'"}],
+                    max_tokens=10
+                )
+                if openai_test.choices[0].message.content:
+                    openai_status = "OK"
+                else:
+                    openai_status = "Failed - No response"
             else:
                 openai_status = "Failed - Client not available"
         except Exception as e:
             logger.error(f"Error testing OpenAI: {e}")
-            openai_status = "Failed"
+            openai_status = f"Failed - {str(e)}"
 
         # Test MongoDB
         try:

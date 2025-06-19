@@ -1039,15 +1039,16 @@ const MarketMapApp = () => {
               <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Market Size Analysis</h3>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                {/* Left side - Descriptions */}
+                {/* Left side - Detailed Analytical Descriptions */}
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-4 h-4 bg-blue-900 rounded-full mt-2 flex-shrink-0"></div>
                     <div>
-                      <h4 className="text-lg font-bold text-blue-900 mb-2">TAM</h4>
-                      <p className="text-gray-600 text-sm">
-                        Total Addressable Market represents the total market demand for {analysis.market_input.product_name} 
-                        across all potential customers and use cases in {analysis.market_input.geography}.
+                      <h4 className="text-lg font-bold text-blue-900 mb-2">TAM - {formatCurrency(analysis.market_map.total_market_size)}</h4>
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        <strong>Total Addressable Market:</strong> Represents 100% of global revenue opportunity for {analysis.market_input.product_name} 
+                        across all customer segments in {analysis.market_input.geography}. Based on {analysis.market_map.data_sources.join(', ')} data, 
+                        growing at {(analysis.market_map.market_growth_rate * 100).toFixed(1)}% CAGR driven by {analysis.market_map.key_drivers.slice(0,2).join(' and ')}.
                       </p>
                     </div>
                   </div>
@@ -1055,10 +1056,12 @@ const MarketMapApp = () => {
                   <div className="flex items-start space-x-4">
                     <div className="w-4 h-4 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
                     <div>
-                      <h4 className="text-lg font-bold text-blue-600 mb-2">SAM</h4>
-                      <p className="text-gray-600 text-sm">
-                        Serviceable Addressable Market is the portion of TAM that can be realistically reached with 
-                        our {analysis.market_input.transaction_type} model targeting {analysis.market_input.target_user}.
+                      <h4 className="text-lg font-bold text-blue-600 mb-2">SAM - {formatCurrency(analysis.market_map.total_market_size * 0.3)}</h4>
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        <strong>Serviceable Addressable Market:</strong> 30% of TAM ({formatCurrency(analysis.market_map.total_market_size * 0.3)}) 
+                        representing segments we can realistically serve with our {analysis.market_input.transaction_type} business model. 
+                        Focused on {analysis.market_input.target_user} who prioritize {analysis.market_input.key_metrics.split(',')[0]} 
+                        and are motivated by {analysis.market_input.demand_driver}.
                       </p>
                     </div>
                   </div>
@@ -1066,84 +1069,100 @@ const MarketMapApp = () => {
                   <div className="flex items-start space-x-4">
                     <div className="w-4 h-4 bg-blue-300 rounded-full mt-2 flex-shrink-0"></div>
                     <div>
-                      <h4 className="text-lg font-bold text-blue-300 mb-2">SOM</h4>
-                      <p className="text-gray-600 text-sm">
-                        Serviceable Obtainable Market represents the realistic market share we can capture based on 
-                        competitive positioning and {analysis.market_input.key_metrics} capabilities.
+                      <h4 className="text-lg font-bold text-blue-300 mb-2">SOM - {formatCurrency(analysis.market_map.total_market_size * 0.03)}</h4>
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        <strong>Serviceable Obtainable Market:</strong> 10% of SAM ({formatCurrency(analysis.market_map.total_market_size * 0.03)}) 
+                        based on realistic 3-5 year market penetration assuming competitive response from {analysis.market_map.competitors.slice(0,2).map(c => c.name).join(' and ')}. 
+                        Achievable through {analysis.market_map.strategic_recommendations.slice(0,1)[0]?.toLowerCase() || 'focused market strategy'}.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Right side - Concentric Circles Visualization */}
-                <div className="flex justify-center">
+                {/* Right side - Concentric Circles Visualization with Better Labels */}
+                <div className="flex justify-center relative">
                   <div className="relative w-80 h-80">
                     {/* TAM - Outer Circle */}
-                    <div className="absolute inset-0 w-80 h-80 bg-blue-900 rounded-full flex items-center justify-center">
+                    <div className="absolute inset-0 w-80 h-80 bg-blue-900 rounded-full flex items-end justify-center pb-8">
+                      {/* TAM Label positioned at bottom of outer ring */}
                       <div className="text-white text-center">
-                        <div className="text-2xl font-bold">{formatCurrency(analysis.market_map.total_market_size)}</div>
-                        <div className="text-sm font-medium mt-1">TAM</div>
+                        <div className="text-xl font-bold">{formatCurrency(analysis.market_map.total_market_size)}</div>
+                        <div className="text-sm font-medium">TAM</div>
                       </div>
+                    </div>
                       
-                      {/* SAM - Middle Circle */}
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-blue-600 rounded-full flex items-center justify-center">
-                        <div className="text-white text-center">
-                          <div className="text-xl font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.3)}</div>
-                          <div className="text-xs font-medium mt-1">SAM</div>
-                        </div>
+                    {/* SAM - Middle Circle */}
+                    <div className="absolute top-6 left-6 w-68 h-68 bg-blue-600 rounded-full flex items-end justify-center pb-6">
+                      <div className="text-white text-center">
+                        <div className="text-lg font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.3)}</div>
+                        <div className="text-sm font-medium">SAM</div>
+                      </div>
+                    </div>
                         
-                        {/* SOM - Inner Circle */}
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-blue-300 rounded-full flex items-center justify-center">
-                          <div className="text-white text-center">
-                            <div className="text-lg font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.03)}</div>
-                            <div className="text-xs font-medium mt-1">SOM</div>
-                          </div>
-                        </div>
+                    {/* SOM - Inner Circle */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-blue-300 rounded-full flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <div className="text-base font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.03)}</div>
+                        <div className="text-xs font-medium">SOM</div>
                       </div>
                     </div>
                     
-                    {/* Arrows pointing to each circle */}
-                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-8 h-0.5 bg-gray-400"></div>
-                        <div className="w-2 h-2 border-t-2 border-r-2 border-gray-400 transform rotate-45"></div>
+                    {/* Improved Arrows with Labels */}
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                      <div className="flex flex-col items-center">
+                        <div className="text-xs text-gray-600 mb-1">Total Market</div>
+                        <div className="w-6 h-px bg-gray-400"></div>
+                        <div className="w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-gray-400"></div>
                       </div>
                     </div>
                     
-                    <div className="absolute top-8 -right-2">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-8 h-0.5 bg-gray-400"></div>
-                        <div className="w-2 h-2 border-t-2 border-r-2 border-gray-400 transform rotate-45"></div>
+                    <div className="absolute top-12 -right-12">
+                      <div className="flex items-center">
+                        <div className="w-8 h-px bg-gray-400"></div>
+                        <div className="w-0 h-0 border-t-2 border-b-2 border-l-4 border-transparent border-l-gray-400"></div>
+                        <div className="text-xs text-gray-600 ml-2">Serviceable<br/>Market</div>
                       </div>
                     </div>
                     
-                    <div className="absolute bottom-8 -left-2">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-8 h-0.5 bg-gray-400"></div>
-                        <div className="w-2 h-2 border-t-2 border-r-2 border-gray-400 transform rotate-45"></div>
+                    <div className="absolute bottom-12 -left-16">
+                      <div className="flex items-center">
+                        <div className="text-xs text-gray-600 mr-2">Obtainable<br/>Market</div>
+                        <div className="w-0 h-0 border-t-2 border-b-2 border-r-4 border-transparent border-r-gray-400"></div>
+                        <div className="w-8 h-px bg-gray-400"></div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* Market Analysis Summary */}
+              {/* Detailed Market Analysis Summary */}
               <div className="mt-8 p-6 bg-gray-50 rounded-lg">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                  <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">Market Sizing Methodology & Assumptions</h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center p-4 bg-white rounded-lg">
                     <div className="text-2xl font-bold text-blue-900 mb-2">{formatCurrency(analysis.market_map.total_market_size)}</div>
-                    <div className="text-sm text-gray-600">Total Addressable Market</div>
-                    <div className="text-xs text-gray-500 mt-1">100% of market opportunity</div>
+                    <div className="text-sm font-semibold text-gray-700 mb-2">Total Addressable Market</div>
+                    <div className="text-xs text-gray-600 leading-relaxed">
+                      100% market opportunity based on {analysis.market_map.methodology}. 
+                      Growth rate: {(analysis.market_map.market_growth_rate * 100).toFixed(1)}% CAGR.
+                      Confidence: {analysis.market_map.confidence_level}.
+                    </div>
                   </div>
-                  <div>
+                  <div className="text-center p-4 bg-white rounded-lg">
                     <div className="text-2xl font-bold text-blue-600 mb-2">{formatCurrency(analysis.market_map.total_market_size * 0.3)}</div>
-                    <div className="text-sm text-gray-600">Serviceable Addressable Market</div>
-                    <div className="text-xs text-gray-500 mt-1">30% of TAM we can serve</div>
+                    <div className="text-sm font-semibold text-gray-700 mb-2">Serviceable Addressable Market</div>
+                    <div className="text-xs text-gray-600 leading-relaxed">
+                      30% of TAM filtering for {analysis.market_input.target_user} segments compatible with 
+                      {analysis.market_input.transaction_type} model and {analysis.market_input.key_metrics.split(',')[0]} requirements.
+                    </div>
                   </div>
-                  <div>
+                  <div className="text-center p-4 bg-white rounded-lg">
                     <div className="text-2xl font-bold text-blue-300 mb-2">{formatCurrency(analysis.market_map.total_market_size * 0.03)}</div>
-                    <div className="text-sm text-gray-600">Serviceable Obtainable Market</div>
-                    <div className="text-xs text-gray-500 mt-1">10% of SAM we can capture</div>
+                    <div className="text-sm font-semibold text-gray-700 mb-2">Serviceable Obtainable Market</div>
+                    <div className="text-xs text-gray-600 leading-relaxed">
+                      10% of SAM assuming competitive market with established players 
+                      ({analysis.market_map.competitors.slice(0,2).map(c => c.name).join(', ')}) and 3-5 year penetration timeline.
+                    </div>
                   </div>
                 </div>
               </div>

@@ -580,10 +580,10 @@ class MarketIntelligenceAgent:
                 ]
             },
             "competitors": [
-                {"name": "Market Leader", "share": 0.25, "strengths": ["Brand recognition", "Market presence"], "weaknesses": ["High price", "Slow innovation"], "price_range": "High", "price_tier": "Premium"},
-                {"name": "Strong Competitor", "share": 0.18, "strengths": ["Innovation", "Technology"], "weaknesses": ["Limited reach", "Brand awareness"], "price_range": "Medium", "price_tier": "Mid-Range"},
-                {"name": "Growing Player", "share": 0.12, "strengths": ["Agility", "Customer focus"], "weaknesses": ["Scale", "Resources"], "price_range": "Medium", "price_tier": "Mid-Range"},
-                {"name": "Niche Provider", "share": 0.08, "strengths": ["Specialization", "Quality"], "weaknesses": ["Limited market", "High cost"], "price_range": "High", "price_tier": "Premium"}
+                {"name": "Market Leader", "share": 0.22, "strengths": ["Brand recognition", "Market presence"], "weaknesses": ["High price", "Slow innovation"], "price_range": "$200-$500", "price_tier": "Premium"},
+                {"name": "Strong Competitor", "share": 0.18, "strengths": ["Innovation", "Technology"], "weaknesses": ["Limited reach", "Brand awareness"], "price_range": "$150-$400", "price_tier": "Mid-Range"},
+                {"name": "Growing Player", "share": 0.14, "strengths": ["Agility", "Customer focus"], "weaknesses": ["Scale", "Resources"], "price_range": "$120-$350", "price_tier": "Mid-Range"},
+                {"name": "Regional Provider", "share": 0.10, "strengths": ["Local expertise", "Cost efficiency"], "weaknesses": ["Limited market", "Technology gaps"], "price_range": "$80-$250", "price_tier": "Budget"}
             ],
             "opportunities": [
                 f"{market_input.demand_driver} driving market growth",

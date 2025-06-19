@@ -322,7 +322,13 @@ class MarketIntelligenceAgent:
                 "opportunities": [list of 4-5 specific opportunities],
                 "threats": [list of 4-5 specific threats],
                 "recommendations": [list of 4-5 actionable recommendations],
-                "data_sources": [list of credible sources],
+                "data_sources": [
+                    {"name": "Gartner Market Research", "url": "https://www.gartner.com/en/research"},
+                    {"name": "McKinsey Industry Reports", "url": "https://www.mckinsey.com/industries"},
+                    {"name": "IBISWorld Market Analysis", "url": "https://www.ibisworld.com"},
+                    {"name": "Forrester Research", "url": "https://www.forrester.com/research"},
+                    {"name": "PwC Industry Insights", "url": "https://www.pwc.com/us/en/industries.html"}
+                ],
                 "confidence_level": "high/medium/low",
                 "methodology": "description of analysis methodology"
             }}

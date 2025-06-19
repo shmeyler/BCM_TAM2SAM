@@ -243,6 +243,13 @@ class MarketIntelligenceAgent:
 
             Return accurate, research-based data for {market_input.product_name} in {market_input.geography}.
 
+            IMPORTANT: Use proper market segmentation categories:
+            
+            1. GEOGRAPHICS: Country, City, Density, Language, Climate, Area, Population
+            2. DEMOGRAPHICS: Age, Gender, Income, Education, Social Status, Family, Life Stage, Occupation  
+            3. PSYCHOGRAPHICS: Lifestyle, AIO (Activity/Interest/Opinion), Concerns, Personality, Values, Attitudes
+            4. BEHAVIORAL: Purchase, Usage, Intent, Occasion, Buyer Stage, Life Cycle Stage, Engagement
+
             Provide a comprehensive JSON response with the following structure:
             {{
                 "market_overview": {{
@@ -254,17 +261,46 @@ class MarketIntelligenceAgent:
                     "som_estimation": "SOM as realistic subset of SAM"
                 }},
                 "segmentation": {{
-                    "by_function": [
+                    "by_geographics": [
                         {{
-                            "name": "segment name",
-                            "description": "description",
+                            "name": "geographic segment name",
+                            "description": "geographic description focusing on location, density, climate etc",
                             "size": [size in dollars],
                             "growth": [growth rate as decimal],
-                            "key_players": ["company1", "company2"]
+                            "key_players": ["company1", "company2"],
+                            "geographic_factors": ["Country/Region", "Urban/Rural density", "Climate considerations"]
                         }}
                     ],
-                    "by_user": [similar structure],
-                    "by_price": [similar structure]
+                    "by_demographics": [
+                        {{
+                            "name": "demographic segment name", 
+                            "description": "demographic description focusing on age, income, education, occupation",
+                            "size": [size in dollars],
+                            "growth": [growth rate as decimal],
+                            "key_players": ["company1", "company2"],
+                            "demographic_factors": ["Age range", "Income level", "Education", "Occupation"]
+                        }}
+                    ],
+                    "by_psychographics": [
+                        {{
+                            "name": "psychographic segment name",
+                            "description": "psychographic description focusing on lifestyle, values, attitudes, interests",
+                            "size": [size in dollars], 
+                            "growth": [growth rate as decimal],
+                            "key_players": ["company1", "company2"],
+                            "psychographic_factors": ["Lifestyle", "Values", "Attitudes", "Interests"]
+                        }}
+                    ],
+                    "by_behavioral": [
+                        {{
+                            "name": "behavioral segment name",
+                            "description": "behavioral description focusing on usage, purchase patterns, buyer stage",
+                            "size": [size in dollars],
+                            "growth": [growth rate as decimal], 
+                            "key_players": ["company1", "company2"],
+                            "behavioral_factors": ["Usage patterns", "Purchase frequency", "Buyer stage", "Engagement level"]
+                        }}
+                    ]
                 }},
                 "competitors": [
                     {{

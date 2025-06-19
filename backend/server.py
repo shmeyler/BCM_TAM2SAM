@@ -535,20 +535,25 @@ class MarketIntelligenceAgent:
                 "key_drivers": [market_input.demand_driver, "Technology adoption", "Market expansion"]
             },
             "segmentation": {
-                "by_function": [
-                    {"name": f"Basic {market_input.product_name}", "description": f"Entry-level solutions", "size": fallback_tam * 0.4, "growth": 0.06, "key_players": ["Market Leader A", "Company B"]},
-                    {"name": f"Professional {market_input.product_name}", "description": f"Mid-tier solutions", "size": fallback_tam * 0.4, "growth": 0.08, "key_players": ["Company C", "Leader D"]},
-                    {"name": f"Enterprise {market_input.product_name}", "description": f"Enterprise solutions", "size": fallback_tam * 0.2, "growth": 0.12, "key_players": ["Enterprise Corp", "Big Co"]}
+                "by_geographics": [
+                    {"name": "North America", "description": "Primary market in US and Canada", "size": fallback_tam * 0.4, "growth": 0.06, "key_players": ["Market Leader A", "Company B"]},
+                    {"name": "Europe", "description": "European market segment", "size": fallback_tam * 0.3, "growth": 0.08, "key_players": ["Company C", "Leader D"]},
+                    {"name": "Asia-Pacific", "description": "Growing APAC markets", "size": fallback_tam * 0.3, "growth": 0.12, "key_players": ["Enterprise Corp", "Big Co"]}
                 ],
-                "by_user": [
-                    {"name": "Primary Users", "description": f"Core {market_input.target_user}", "size": fallback_tam * 0.6, "growth": 0.08, "key_players": ["Leader 1", "Company 2"]},
-                    {"name": "Secondary Users", "description": "Adjacent segments", "size": fallback_tam * 0.3, "growth": 0.06, "key_players": ["Alt Co", "Option Inc"]},
-                    {"name": "Emerging Users", "description": "New segments", "size": fallback_tam * 0.1, "growth": 0.15, "key_players": ["Startup A", "Growth Co"]}
+                "by_demographics": [
+                    {"name": "Young Adults", "description": "Tech-savvy professionals 25-35", "size": fallback_tam * 0.4, "growth": 0.10, "key_players": ["Leader 1", "Company 2"]},
+                    {"name": "Middle-aged", "description": "Established professionals 36-50", "size": fallback_tam * 0.4, "growth": 0.06, "key_players": ["Alt Co", "Option Inc"]},
+                    {"name": "Seniors", "description": "Health-conscious seniors 51+", "size": fallback_tam * 0.2, "growth": 0.08, "key_players": ["Startup A", "Growth Co"]}
                 ],
-                "by_price": [
-                    {"name": "Budget", "description": "Affordable solutions", "size": fallback_tam * 0.3, "growth": 0.05, "key_players": ["Budget Brand", "Value Co"]},
-                    {"name": "Mid-Range", "description": "Balanced offerings", "size": fallback_tam * 0.5, "growth": 0.08, "key_players": ["Mid Market", "Standard Inc"]},
-                    {"name": "Premium", "description": "High-end solutions", "size": fallback_tam * 0.2, "growth": 0.12, "key_players": ["Premium Corp", "Luxury Ltd"]}
+                "by_psychographics": [
+                    {"name": "Health Enthusiasts", "description": "Wellness-focused consumers", "size": fallback_tam * 0.4, "growth": 0.09, "key_players": ["Budget Brand", "Value Co"]},
+                    {"name": "Tech Early Adopters", "description": "Innovation-driven users", "size": fallback_tam * 0.4, "growth": 0.12, "key_players": ["Mid Market", "Standard Inc"]},
+                    {"name": "Budget-Conscious", "description": "Value-oriented segments", "size": fallback_tam * 0.2, "growth": 0.05, "key_players": ["Premium Corp", "Luxury Ltd"]}
+                ],
+                "by_behavioral": [
+                    {"name": "Regular Users", "description": "Daily active users", "size": fallback_tam * 0.4, "growth": 0.08, "key_players": ["Regular Corp", "Daily Inc"]},
+                    {"name": "Occasional Users", "description": "Periodic usage patterns", "size": fallback_tam * 0.4, "growth": 0.06, "key_players": ["Casual Co", "Sometimes Ltd"]},
+                    {"name": "First-time Buyers", "description": "New market entrants", "size": fallback_tam * 0.2, "growth": 0.15, "key_players": ["Newbie Corp", "Fresh Start"]}
                 ]
             },
             "competitors": [

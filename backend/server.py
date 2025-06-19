@@ -569,9 +569,10 @@ class VisualMapGenerator:
         # Create visual market map structure
         visual_map = {
             "title": f"{product_name} Market Segmentation",
-            "functional_segments": [],
-            "user_segments": [],
-            "price_segments": [],
+            "geographic_segments": [],
+            "demographic_segments": [],
+            "psychographic_segments": [],
+            "behavioral_segments": [],
             "market_overview": market_data.get("market_overview", {})
         }
 

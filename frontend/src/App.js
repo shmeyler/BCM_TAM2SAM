@@ -502,22 +502,24 @@ const MarketMapApp = () => {
 
               {/* Subtle back option during analysis */}
               {isAnalyzing && (
-                <button
-                  onClick={() => {
-                    if (window.confirm('Are you sure you want to cancel the analysis? This will stop the current process.')) {
-                      setIsAnalyzing(false);
-                      setAnalysisProgress(prev => ({
-                        ...prev,
-                        currentStep: 0,
-                        stepName: '',
-                        estimatedTimeLeft: 0
-                      }));
-                    }
-                  }}
-                  className="text-gray-500 text-sm hover:text-gray-700"
-                >
-                  Cancel Analysis
-                </button>
+                <div className="flex items-center">
+                  <button
+                    onClick={() => {
+                      if (window.confirm('Are you sure you want to cancel the analysis? This will stop the current process.')) {
+                        setIsAnalyzing(false);
+                        setAnalysisProgress(prev => ({
+                          ...prev,
+                          currentStep: 0,
+                          stepName: '',
+                          estimatedTimeLeft: 0
+                        }));
+                      }
+                    }}
+                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+                  >
+                    Cancel Analysis
+                  </button>
+                </div>
               )}
 
               {currentStep < 3 ? (

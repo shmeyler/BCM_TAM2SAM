@@ -37,6 +37,7 @@ mongo_client = AsyncIOMotorClient(mongo_url)
 db = mongo_client[os.environ['DB_NAME']]
 
 # OpenAI setup - Modern client compatible with httpx 0.28.1
+openai_client = None
 try:
     from openai import OpenAI
     openai_client = OpenAI(
@@ -45,11 +46,7 @@ try:
     logger.info("OpenAI modern client initialized successfully")
 except Exception as e:
     logger.error(f"Failed to initialize OpenAI client: {e}")
-    # Fallback to global configuration
-    import openai
-    openai.api_key = os.environ.get('OPENAI_API_KEY', 'your-openai-api-key-here')
-    openai_client = openai
-    logger.info("Using fallback OpenAI configuration")
+    openai_client = None
 
 # Create the main app without a prefix
 app = FastAPI()

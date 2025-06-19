@@ -208,16 +208,129 @@ class MarketIntelligenceAgent:
     @staticmethod
     async def analyze_market_landscape(market_input: MarketInput) -> Dict[str, Any]:
         """Comprehensive market intelligence analysis using AI with real market research"""
-        # First, try to get accurate market data
+        
+        # Check if OpenAI client is available
+        if openai_client is None:
+            logger.warning("OpenAI client not available, using fallback analysis")
+            return MarketIntelligenceAgent._get_fallback_analysis(market_input)
+        
+        # Use OpenAI for dynamic market analysis
+        try:
+            prompt = f"""
+            You are a senior market research analyst conducting a comprehensive market intelligence analysis.
+
+            MARKET TO ANALYZE:
+            - Product/Service: {market_input.product_name}
+            - Industry: {market_input.industry}
+            - Geography: {market_input.geography}
+            - Target Users: {market_input.target_user}
+            - Market Drivers: {market_input.demand_driver}
+            - Revenue Model: {market_input.transaction_type}
+            - Key Metrics: {market_input.key_metrics}
+            - Known Benchmarks: {market_input.benchmarks}
+
+            CRITICAL REQUIREMENTS:
+            1. Use REALISTIC market sizes - avoid $500B defaults
+            2. Research REAL companies that exist in this market
+            3. Provide SPECIFIC growth rates based on actual industry data
+            4. Use credible data sources and methodology
+
+            MARKET SIZE GUIDELINES BY CATEGORY:
+            - Software niches: $1B-$50B TAM
+            - Consumer products: $500M-$20B TAM
+            - Healthcare segments: $2B-$100B TAM
+            - Technology platforms: $10B-$200B TAM
+
+            Return accurate, research-based data for {market_input.product_name} in {market_input.geography}.
+
+            Provide a comprehensive JSON response with the following structure:
+            {{
+                "market_overview": {{
+                    "total_market_size": [realistic TAM in dollars],
+                    "growth_rate": [realistic annual growth rate as decimal],
+                    "key_drivers": [list of 3-4 real market drivers],
+                    "tam_methodology": "explanation of TAM calculation",
+                    "sam_calculation": "SAM as percentage of TAM with rationale",
+                    "som_estimation": "SOM as realistic subset of SAM"
+                }},
+                "segmentation": {{
+                    "by_function": [
+                        {{
+                            "name": "segment name",
+                            "description": "description",
+                            "size": [size in dollars],
+                            "growth": [growth rate as decimal],
+                            "key_players": ["company1", "company2"]
+                        }}
+                    ],
+                    "by_user": [similar structure],
+                    "by_price": [similar structure]
+                }},
+                "competitors": [
+                    {{
+                        "name": "real company name",
+                        "share": [market share as decimal],
+                        "strengths": ["strength1", "strength2"],
+                        "weaknesses": ["weakness1", "weakness2"],
+                        "price_range": "actual price range",
+                        "price_tier": "Premium/Mid-Range/Budget",
+                        "innovation_focus": "focus area",
+                        "user_segment": "target segment"
+                    }}
+                ],
+                "opportunities": [list of 4-5 specific opportunities],
+                "threats": [list of 4-5 specific threats],
+                "recommendations": [list of 4-5 actionable recommendations],
+                "data_sources": [list of credible sources],
+                "confidence_level": "high/medium/low",
+                "methodology": "description of analysis methodology"
+            }}
+
+            Return only valid JSON with accurate, researched market intelligence.
+            """
+
+            # Call OpenAI API
+            response = await asyncio.to_thread(
+                openai_client.chat.completions.create,
+                model="gpt-4",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.1,
+                max_tokens=3000
+            )
+            
+            content = response.choices[0].message.content.strip()
+            
+            # Parse JSON response
+            try:
+                if content.startswith("```json"):
+                    content = content[7:]
+                if content.endswith("```"):
+                    content = content[:-3]
+                
+                ai_analysis = json.loads(content)
+                logger.info(f"AI analysis completed for {market_input.product_name}")
+                return ai_analysis
+                
+            except json.JSONDecodeError as e:
+                logger.error(f"JSON decode error: {e}")
+                return MarketIntelligenceAgent._get_fallback_analysis(market_input)
+                
+        except Exception as e:
+            logger.error(f"Error with OpenAI analysis: {e}")
+            return MarketIntelligenceAgent._get_fallback_analysis(market_input)
+
+    @staticmethod
+    def _get_fallback_analysis(market_input: MarketInput) -> Dict[str, Any]:
+        """Fallback analysis when OpenAI is not available"""
+        # First check curated database
         curated_data = MarketIntelligenceAgent.get_curated_market_data(
             market_input.product_name,
             market_input.industry,
             market_input.geography
         )
 
-        # If we have curated data, use it directly
         if curated_data:
-            logging.info(f"Using curated market data for {market_input.product_name}: TAM=${curated_data['tam']:,}")
+            logger.info(f"Using curated market data for {market_input.product_name}: TAM=${curated_data['tam']:,}")
             
             # Build analysis directly from curated data
             tam = curated_data['tam']
@@ -351,46 +464,7 @@ class MarketIntelligenceAgent:
                 "methodology": f"Curated market database analysis with {curated_data['confidence']} confidence"
             }
 
-        # Fallback analysis for non-curated markets
-        try:
-            # Create a simplified prompt for basic analysis
-            prompt = f"""
-            Analyze the {market_input.product_name} market in {market_input.geography} within the {market_input.industry} industry.
-            
-            Target users: {market_input.target_user}
-            Key drivers: {market_input.demand_driver}
-            Revenue model: {market_input.transaction_type}
-            
-            Provide realistic market estimates and identify 4 real competitor companies.
-            
-            Return JSON with market_overview, segmentation, competitors, opportunities, threats, and recommendations.
-            """
-
-            if hasattr(openai_client, 'chat') and callable(getattr(openai_client.chat, 'completions', None)):
-                # Use OpenAI for basic analysis if available
-                response = await asyncio.to_thread(
-                    openai_client.chat.completions.create,
-                    model="gpt-4",
-                    messages=[{"role": "user", "content": prompt}],
-                    temperature=0.1,
-                    max_tokens=2000
-                )
-                content = response.choices[0].message.content.strip()
-                
-                # Try to parse JSON response
-                try:
-                    if content.startswith("```json"):
-                        content = content[7:]
-                    if content.endswith("```"):
-                        content = content[:-3]
-                    return json.loads(content)
-                except json.JSONDecodeError:
-                    pass
-
-        except Exception as e:
-            logger.error(f"Error with AI analysis: {e}")
-
-        # Final fallback with realistic industry data
+        # Final fallback for unknown markets
         fallback_tam = 5000000000  # $5B default
         fallback_growth = 0.08     # 8% default
         

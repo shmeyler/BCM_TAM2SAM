@@ -14,7 +14,7 @@ from typing import Dict, Any, Optional, Tuple
 # Get the backend URL from the frontend/.env file
 def get_backend_url() -> str:
     """Read the backend URL from the frontend/.env file"""
-    env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'frontend', '.env')
+    env_path = os.path.join('/app', 'frontend', '.env')
     with open(env_path, 'r') as f:
         for line in f:
             if line.startswith('REACT_APP_BACKEND_URL='):

@@ -1307,24 +1307,6 @@ const MarketMapApp = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Executive Summary</h3>
-                <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
-              </div>
-              
-              {analysis.market_map && analysis.market_map.executive_summary ? (
-                <div className="prose prose-lg max-w-none">
-                  <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                    {analysis.market_map.executive_summary}
-                  </div>
-                </div>
-              ) : (
-                <div className="text-gray-600 italic text-center py-8">
-                  Executive summary will be generated with the market analysis
-                </div>
-              )}
-            </div>
           </div>
         )}
 

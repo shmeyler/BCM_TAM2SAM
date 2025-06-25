@@ -649,7 +649,36 @@ const MarketMapApp = () => {
           </div>
         )}
 
-        {/* Executive Summary Section - Moved to Top */}
+        {/* Results Step - Market Map */}
+        {currentStep === 4 && analysis && (
+          <div className="space-y-8">
+            {/* Market Map Header */}
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <div className="text-center mb-6">
+                <h2 className="text-4xl font-bold text-gray-900 mb-2">Market Map: {analysis.market_input.product_name}</h2>
+                <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
+                <p className="text-lg text-gray-600 mt-4">{analysis.market_input.geography} • {analysis.market_input.industry}</p>
+                
+                <div className="flex justify-center space-x-6 mt-6">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-orange-500">{formatCurrency(analysis.market_map.total_market_size)}</div>
+                    <div className="text-sm text-gray-600">Total Market Size</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-600">{(analysis.market_map.market_growth_rate * 100).toFixed(1)}%</div>
+                    <div className="text-sm text-gray-600">Annual Growth Rate</div>
+                  </div>
+                  <div className={`text-center px-4 py-2 rounded-full text-sm font-semibold ${
+                    analysis.market_map.confidence_level === 'high' ? 'bg-green-100 text-green-800' :
+                    analysis.market_map.confidence_level === 'medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
+                  }`}>
+                    {analysis.market_map.confidence_level.toUpperCase()} CONFIDENCE
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Executive Summary Section - Moved to Top */}
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-lg p-8 border border-blue-100">
               <div className="text-center mb-8">
                 <h3 className="text-3xl font-bold text-gray-900 mb-3">Executive Summary</h3>
@@ -787,35 +816,6 @@ const MarketMapApp = () => {
                   </div>
                 </div>
               )}
-            </div>
-
-        {/* Results Step - Market Map */}
-        {currentStep === 4 && analysis && (
-          <div className="space-y-8">
-            {/* Market Map Header */}
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <div className="text-center mb-6">
-                <h2 className="text-4xl font-bold text-gray-900 mb-2">Market Map: {analysis.market_input.product_name}</h2>
-                <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
-                <p className="text-lg text-gray-600 mt-4">{analysis.market_input.geography} • {analysis.market_input.industry}</p>
-                
-                <div className="flex justify-center space-x-6 mt-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-orange-500">{formatCurrency(analysis.market_map.total_market_size)}</div>
-                    <div className="text-sm text-gray-600">Total Market Size</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600">{(analysis.market_map.market_growth_rate * 100).toFixed(1)}%</div>
-                    <div className="text-sm text-gray-600">Annual Growth Rate</div>
-                  </div>
-                  <div className={`text-center px-4 py-2 rounded-full text-sm font-semibold ${
-                    analysis.market_map.confidence_level === 'high' ? 'bg-green-100 text-green-800' :
-                    analysis.market_map.confidence_level === 'medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
-                  }`}>
-                    {analysis.market_map.confidence_level.toUpperCase()} CONFIDENCE
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Visual Market Map */}

@@ -342,22 +342,49 @@ class MarketIntelligenceAgent:
             response = await asyncio.to_thread(
                 openai_client.chat.completions.create,
                 model="gpt-4",
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {
+                        "role": "system", 
+                        "content": "You are a market research expert. Return ONLY valid JSON with no markdown formatting or additional text."
+                    },
+                    {
+                        "role": "user", 
+                        "content": prompt
+                    }
+                ],
                 temperature=0.1,
                 max_tokens=3000
             )
             
             content = response.choices[0].message.content.strip()
+            logger.info(f"OpenAI response length: {len(content)} characters")
             
-            # Parse JSON response
+            # Parse JSON response with better error handling
             try:
+                # Clean up any markdown formatting
                 if content.startswith("```json"):
                     content = content[7:]
                 if content.endswith("```"):
                     content = content[:-3]
+                if content.startswith("```"):
+                    content = content[3:]
                 
+                content = content.strip()
                 ai_analysis = json.loads(content)
-                # After getting the initial analysis, generate an executive summary
+                logger.info(f"Successfully parsed AI analysis for {market_input.product_name}")
+                
+                # Validate that we got unique data (not fallback)
+                if ai_analysis.get('market_overview', {}).get('total_market_size', 0) == 5000000000:
+                    logger.warning("AI returned generic $5B market size, requesting retry...")
+                    # This is likely generic data, force regeneration
+                    raise ValueError("Generic response detected")
+                
+                return ai_analysis
+                
+            except (json.JSONDecodeError, ValueError) as e:
+                logger.error(f"JSON parsing error for {market_input.product_name}: {e}")
+                logger.error(f"Raw content: {content[:500]}...")
+                # Fall through to fallback analysis
                 try:
                     summary_prompt = f"""
                     Based on this market analysis for {market_input.product_name}, write a concise 200-word executive summary for C-level decision makers.

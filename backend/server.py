@@ -360,23 +360,31 @@ class MarketIntelligenceAgent:
                 # After getting the initial analysis, generate an executive summary
                 try:
                     summary_prompt = f"""
-                    Based on this market analysis for {market_input.product_name}, write a 250-word executive summary:
+                    Based on this market analysis for {market_input.product_name}, write a concise 200-word executive summary for C-level decision makers.
 
-                    Market Size: ${ai_analysis.get('market_overview', {}).get('total_market_size', 0):,.0f}
-                    Growth: {ai_analysis.get('market_overview', {}).get('growth_rate', 0)*100:.1f}%
-                    Key Competitors: {', '.join([comp.get('name', '') for comp in ai_analysis.get('competitors', [])[:3]])}
+                    KEY DATA:
+                    - Market Size: ${ai_analysis.get('market_overview', {}).get('total_market_size', 0):,.0f}
+                    - Growth: {ai_analysis.get('market_overview', {}).get('growth_rate', 0)*100:.1f}% CAGR
+                    - Industry: {market_input.industry}
+                    - Geography: {market_input.geography}
+                    - Top Competitors: {', '.join([comp.get('name', '') for comp in ai_analysis.get('competitors', [])[:3]])}
+                    - Target: {market_input.target_user}
 
-                    Format:
-                    **MARKET OPPORTUNITY**
-                    Brief market size and growth overview.
+                    EXECUTIVE SUMMARY STRUCTURE (4 short paragraphs):
 
-                    **COMPETITIVE LANDSCAPE** 
-                    Key players and competitive dynamics.
+                    **MARKET OPPORTUNITY** (50 words)
+                    Lead with market size, growth rate, and key market driver. Be specific to {market_input.product_name}.
 
-                    **STRATEGIC PRIORITIES**
-                    Top 2-3 actionable recommendations.
+                    **COMPETITIVE LANDSCAPE** (50 words)  
+                    Highlight top 2-3 competitors and competitive dynamics. What's the competitive advantage opportunity?
 
-                    Professional consulting tone, specific data points, actionable insights.
+                    **TARGET MARKET** (50 words)
+                    Most attractive customer segment and geographic opportunity. Why this target matters.
+
+                    **STRATEGIC RECOMMENDATION** (50 words)
+                    Top 2 strategic priorities with expected outcomes. Be specific and actionable.
+
+                    Write in McKinsey-style consulting language. Use specific numbers. Focus on strategic implications for {market_input.product_name} business decisions.
                     """
 
                     summary_response = await asyncio.to_thread(
@@ -384,7 +392,7 @@ class MarketIntelligenceAgent:
                         model="gpt-4",
                         messages=[{"role": "user", "content": summary_prompt}],
                         temperature=0.1,
-                        max_tokens=400  # Reduced from 600
+                        max_tokens=350  # Reduced for brevity
                     )
                     
                     executive_summary = summary_response.choices[0].message.content.strip()

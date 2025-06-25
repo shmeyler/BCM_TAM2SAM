@@ -220,7 +220,9 @@ class MarketIntelligenceAgent:
         # Use OpenAI for dynamic market analysis
         try:
             prompt = f"""
-            You are a senior market research analyst conducting a comprehensive market intelligence analysis.
+            You are a senior market research analyst conducting a specific analysis for {market_input.product_name} in the {market_input.industry} industry.
+
+            CRITICAL: This analysis must be UNIQUELY SPECIFIC to {market_input.product_name}. Do NOT use generic market analysis templates.
 
             MARKET TO ANALYZE:
             - Product/Service: {market_input.product_name}

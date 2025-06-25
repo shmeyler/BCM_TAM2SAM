@@ -1223,7 +1223,7 @@ const MarketMapApp = () => {
                 <div className="flex justify-center relative">
                   <div className="relative w-80 h-80">
                     {/* TAM - Outer Circle */}
-                    <div className="absolute inset-0 w-80 h-80 bg-blue-900 rounded-full flex items-end justify-center pb-8">
+                    <div className="absolute inset-0 w-80 h-80 bg-blue-900 rounded-full flex items-end justify-center pb-4">
                       {/* TAM Label positioned at bottom of outer ring */}
                       <div className="text-white text-center">
                         <div className="text-xl font-bold">{formatCurrency(analysis.market_map.total_market_size)}</div>
@@ -1231,15 +1231,15 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                       
-                    {/* SAM - Middle Circle */}
-                    <div className="absolute top-6 left-6 w-68 h-68 bg-blue-600 rounded-full flex items-end justify-center pb-6">
+                    {/* SAM - Middle Circle - Properly centered */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-blue-600 rounded-full flex items-end justify-center pb-3">
                       <div className="text-white text-center">
                         <div className="text-lg font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.3)}</div>
                         <div className="text-sm font-medium">SAM</div>
                       </div>
                     </div>
                         
-                    {/* SOM - Inner Circle */}
+                    {/* SOM - Inner Circle - Properly centered */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-blue-300 rounded-full flex items-center justify-center">
                       <div className="text-white text-center">
                         <div className="text-base font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.03)}</div>
@@ -1247,26 +1247,26 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    {/* Improved Arrows with Labels */}
+                    {/* Improved Labels with better positioning */}
                     <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
                       <div className="flex flex-col items-center">
-                        <div className="text-xs text-gray-600 mb-1">Total Market</div>
+                        <div className="text-xs text-gray-600 mb-1 whitespace-nowrap">Total Market</div>
                         <div className="w-6 h-px bg-gray-400"></div>
                         <div className="w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-gray-400"></div>
                       </div>
                     </div>
                     
-                    <div className="absolute top-12 -right-12">
+                    <div className="absolute top-8 -right-16">
                       <div className="flex items-center">
                         <div className="w-8 h-px bg-gray-400"></div>
                         <div className="w-0 h-0 border-t-2 border-b-2 border-l-4 border-transparent border-l-gray-400"></div>
-                        <div className="text-xs text-gray-600 ml-2">Serviceable<br/>Market</div>
+                        <div className="text-xs text-gray-600 ml-2 whitespace-nowrap">Serviceable<br/>Market</div>
                       </div>
                     </div>
                     
-                    <div className="absolute bottom-12 -left-16">
+                    <div className="absolute bottom-8 -left-20">
                       <div className="flex items-center">
-                        <div className="text-xs text-gray-600 mr-2">Obtainable<br/>Market</div>
+                        <div className="text-xs text-gray-600 mr-2 whitespace-nowrap">Obtainable<br/>Market</div>
                         <div className="w-0 h-0 border-t-2 border-b-2 border-r-4 border-transparent border-r-gray-400"></div>
                         <div className="w-8 h-px bg-gray-400"></div>
                       </div>

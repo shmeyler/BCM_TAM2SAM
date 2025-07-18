@@ -373,12 +373,6 @@ class MarketIntelligenceAgent:
                 ai_analysis = json.loads(content)
                 logger.info("Successfully parsed AI analysis for %s", market_input.product_name)
                 
-                # Validate that we got unique data (not fallback)
-                if ai_analysis.get('market_overview', {}).get('total_market_size', 0) == 5000000000:
-                    logger.warning("AI returned generic $5B market size, requesting retry...")
-                    # This is likely generic data, force regeneration
-                    raise ValueError("Generic response detected")
-                
                 return ai_analysis
                 
             except (json.JSONDecodeError, ValueError) as e:

@@ -371,7 +371,7 @@ class MarketIntelligenceAgent:
                 
                 content = content.strip()
                 ai_analysis = json.loads(content)
-                logger.info(f"Successfully parsed AI analysis for {market_input.product_name}")
+                logger.info("Successfully parsed AI analysis for %s", market_input.product_name)
                 
                 # Validate that we got unique data (not fallback)
                 if ai_analysis.get('market_overview', {}).get('total_market_size', 0) == 5000000000:

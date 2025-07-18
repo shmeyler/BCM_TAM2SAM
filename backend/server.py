@@ -398,231 +398,167 @@ class MarketIntelligenceAgent:
 
     @staticmethod
     def _get_fallback_analysis(market_input: MarketInput) -> Dict[str, Any]:
-        """Fallback analysis when OpenAI is not available"""
-        # First check curated database
-        curated_data = MarketIntelligenceAgent.get_curated_market_data(
-            market_input.product_name,
-            market_input.industry,
-            market_input.geography
-        )
-
-        if curated_data:
-            logger.info("Using curated market data for %s: TAM=$%s", market_input.product_name, f"{curated_data['tam']:,}")
-            
-            # Build analysis directly from curated data
-            tam = curated_data['tam']
-            sam = int(tam * 0.3)  # 30% SAM
-            som = int(sam * 0.1)  # 10% SOM
-            
-            # Build competitor data from curated list - ensure minimum 4 competitors
-            competitors = []
-            competitor_names = curated_data['competitors']
-            
-            # Ensure we have at least 4 competitors
-            while len(competitor_names) < 4:
-                competitor_names.extend(["Market Challenger", "Industry Player", "Regional Leader", "Emerging Competitor"])
-            
-            for i, comp_name in enumerate(competitor_names[:4]):
-                market_share = max(0.05, 0.30 - (i * 0.06))  # Ensure realistic market shares that add up
-                competitors.append({
-                    "name": comp_name,
-                    "share": market_share,
-                    "strengths": [
-                        "Market leadership" if i == 0 else f"Innovation in {market_input.product_name}",
-                        "Brand recognition" if i == 0 else "Strong customer relationships"
-                    ] if i == 0 else [
-                        "Technology innovation" if i == 1 else "Customer focus",
-                        "Rapid growth" if i == 1 else "Cost efficiency"
-                    ],
-                    "weaknesses": [
-                        "High pricing pressure" if i == 0 else "Limited market reach",
-                        "Legacy systems" if i == 0 else "Resource constraints"
-                    ] if i < 2 else [
-                        "Scale limitations",
-                        "Brand awareness challenges"
-                    ],
-                    "price_range": f"${150+i*75}-${350+i*150}",
-                    "price_tier": "Premium" if i == 0 else "Mid-Range" if i < 3 else "Budget",
-                    "innovation_focus": f"{market_input.product_name} advancement and market expansion",
-                    "user_segment": market_input.target_user
-                })
-
-            return {
-                "market_overview": {
-                    "total_market_size": tam,
-                    "growth_rate": curated_data['growth_rate'],
-                    "key_drivers": [
-                        market_input.demand_driver,
-                        "Market expansion and adoption",
-                        "Technology advancement",
-                        "Consumer demand growth"
-                    ],
-                    "tam_methodology": f"Curated market database from {', '.join(curated_data['sources'])}",
-                    "sam_calculation": f"30% of TAM based on target market analysis: ${sam:,}",
-                    "som_estimation": f"10% of SAM with realistic market capture: ${som:,}"
-                },
-                "segmentation": {
-                    "by_geographics": [
-                        {
-                            "name": f"Major US Metro Areas",
-                            "description": f"Urban markets in NYC, LA, Chicago, SF, Boston metro areas with high population density",
-                            "size": int(sam * 0.4),
-                            "growth": curated_data['growth_rate'] * 0.9,
-                            "key_players": curated_data['competitors'][:2],
-                            "geographic_factors": ["NYC DMA 501", "LA DMA 803", "Chicago DMA 602", "Urban density >3000/sq mi"]
-                        },
-                        {
-                            "name": f"Suburban Growth Markets",
-                            "description": f"Suburban areas in TX, FL, AZ, NC with expanding populations and disposable income",
-                            "size": int(sam * 0.35),
-                            "growth": curated_data['growth_rate'] * 1.1,
-                            "key_players": curated_data['competitors'][1:3],
-                            "geographic_factors": ["Dallas-Fort Worth", "Miami-Dade", "Phoenix", "Charlotte", "Suburban density 1000-3000/sq mi"]
-                        },
-                        {
-                            "name": f"Secondary Cities & Rural",
-                            "description": f"Mid-size cities and rural areas with growing digital adoption",
-                            "size": int(sam * 0.25),
-                            "growth": curated_data['growth_rate'] * 1.2,
-                            "key_players": curated_data['competitors'][:3],
-                            "geographic_factors": ["Cities 100K-500K population", "Rural areas", "ZIP codes 30000-99999", "Density <1000/sq mi"]
-                        }
-                    ],
-                    "by_demographics": [
-                        {
-                            "name": f"Young Adults (25-35)",
-                            "description": f"Tech-savvy young professionals",
-                            "size": int(sam * 0.4),
-                            "growth": curated_data['growth_rate'] * 1.1,
-                            "key_players": curated_data['competitors'][:3]
-                        },
-                        {
-                            "name": f"Middle-aged (36-50)",
-                            "description": f"Established professionals with disposable income",
-                            "size": int(sam * 0.4),
-                            "growth": curated_data['growth_rate'],
-                            "key_players": curated_data['competitors'][1:]
-                        },
-                        {
-                            "name": f"Seniors (51+)",
-                            "description": f"Health-conscious seniors",
-                            "size": int(sam * 0.2),
-                            "growth": curated_data['growth_rate'] * 0.8,
-                            "key_players": curated_data['competitors'][::2]
-                        }
-                    ],
-                    "by_psychographics": [
-                        {
-                            "name": f"Health Enthusiasts",
-                            "description": f"Consumers focused on health and wellness",
-                            "size": int(sam * 0.5),
-                            "growth": curated_data['growth_rate'] * 1.2,
-                            "key_players": curated_data['competitors'][:3]
-                        },
-                        {
-                            "name": f"Tech Early Adopters",
-                            "description": f"Technology enthusiasts and early adopters",
-                            "size": int(sam * 0.3),
-                            "growth": curated_data['growth_rate'] * 1.3,
-                            "key_players": curated_data['competitors'][1:3]
-                        },
-                        {
-                            "name": f"Budget-Conscious",
-                            "description": f"Value-oriented consumers",
-                            "size": int(sam * 0.2),
-                            "growth": curated_data['growth_rate'] * 0.7,
-                            "key_players": curated_data['competitors'][2:]
-                        }
-                    ],
-                    "by_behavioral": [
-                        {
-                            "name": f"Regular Users",
-                            "description": f"Daily and frequent users",
-                            "size": int(sam * 0.4),
-                            "growth": curated_data['growth_rate'],
-                            "key_players": curated_data['competitors'][:2]
-                        },
-                        {
-                            "name": f"Occasional Users",
-                            "description": f"Periodic and casual users", 
-                            "size": int(sam * 0.4),
-                            "growth": curated_data['growth_rate'] * 0.8,
-                            "key_players": curated_data['competitors'][1:3]
-                        },
-                        {
-                            "name": f"First-time Buyers",
-                            "description": f"New customers entering the market",
-                            "size": int(sam * 0.2),
-                            "growth": curated_data['growth_rate'] * 1.4,
-                            "key_players": curated_data['competitors'][:3]
-                        }
-                    ]
-                },
-                "competitors": competitors,
-                "opportunities": [
-                    f"{market_input.demand_driver} driving market expansion",
-                    f"Growing demand from {market_input.target_user} segment",
-                    f"Technology advancement in {market_input.industry}",
-                    f"Geographic expansion opportunities in {market_input.geography}",
-                    f"Partnership opportunities with established players"
-                ],
-                "threats": [
-                    f"Intense competition from {curated_data['competitors'][0]}",
-                    f"Market saturation in core segments",
-                    f"Economic volatility affecting {market_input.target_user}",
-                    f"Regulatory changes in {market_input.industry}",
-                    f"Technology disruption risk"
-                ],
-                "recommendations": [
-                    f"MARKET PENETRATION: Target {market_input.target_user} in top 10 US metro areas (NYC, LA, Chicago DMAs) with localized marketing campaigns - projected 15-20% market share growth within 18 months",
-                    f"PRODUCT DIFFERENTIATION: Develop advanced {market_input.key_metrics} analytics dashboard to outperform {curated_data['competitors'][0]} - invest $2-5M in R&D for 25% premium pricing capability",
-                    f"STRATEGIC PARTNERSHIPS: Form distribution partnerships with 3-5 major {market_input.industry} players to accelerate {market_input.transaction_type} adoption - target 40% channel sales within 2 years",
-                    f"GEOGRAPHIC EXPANSION: Launch pilot programs in suburban growth markets (Dallas, Phoenix, Charlotte) leveraging {market_input.demand_driver} trends - establish regional operations with $1-3M investment",
-                    f"ACQUISITION STRATEGY: Acquire 1-2 smaller competitors in emerging segments to gain {market_input.key_metrics} capabilities and customer base - budget $10-50M for strategic acquisitions"
-                ],
-                "data_sources": curated_data['sources'],
-                "confidence_level": curated_data['confidence'],
-                "methodology": f"Curated market database analysis with {curated_data['confidence']} confidence"
-            }
-
-        # Final fallback for unknown markets
-        fallback_tam = 5000000000  # $5B default
-        fallback_growth = 0.08     # 8% default
+        """Minimal fallback analysis when OpenAI fails - no curated database"""
+        logger.warning(f"Using minimal fallback analysis for {market_input.product_name}")
         
+        # Generate basic market analysis without curated data
+        tam = 1000000000  # $1B default TAM
+        sam = int(tam * 0.3)  # 30% SAM
+        som = int(sam * 0.1)  # 10% SOM
+        
+        # Generic competitors based on industry
+        competitors = [
+            {
+                "name": "Market Leader",
+                "share": 0.25,
+                "strengths": ["Market dominance", "Brand recognition"],
+                "weaknesses": ["High pricing", "Legacy systems"],
+                "price_range": "$200-$500",
+                "price_tier": "Premium",
+                "innovation_focus": "Market expansion",
+                "user_segment": market_input.target_user
+            },
+            {
+                "name": "Technology Innovator",
+                "share": 0.20,
+                "strengths": ["Innovation", "Technology leadership"],
+                "weaknesses": ["Limited market reach", "Resource constraints"],
+                "price_range": "$150-$400",
+                "price_tier": "Mid-Range",
+                "innovation_focus": "Technology advancement",
+                "user_segment": market_input.target_user
+            },
+            {
+                "name": "Growth Challenger",
+                "share": 0.15,
+                "strengths": ["Rapid growth", "Customer focus"],
+                "weaknesses": ["Scale limitations", "Brand awareness"],
+                "price_range": "$100-$300",
+                "price_tier": "Mid-Range",
+                "innovation_focus": "Customer experience",
+                "user_segment": market_input.target_user
+            },
+            {
+                "name": "Value Player",
+                "share": 0.10,
+                "strengths": ["Cost efficiency", "Accessibility"],
+                "weaknesses": ["Limited features", "Low margins"],
+                "price_range": "$50-$200",
+                "price_tier": "Budget",
+                "innovation_focus": "Cost optimization",
+                "user_segment": market_input.target_user
+            }
+        ]
+
         return {
             "market_overview": {
-                "total_market_size": fallback_tam,
-                "growth_rate": fallback_growth,
-                "key_drivers": [market_input.demand_driver, "Technology adoption", "Market expansion"]
+                "total_market_size": tam,
+                "growth_rate": 0.08,
+                "key_drivers": [
+                    market_input.demand_driver,
+                    "Technology adoption",
+                    "Market expansion",
+                    "Consumer demand growth"
+                ],
+                "tam_methodology": "Basic market estimation",
+                "sam_calculation": f"30% of TAM: ${sam:,}",
+                "som_estimation": f"10% of SAM: ${som:,}"
             },
             "segmentation": {
                 "by_geographics": [
-                    {"name": "Major Metro Areas", "description": "Top 20 US metro markets including NYC (DMA 501), LA (DMA 803), Chicago (DMA 602) with urban density >2500/sq mi", "size": fallback_tam * 0.45, "growth": 0.07, "key_players": ["Market Leader A", "Company B"]},
-                    {"name": "Suburban Growth Markets", "description": "Expanding suburban areas in TX, FL, AZ, NC with household income >$75K and density 1000-2500/sq mi", "size": fallback_tam * 0.35, "growth": 0.09, "key_players": ["Company C", "Leader D"]},
-                    {"name": "Secondary Cities & Rural", "description": "Mid-size cities (100K-500K population) and rural areas with growing broadband adoption", "size": fallback_tam * 0.20, "growth": 0.11, "key_players": ["Enterprise Corp", "Regional Co"]}
+                    {
+                        "name": "Major Metro Areas",
+                        "description": "Urban markets with high population density",
+                        "size": int(sam * 0.4),
+                        "growth": 0.07,
+                        "key_players": ["Market Leader", "Technology Innovator"]
+                    },
+                    {
+                        "name": "Suburban Markets",
+                        "description": "Suburban areas with growing populations",
+                        "size": int(sam * 0.35),
+                        "growth": 0.09,
+                        "key_players": ["Growth Challenger", "Value Player"]
+                    },
+                    {
+                        "name": "Secondary Cities",
+                        "description": "Mid-size cities and rural areas",
+                        "size": int(sam * 0.25),
+                        "growth": 0.11,
+                        "key_players": ["Value Player", "Market Leader"]
+                    }
                 ],
                 "by_demographics": [
-                    {"name": "Young Adults", "description": "Tech-savvy professionals 25-35", "size": fallback_tam * 0.4, "growth": 0.10, "key_players": ["Leader 1", "Company 2"]},
-                    {"name": "Middle-aged", "description": "Established professionals 36-50", "size": fallback_tam * 0.4, "growth": 0.06, "key_players": ["Alt Co", "Option Inc"]},
-                    {"name": "Seniors", "description": "Health-conscious seniors 51+", "size": fallback_tam * 0.2, "growth": 0.08, "key_players": ["Startup A", "Growth Co"]}
+                    {
+                        "name": "Young Adults",
+                        "description": "Tech-savvy professionals 25-35",
+                        "size": int(sam * 0.4),
+                        "growth": 0.10,
+                        "key_players": ["Technology Innovator", "Growth Challenger"]
+                    },
+                    {
+                        "name": "Middle-aged",
+                        "description": "Established professionals 36-50",
+                        "size": int(sam * 0.4),
+                        "growth": 0.06,
+                        "key_players": ["Market Leader", "Technology Innovator"]
+                    },
+                    {
+                        "name": "Seniors",
+                        "description": "Mature consumers 51+",
+                        "size": int(sam * 0.2),
+                        "growth": 0.08,
+                        "key_players": ["Market Leader", "Value Player"]
+                    }
                 ],
                 "by_psychographics": [
-                    {"name": "Health Enthusiasts", "description": "Wellness-focused consumers", "size": fallback_tam * 0.4, "growth": 0.09, "key_players": ["Budget Brand", "Value Co"]},
-                    {"name": "Tech Early Adopters", "description": "Innovation-driven users", "size": fallback_tam * 0.4, "growth": 0.12, "key_players": ["Mid Market", "Standard Inc"]},
-                    {"name": "Budget-Conscious", "description": "Value-oriented segments", "size": fallback_tam * 0.2, "growth": 0.05, "key_players": ["Premium Corp", "Luxury Ltd"]}
+                    {
+                        "name": "Innovation Adopters",
+                        "description": "Early adopters of new technology",
+                        "size": int(sam * 0.4),
+                        "growth": 0.12,
+                        "key_players": ["Technology Innovator", "Growth Challenger"]
+                    },
+                    {
+                        "name": "Quality Focused",
+                        "description": "Premium quality seekers",
+                        "size": int(sam * 0.4),
+                        "growth": 0.09,
+                        "key_players": ["Market Leader", "Technology Innovator"]
+                    },
+                    {
+                        "name": "Budget Conscious",
+                        "description": "Value-oriented consumers",
+                        "size": int(sam * 0.2),
+                        "growth": 0.05,
+                        "key_players": ["Value Player", "Growth Challenger"]
+                    }
                 ],
                 "by_behavioral": [
-                    {"name": "Regular Users", "description": "Daily active users", "size": fallback_tam * 0.4, "growth": 0.08, "key_players": ["Regular Corp", "Daily Inc"]},
-                    {"name": "Occasional Users", "description": "Periodic usage patterns", "size": fallback_tam * 0.4, "growth": 0.06, "key_players": ["Casual Co", "Sometimes Ltd"]},
-                    {"name": "First-time Buyers", "description": "New market entrants", "size": fallback_tam * 0.2, "growth": 0.15, "key_players": ["Newbie Corp", "Fresh Start"]}
+                    {
+                        "name": "Regular Users",
+                        "description": "Daily active users",
+                        "size": int(sam * 0.4),
+                        "growth": 0.08,
+                        "key_players": ["Market Leader", "Technology Innovator"]
+                    },
+                    {
+                        "name": "Occasional Users",
+                        "description": "Periodic usage patterns",
+                        "size": int(sam * 0.4),
+                        "growth": 0.06,
+                        "key_players": ["Growth Challenger", "Value Player"]
+                    },
+                    {
+                        "name": "New Users",
+                        "description": "First-time market entrants",
+                        "size": int(sam * 0.2),
+                        "growth": 0.15,
+                        "key_players": ["Growth Challenger", "Technology Innovator"]
+                    }
                 ]
             },
-            "competitors": [
-                {"name": "Market Leader", "share": 0.22, "strengths": ["Brand recognition", "Market presence"], "weaknesses": ["High price", "Slow innovation"], "price_range": "$200-$500", "price_tier": "Premium"},
-                {"name": "Strong Competitor", "share": 0.18, "strengths": ["Innovation", "Technology"], "weaknesses": ["Limited reach", "Brand awareness"], "price_range": "$150-$400", "price_tier": "Mid-Range"},
-                {"name": "Growing Player", "share": 0.14, "strengths": ["Agility", "Customer focus"], "weaknesses": ["Scale", "Resources"], "price_range": "$120-$350", "price_tier": "Mid-Range"},
-                {"name": "Regional Provider", "share": 0.10, "strengths": ["Local expertise", "Cost efficiency"], "weaknesses": ["Limited market", "Technology gaps"], "price_range": "$80-$250", "price_tier": "Budget"}
-            ],
+            "competitors": competitors,
             "opportunities": [
                 f"{market_input.demand_driver} driving market growth",
                 f"Underserved segments in {market_input.geography}",
@@ -636,15 +572,14 @@ class MarketIntelligenceAgent:
                 f"Economic uncertainty"
             ],
             "recommendations": [
-                f"GEOGRAPHIC FOCUS: Target top 5 metro areas (NYC, LA, Chicago, Houston, Phoenix) with $500K-1M localized marketing spend to capture 12-15% local market share within 24 months",
-                f"COMPETITIVE POSITIONING: Develop premium {market_input.transaction_type} offering with 20-30% price advantage over market leader while maintaining {market_input.key_metrics} performance standards",
-                f"STRATEGIC PARTNERSHIPS: Establish distribution partnerships with 2-3 regional players in suburban growth markets to accelerate customer acquisition by 40-50% annually",
-                f"TECHNOLOGY INVESTMENT: Invest $2-5M in advanced {market_input.key_metrics} capabilities to differentiate from budget competitors and justify premium pricing",
-                f"MARKET EXPANSION: Launch pilot programs in secondary cities with populations 100K-500K, targeting early adopters of {market_input.demand_driver} trends with projected 25% ROI"
+                f"Focus on {market_input.target_user} segment differentiation",
+                f"Leverage {market_input.demand_driver} trends for growth",
+                f"Build strategic partnerships in {market_input.industry}",
+                f"Invest in {market_input.key_metrics} capabilities"
             ],
-            "data_sources": ["Market Research", "Industry Analysis", "Public Data"],
-            "confidence_level": "medium",
-            "methodology": "AI analysis with market research"
+            "data_sources": ["Basic market estimation"],
+            "confidence_level": "low",
+            "methodology": "Minimal fallback analysis"
         }
 
 class VisualMapGenerator:

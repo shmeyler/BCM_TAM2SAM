@@ -383,7 +383,7 @@ class MarketIntelligenceAgent:
                 
             except (json.JSONDecodeError, ValueError) as e:
                 logger.error(f"JSON parsing error for {market_input.product_name}: {e}")
-                logger.error(f"Raw content: {content[:500]}...")
+                logger.error("Raw content: %s", content[:500])
                 # Fall through to fallback analysis
                 logger.info(f"Falling back to curated data for {market_input.product_name}")
                 return MarketIntelligenceAgent._get_fallback_analysis(market_input)

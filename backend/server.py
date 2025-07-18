@@ -768,7 +768,10 @@ class ComprehensiveAnalysisEngine:
                 opportunities=opportunities,
                 threats=threats,
                 strategic_recommendations=recommendations,
-                data_sources=ai_analysis.get("data_sources", ["Industry reports", "Market research", "Public data"]),
+                data_sources=[
+                    source.get("name", str(source)) if isinstance(source, dict) else str(source)
+                    for source in ai_analysis.get("data_sources", ["Industry reports", "Market research", "Public data"])
+                ],
                 confidence_level=ai_analysis.get("confidence_level", "medium"),
                 methodology=ai_analysis.get("methodology", "AI-powered analysis with market research"),
                 executive_summary=ai_analysis.get("executive_summary", "Executive summary not available"),

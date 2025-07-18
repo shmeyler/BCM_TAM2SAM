@@ -385,62 +385,8 @@ class MarketIntelligenceAgent:
                 logger.error(f"JSON parsing error for {market_input.product_name}: {e}")
                 logger.error(f"Raw content: {content[:500]}...")
                 # Fall through to fallback analysis
-                try:
-                    summary_prompt = f"""
-                    Based on this market analysis for {market_input.product_name}, write a concise 200-word executive summary for C-level decision makers.
-
-                    KEY DATA:
-                    - Market Size: ${ai_analysis.get('market_overview', {}).get('total_market_size', 0):,.0f}
-                    - Growth: {ai_analysis.get('market_overview', {}).get('growth_rate', 0)*100:.1f}% CAGR
-                    - Industry: {market_input.industry}
-                    - Geography: {market_input.geography}
-                    - Top Competitors: {', '.join([comp.get('name', '') for comp in ai_analysis.get('competitors', [])[:3]])}
-                    - Target: {market_input.target_user}
-
-                    EXECUTIVE SUMMARY STRUCTURE (4 short paragraphs):
-
-                    **MARKET OPPORTUNITY** (50 words)
-                    Lead with market size, growth rate, and key market driver. Be specific to {market_input.product_name}.
-
-                    **COMPETITIVE LANDSCAPE** (50 words)  
-                    Highlight top 2-3 competitors and competitive dynamics. What's the competitive advantage opportunity?
-
-                    **TARGET MARKET** (50 words)
-                    Most attractive customer segment and geographic opportunity. Why this target matters.
-
-                    **STRATEGIC RECOMMENDATION** (50 words)
-                    Top 2 strategic priorities with expected outcomes. Be specific and actionable.
-
-                    Write in McKinsey-style consulting language. Use specific numbers. Focus on strategic implications for {market_input.product_name} business decisions.
-                    """
-
-                    summary_response = await asyncio.to_thread(
-                        openai_client.chat.completions.create,
-                        model="gpt-4",
-                        messages=[{"role": "user", "content": summary_prompt}],
-                        temperature=0.1,
-                        max_tokens=350  # Reduced for brevity
-                    )
-                    
-                    executive_summary = summary_response.choices[0].message.content.strip()
-                    ai_analysis["executive_summary"] = executive_summary
-                    logger.info("Executive summary generated successfully")
-                    
-                except Exception as e:
-                    logger.error(f"Error generating executive summary: {e}")
-                    ai_analysis["executive_summary"] = f"""
-                    **MARKET OPPORTUNITY**
-                    The {market_input.product_name} market represents a ${ai_analysis.get('market_overview', {}).get('total_market_size', 5000000000)/1000000000:.1f}B opportunity driven by {market_input.demand_driver}. Strong growth trajectory presents compelling investment potential for organizations targeting {market_input.target_user}.
-
-                    **COMPETITIVE LANDSCAPE**
-                    Market features established players alongside emerging competitors, creating differentiation opportunities through {market_input.key_metrics} optimization and strategic positioning in underserved segments.
-
-                    **STRATEGIC PRIORITIES**
-                    Focus on high-growth market segments, build strategic partnerships with industry players, and invest in capabilities that leverage {market_input.demand_driver} trends to capture market share and drive {market_input.transaction_type} adoption.
-                    """
-
-                logger.info(f"AI analysis completed for {market_input.product_name}")
-                return ai_analysis
+                logger.info(f"Falling back to curated data for {market_input.product_name}")
+                return MarketIntelligenceAgent._get_fallback_analysis(market_input)
                 
             except json.JSONDecodeError as e:
                 logger.error(f"JSON decode error: {e}")

@@ -1,0 +1,59 @@
+Starting Detailed OpenAI Integration Test
+Using API URL: https://514ef936-0e3e-4ac9-b819-f2a1b5191832.preview.emergentagent.com/api
+
+============================================================
+DETAILED OPENAI INTEGRATION TEST
+============================================================
+
+1. Checking OpenAI Integration Status...
+   OpenAI Status: OK
+   ✅ OpenAI integration is working
+
+1. Testing Fitness Tracker...
+
+2. Testing SaaS Software for Small Businesses...
+
+3. Testing Coffee Shop Chain...
+
+============================================================
+ANALYSIS RESULTS
+============================================================
+
+--- Fitness Tracker ---
+✅ Analysis completed successfully
+   Competitors: []
+   Market Size: $5,000,000,000.0
+   Confidence: medium
+   Methodology: AI analysis
+   Data Sources: 2 sources
+   ⚠️  Likely using FALLBACK analysis (default market size + no competitors)
+
+--- SaaS Software for Small Businesses ---
+✅ Analysis completed successfully
+   Competitors: []
+   Market Size: $5,000,000,000.0
+   Confidence: medium
+   Methodology: AI analysis
+   Data Sources: 2 sources
+   ⚠️  Likely using FALLBACK analysis (default market size + no competitors)
+
+--- Coffee Shop Chain ---
+✅ Analysis completed successfully
+   Competitors: []
+   Market Size: $5,000,000,000.0
+   Confidence: medium
+   Methodology: AI analysis
+   Data Sources: 2 sources
+   ⚠️  Likely using FALLBACK analysis (default market size + no competitors)
+
+--- Uniqueness Check ---
+   ⚠️  Analyses are IDENTICAL (not unique)
+
+============================================================
+FINAL ASSESSMENT
+============================================================
+⚠️  ISSUES DETECTED:
+   ❌ OpenAI may not be working properly (using fallback)
+   ❌ Analysis may not be unique across different markets
+
+❌ Issues detected - see details above

@@ -1,0 +1,47 @@
+Starting OpenAI Integration Tests for Market Map Generator
+Using API URL: https://514ef936-0e3e-4ac9-b819-f2a1b5191832.preview.emergentagent.com/api
+
+============================================================
+OPENAI INTEGRATION TEST SUITE
+============================================================
+
+==================================================
+Step 1: Testing OpenAI Connection
+==================================================
+OpenAI Status: OK
+✅ OpenAI connection successful: OpenAI connection is working
+
+==================================================
+Step 2: Testing Unique Analysis Generation
+==================================================
+
+--- Testing: Fitness Tracker ---
+❌ Fitness Tracker: No competitors found in analysis
+
+--- Testing: SaaS Software for Small Businesses ---
+❌ SaaS Software for Small Businesses: No competitors found in analysis
+
+--- Testing: Electric Vehicle Charging Stations ---
+❌ Electric Vehicle Charging Stations: No competitors found in analysis
+
+--- Testing: Food Delivery Service ---
+❌ Food Delivery Service: No competitors found in analysis
+
+==================================================
+Step 3: Verifying Analysis Uniqueness
+==================================================
+❌ Uniqueness check failed: Not enough analysis results to compare uniqueness
+
+==================================================
+Step 4: Verifying No Curated Data Fallback
+==================================================
+✅ No curated data fallback: No fitness tracker analysis to check for curated fallback
+
+============================================================
+DETAILED ANALYSIS SUMMARY
+============================================================
+
+============================================================
+❌ SOME OPENAI INTEGRATION TESTS FAILED!
+❌ Check the detailed results above
+============================================================

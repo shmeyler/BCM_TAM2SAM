@@ -407,7 +407,7 @@ class MarketIntelligenceAgent:
         )
 
         if curated_data:
-            logger.info(f"Using curated market data for {market_input.product_name}: TAM=${curated_data['tam']:,}")
+            logger.info("Using curated market data for %s: TAM=$%s", market_input.product_name, f"{curated_data['tam']:,}")
             
             # Build analysis directly from curated data
             tam = curated_data['tam']

@@ -233,13 +233,16 @@ metadata:
 
 test_plan:
   current_focus:
-    - "API Health Check"
-    - "Integration Status Check"
-    - "Market Analysis"
-    - "Analysis History"
-    - "Export Market Map"
+    - "TAM-SAM-SOM Chart Display"
+    - "Competitive Analysis Display"
+    - "Market Segmentation Data"
+    - "Export Functionality"
+    - "Analysis History Navigation"
+  stuck_tasks:
     - "DTCC Competitive Analysis Fix"
-  stuck_tasks: []
+    - "Market Segmentation Data"
+    - "Export Functionality"
+    - "Analysis History Navigation"
   test_all: false
   test_priority: "high_first"
 

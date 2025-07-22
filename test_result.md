@@ -213,6 +213,18 @@ backend:
         agent: "testing"
         comment: "RESOLVED: Fixed data_sources validation error that was causing OpenAI analysis to fail and fall back to generic data. OpenAI now successfully generates unique analysis for different market categories with real company names and realistic market data. JSON parsing works correctly."
 
+  - task: "DTCC Competitive Analysis Fix"
+    implemented: true
+    working: false
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL ISSUE: OpenAI analysis for DTCC financial services returns only 1-2 competitors instead of required minimum 4, and does not include DTCC itself in competitive analysis for benchmarking. This violates the core requirement that researched company should be included for comparison. Issue appears specific to financial services industry - fitness tracker analysis works correctly. OpenAI prompt needs modification to enforce minimum competitor count and include researched company."
+
 metadata:
   created_by: "testing_agent"
   version: "1.0"

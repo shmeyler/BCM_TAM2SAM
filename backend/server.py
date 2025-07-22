@@ -318,7 +318,37 @@ class MarketIntelligenceAgent:
                 }},
                 "competitors": [
                     {{
-                        "name": "real company name",
+                        "name": "{market_input.product_name}",
+                        "share": [market share as decimal for {market_input.product_name}],
+                        "strengths": ["specific strengths of {market_input.product_name}"],
+                        "weaknesses": ["specific weaknesses or challenges for {market_input.product_name}"],
+                        "price_range": "actual price range for {market_input.product_name} services",
+                        "price_tier": "Premium/Mid-Range/Budget",
+                        "innovation_focus": "key focus areas for {market_input.product_name}",
+                        "user_segment": "{market_input.target_user}"
+                    }},
+                    {{
+                        "name": "major competitor 1 name",
+                        "share": [market share as decimal],
+                        "strengths": ["strength1", "strength2"],
+                        "weaknesses": ["weakness1", "weakness2"],
+                        "price_range": "actual price range",
+                        "price_tier": "Premium/Mid-Range/Budget",
+                        "innovation_focus": "focus area",
+                        "user_segment": "target segment"
+                    }},
+                    {{
+                        "name": "major competitor 2 name", 
+                        "share": [market share as decimal],
+                        "strengths": ["strength1", "strength2"],
+                        "weaknesses": ["weakness1", "weakness2"],
+                        "price_range": "actual price range",
+                        "price_tier": "Premium/Mid-Range/Budget",
+                        "innovation_focus": "focus area",
+                        "user_segment": "target segment"
+                    }},
+                    {{
+                        "name": "major competitor 3 name",
                         "share": [market share as decimal],
                         "strengths": ["strength1", "strength2"],
                         "weaknesses": ["weakness1", "weakness2"],

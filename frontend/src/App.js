@@ -1219,12 +1219,11 @@ const MarketMapApp = () => {
                   </div>
                 </div>
 
-                {/* Right side - Concentric Circles Visualization with Better Labels */}
+                {/* Right side - Concentric Circles Visualization with Better Labels and Arrows */}
                 <div className="flex justify-center relative">
                   <div className="relative w-80 h-80">
                     {/* TAM - Outer Circle */}
-                    <div className="absolute inset-0 w-80 h-80 bg-blue-900 rounded-full flex items-end justify-center pb-4">
-                      {/* TAM Label positioned at bottom of outer ring */}
+                    <div className="absolute inset-0 w-80 h-80 bg-blue-900 rounded-full flex items-center justify-center">
                       <div className="text-white text-center">
                         <div className="text-xl font-bold">{formatCurrency(analysis.market_map.total_market_size)}</div>
                         <div className="text-sm font-medium">TAM</div>
@@ -1232,7 +1231,7 @@ const MarketMapApp = () => {
                     </div>
                       
                     {/* SAM - Middle Circle - Properly centered */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-blue-600 rounded-full flex items-end justify-center pb-3">
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-blue-600 rounded-full flex items-center justify-center">
                       <div className="text-white text-center">
                         <div className="text-lg font-bold">{formatCurrency(analysis.market_map.total_market_size * 0.3)}</div>
                         <div className="text-sm font-medium">SAM</div>
@@ -1247,28 +1246,28 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    {/* Improved Labels with better positioning */}
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                    {/* Enhanced Labels with arrows pointing to each circle */}
+                    <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
                       <div className="flex flex-col items-center">
-                        <div className="text-xs text-gray-600 mb-1 whitespace-nowrap">Total Market</div>
-                        <div className="w-6 h-px bg-gray-400"></div>
-                        <div className="w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-gray-400"></div>
+                        <div className="text-sm font-semibold text-gray-700 mb-2 text-center">Total Addressable Market</div>
+                        <div className="w-px h-8 bg-gray-400"></div>
+                        <div className="w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-gray-400"></div>
                       </div>
                     </div>
                     
-                    <div className="absolute top-8 -right-16">
+                    <div className="absolute top-4 -right-32">
                       <div className="flex items-center">
-                        <div className="w-8 h-px bg-gray-400"></div>
-                        <div className="w-0 h-0 border-t-2 border-b-2 border-l-4 border-transparent border-l-gray-400"></div>
-                        <div className="text-xs text-gray-600 ml-2 whitespace-nowrap">Serviceable<br/>Market</div>
+                        <div className="text-sm font-semibold text-gray-700 mr-3 text-right">Serviceable<br/>Addressable Market</div>
+                        <div className="h-px w-12 bg-gray-400"></div>
+                        <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-transparent border-l-gray-400"></div>
                       </div>
                     </div>
                     
-                    <div className="absolute bottom-8 -left-20">
+                    <div className="absolute bottom-4 -left-32">
                       <div className="flex items-center">
-                        <div className="text-xs text-gray-600 mr-2 whitespace-nowrap">Obtainable<br/>Market</div>
-                        <div className="w-0 h-0 border-t-2 border-b-2 border-r-4 border-transparent border-r-gray-400"></div>
-                        <div className="w-8 h-px bg-gray-400"></div>
+                        <div className="w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-gray-400"></div>
+                        <div className="h-px w-12 bg-gray-400"></div>
+                        <div className="text-sm font-semibold text-gray-700 ml-3">Serviceable<br/>Obtainable Market</div>
                       </div>
                     </div>
                   </div>

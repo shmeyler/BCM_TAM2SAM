@@ -238,6 +238,7 @@ test_plan:
     - "Market Analysis"
     - "Analysis History"
     - "Export Market Map"
+    - "DTCC Competitive Analysis Fix"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"

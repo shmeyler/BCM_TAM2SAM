@@ -9,13 +9,12 @@ from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 import uuid
 from datetime import datetime
-from openai import OpenAI
+from together import Together
 import json
 import io
 import pandas as pd
 from fastapi.responses import StreamingResponse
 import asyncio
-import httpx
 import sys
 import os
 
@@ -36,17 +35,16 @@ mongo_url = os.environ['MONGO_URL']
 mongo_client = AsyncIOMotorClient(mongo_url)
 db = mongo_client[os.environ['DB_NAME']]
 
-# OpenAI setup - Modern client compatible with httpx 0.28.1
-openai_client = None
+# Together AI setup with Kimi K2 Instruct
+together_client = None
 try:
-    from openai import OpenAI
-    openai_client = OpenAI(
-        api_key=os.environ.get('OPENAI_API_KEY', 'your-openai-api-key-here')
+    together_client = Together(
+        api_key=os.environ.get('TOGETHER_API_KEY', '')
     )
-    logger.info("OpenAI modern client initialized successfully")
+    logger.info("Together AI client initialized successfully with Kimi K2 Instruct 0905")
 except Exception as e:
-    logger.error(f"Failed to initialize OpenAI client: {e}")
-    openai_client = None
+    logger.error(f"Failed to initialize Together AI client: {e}")
+    together_client = None
 
 # Create the main app without a prefix
 app = FastAPI()

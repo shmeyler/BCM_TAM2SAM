@@ -208,14 +208,14 @@ class MarketIntelligenceAgent:
 
     @staticmethod
     async def analyze_market_landscape(market_input: MarketInput) -> Dict[str, Any]:
-        """Comprehensive market intelligence analysis using AI with real market research"""
+        """Comprehensive market intelligence analysis using Together AI Kimi K2 with real market research"""
         
-        # Check if OpenAI client is available
-        if openai_client is None:
-            logger.warning("OpenAI client not available, using fallback analysis")
+        # Check if Together AI client is available
+        if together_client is None:
+            logger.warning("Together AI client not available, using fallback analysis")
             return MarketIntelligenceAgent._get_fallback_analysis(market_input)
         
-        # Use OpenAI for dynamic market analysis
+        # Use Together AI Kimi K2 for dynamic market analysis
         try:
             prompt = f"""
             You are a senior market research analyst conducting a specific analysis for {market_input.product_name} in the {market_input.industry} industry.

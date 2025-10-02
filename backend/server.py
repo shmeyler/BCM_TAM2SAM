@@ -388,7 +388,7 @@ class MarketIntelligenceAgent:
                     }
                 ],
                 temperature=0.1,
-                max_tokens=3000
+                max_tokens=8000
             )
             
             content = response.choices[0].message.content.strip()

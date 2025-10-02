@@ -422,7 +422,7 @@ class MarketIntelligenceAgent:
                 return MarketIntelligenceAgent._get_fallback_analysis(market_input)
                 
         except Exception as e:
-            logger.error(f"Error with OpenAI analysis: {e}")
+            logger.error(f"Error with Together AI (Kimi) analysis: {e}")
             return MarketIntelligenceAgent._get_fallback_analysis(market_input)
 
     @staticmethod

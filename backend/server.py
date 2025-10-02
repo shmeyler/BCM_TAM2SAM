@@ -373,10 +373,10 @@ class MarketIntelligenceAgent:
             Return only valid JSON with accurate, researched market intelligence.
             """
 
-            # Call OpenAI API
+            # Call Together AI API with Kimi K2 Instruct 0905
             response = await asyncio.to_thread(
-                openai_client.chat.completions.create,
-                model="gpt-4",
+                together_client.chat.completions.create,
+                model="moonshotai/Kimi-K2-Instruct-0905",
                 messages=[
                     {
                         "role": "system", 
@@ -392,7 +392,7 @@ class MarketIntelligenceAgent:
             )
             
             content = response.choices[0].message.content.strip()
-            logger.info(f"OpenAI response length: {len(content)} characters")
+            logger.info(f"Together AI (Kimi K2) response length: {len(content)} characters")
             
             # Parse JSON response with better error handling
             try:

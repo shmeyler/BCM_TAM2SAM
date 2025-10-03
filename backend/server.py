@@ -864,7 +864,7 @@ async def root():
     return {"message": "Market Map API Ready", "version": "2.0.0"}
 
 @api_router.post("/analyze-market", response_model=MarketAnalysis)
-async def analyze_market(market_input: MarketInput):
+async def analyze_market(market_input: MarketInput, user: User = Depends(require_auth)):
     try:
         # Step 1: Comprehensive AI Market Intelligence
         ai_analysis = await MarketIntelligenceAgent.analyze_market_landscape(market_input)

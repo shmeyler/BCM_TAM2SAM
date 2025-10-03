@@ -202,41 +202,56 @@ def create_market_report_pdf(market_map, market_input):
     story.append(Paragraph("Comprehensive breakdown across multiple dimensions", subtitle_style))
     story.append(Spacer(1, 0.2*inch))
     
-    # Helper function to create segmentation section
-    def create_segmentation_section(title, segments, color):
+    # Helper function to create segmentation section matching web design
+    def create_segmentation_section(title, segments, color, icon, subtitle):
         elements = []
-        elements.append(Paragraph(title, subheading_style))
+        
+        # Section header with icon and subtitle (like web)
+        header_content = f'''
+        <para alignment="center">
+        <font size="24">{icon}</font><br/>
+        <font size="14"><b>{title}</b></font><br/>
+        <font size="9" color="#6B7280">{subtitle}</font>
+        </para>
+        '''
+        elements.append(Paragraph(header_content, body_style))
+        elements.append(Spacer(1, 0.15*inch))
         
         if not segments:
             elements.append(Paragraph("<i>No segmentation data available</i>", small_text_style))
             return elements
         
         for seg in segments[:3]:
-            # Create a card-like layout for each segment
-            seg_data = [[
-                Paragraph(f'<b>{seg["name"]}</b>', body_style),
-                Paragraph(f'<b>${seg["size_estimate"]/1000000:.0f}M</b><br/><font size="8">{seg["growth_rate"]*100:.1f}% growth</font>', body_style)
-            ]]
+            # Get key players
+            key_players = seg.get("key_players", [])
+            players_text = ""
+            if key_players:
+                players_text = f'<br/><font size="8" color="#6B7280"><b>Key Players:</b> {", ".join(key_players[:3])}</font>'
             
-            seg_table = Table(seg_data, colWidths=[4.5*inch, 2*inch])
+            # Create detailed segment card matching web layout
+            seg_content = f'''
+            <font size="10"><b>{seg["name"]}</b></font><br/>
+            <font size="9" color="#6B7280">{seg["description"]}</font><br/>
+            <font size="9"><b>Market Size:</b> <font color="{color}">${seg["size_estimate"]/1000000:.0f}M</font> | <b>Growth:</b> <font color="#10B981">{seg["growth_rate"]*100:.1f}%</font></font>
+            {players_text}
+            '''
+            
+            seg_data = [[Paragraph(seg_content, body_style)]]
+            
+            seg_table = Table(seg_data, colWidths=[6.5*inch])
             seg_table.setStyle(TableStyle([
-                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                ('BACKGROUND', (0, 0), (0, 0), colors.HexColor(color)),
-                ('BACKGROUND', (1, 0), (1, 0), colors.HexColor('#F9FAFB')),
-                ('BOX', (0, 0), (-1, -1), 1, colors.HexColor('#E5E7EB')),
-                ('INNERGRID', (0, 0), (-1, -1), 1, colors.white),
-                ('LEFTPADDING', (0, 0), (-1, -1), 10),
-                ('RIGHTPADDING', (0, 0), (-1, -1), 10),
-                ('TOPPADDING', (0, 0), (-1, -1), 8),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ('BACKGROUND', (0, 0), (-1, -1), colors.white),
+                ('BOX', (0, 0), (-1, -1), 1.5, colors.HexColor(color)),
+                ('LEFTPADDING', (0, 0), (-1, -1), 12),
+                ('RIGHTPADDING', (0, 0), (-1, -1), 12),
+                ('TOPPADDING', (0, 0), (-1, -1), 10),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 10),
             ]))
             elements.append(seg_table)
-            
-            # Description below
-            elements.append(Paragraph(f'<font size="9">{seg["description"]}</font>', small_text_style))
-            elements.append(Spacer(1, 0.1*inch))
+            elements.append(Spacer(1, 0.12*inch))
         
-        elements.append(Spacer(1, 0.15*inch))
+        elements.append(Spacer(1, 0.2*inch))
         return elements
     
     # Geographic Segmentation

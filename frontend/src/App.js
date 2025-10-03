@@ -1348,6 +1348,30 @@ const MarketMapApp = () => {
                   </div>
                 </button>
               </div>
+              
+              {/* Alternative direct links if downloads don't work */}
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="text-xs text-gray-600 mb-2 font-semibold">Alternative: Open in New Tab</p>
+                <div className="flex flex-wrap gap-2">
+                  <a
+                    href={`${process.env.REACT_APP_BACKEND_URL}/api/export-pdf/${analysis.market_map.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                  >
+                    📄 Open PDF in new tab
+                  </a>
+                  <a
+                    href={`${process.env.REACT_APP_BACKEND_URL}/api/export-market-map/${analysis.market_map.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                  >
+                    📊 Open Excel in new tab
+                  </a>
+                </div>
+              </div>
+              
               <div className="mt-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
                 <p className="text-xs text-orange-800">
                   <span className="font-semibold">💡 Tip:</span> Use PDF for client presentations and Excel for detailed data analysis or integration with simulation platforms.

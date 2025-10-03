@@ -90,7 +90,7 @@ async def create_session(request: Request, response: Response, db = Depends(get_
         # Call Emergent Auth to get session data
         async with httpx.AsyncClient() as client:
             auth_response = await client.get(
-                "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
+                "https://demobackend.emergentagent.com/auth/v1/oauth/session-data",
                 headers={"X-Session-ID": session_id}
             )
             

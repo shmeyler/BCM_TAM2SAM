@@ -285,3 +285,55 @@ async def delete_user(
     except Exception as e:
         logger.error(f"Error deleting user: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@auth_router.post("/admin/invite-user")
+async def invite_user(
+    invite_data: dict,
+    admin: User = Depends(require_admin),
+    db = Depends(get_db)
+):
+    """
+    Pre-register a user (admin only)
+    This creates an inactive user account that will be activated when they first login
+    """
+    try:
+        email = invite_data.get('email', '').lower().strip()
+        name = invite_data.get('name', '').strip()
+        
+        if not email:
+            raise HTTPException(status_code=400, detail="Email is required")
+        
+        if not email.endswith('@beebyclarkmeyler.com'):
+            raise HTTPException(
+                status_code=400,
+                detail="Only @beebyclarkmeyler.com email addresses can be invited"
+            )
+        
+        # Check if user already exists
+        existing_user = await db.users.find_one({"email": email})
+        if existing_user:
+            raise HTTPException(status_code=400, detail="User already exists")
+        
+        # Create pre-registered user (will be activated on first login)
+        new_user = User(
+            email=email,
+            name=name or email.split('@')[0].replace('.', ' ').title(),
+            is_active=True,  # Pre-approved
+            is_admin=False,
+            last_login=None
+        )
+        
+        await db.users.insert_one(new_user.dict())
+        logger.info(f"User invited by admin {admin.email}: {email}")
+        
+        return {
+            "message": "User invited successfully",
+            "user": UserResponse(**new_user.dict())
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error inviting user: {e}")
+        raise HTTPException(status_code=500, detail=str(e))

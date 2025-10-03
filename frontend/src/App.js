@@ -59,7 +59,10 @@ const MarketMapApp = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const sessionId = urlParams.get('session_id');
 
+      console.log('Checking auth... session_id:', sessionId);
+
       if (sessionId) {
+        console.log('Found session_id, creating session...');
         // Create session from OAuth redirect
         await createSession(sessionId);
         // Clean URL
@@ -68,12 +71,14 @@ const MarketMapApp = () => {
       }
 
       // Check existing session
+      console.log('Checking for existing session...');
       const response = await axios.get(`${API}/auth/me`, {
         withCredentials: true
       });
+      console.log('Existing session found:', response.data);
       setUser(response.data);
     } catch (error) {
-      console.log('Not authenticated');
+      console.log('Not authenticated:', error.response?.status);
       setUser(null);
     } finally {
       setAuthLoading(false);
@@ -82,6 +87,7 @@ const MarketMapApp = () => {
 
   const createSession = async (sessionId) => {
     try {
+      console.log('Creating session with session_id:', sessionId);
       const response = await axios.post(
         `${API}/auth/session`,
         {},
@@ -90,12 +96,15 @@ const MarketMapApp = () => {
           withCredentials: true
         }
       );
+      console.log('Session created successfully:', response.data);
       setUser(response.data.user);
       setAuthLoading(false);
     } catch (error) {
       console.error('Session creation failed:', error);
+      console.error('Error details:', error.response?.data);
       alert(error.response?.data?.detail || 'Authentication failed. Please try again.');
       setAuthLoading(false);
+      setUser(null);
     }
   };
 

@@ -190,6 +190,12 @@ const MarketMapApp = () => {
         window.URL.revokeObjectURL(downloadUrl);
         document.body.removeChild(a);
         console.log('Excel download triggered successfully');
+        // Show success message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+        messageDiv.textContent = '✅ Excel data downloaded successfully!';
+        document.body.appendChild(messageDiv);
+        setTimeout(() => messageDiv.remove(), 3000);
       } else {
         console.error('Response not OK:', response.status, response.statusText);
         const text = await response.text();

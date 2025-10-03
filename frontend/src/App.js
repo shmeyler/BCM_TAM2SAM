@@ -597,67 +597,67 @@ const MarketMapApp = () => {
                     )}
                   </button>
 
-                  {/* Progress Indicator - Full Width */}
+                  {/* Progress Indicator - Full Width Prominent Modal */}
                   {isAnalyzing && (
-                    <div className="mt-6 w-full">
-                      <div className="bg-white p-6 rounded-lg shadow-lg border max-w-2xl mx-auto">
-                        <div className="text-center mb-4">
-                          <h4 className="text-lg font-semibold text-gray-900 mb-2">Market Analysis in Progress</h4>
-                          <p className="text-sm text-gray-600">
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                      <div className="bg-white p-8 rounded-xl shadow-2xl border-2 border-orange-200 w-full max-w-3xl">
+                        <div className="text-center mb-6">
+                          <h4 className="text-2xl font-bold text-gray-900 mb-2">Market Analysis in Progress</h4>
+                          <p className="text-base text-gray-600">
                             Step {analysisProgress.currentStep} of {analysisProgress.totalSteps}
                           </p>
                         </div>
 
                         {/* Progress Bar */}
-                        <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+                        <div className="w-full bg-gray-200 rounded-full h-4 mb-6">
                           <div
-                            className="bg-gradient-to-r from-orange-500 to-orange-600 h-3 rounded-full transition-all duration-500 ease-out"
+                            className="bg-gradient-to-r from-orange-500 to-orange-600 h-4 rounded-full transition-all duration-500 ease-out"
                             style={{ width: `${(analysisProgress.currentStep / analysisProgress.totalSteps) * 100}%` }}
                           ></div>
                         </div>
 
                         {/* Current Step */}
-                        <div className="text-center mb-3">
-                          <div className="text-sm font-medium text-gray-900 mb-1">
+                        <div className="text-center mb-6">
+                          <div className="text-lg font-semibold text-gray-900 mb-2">
                             {analysisProgress.stepName || 'Initializing...'}
                           </div>
                           {analysisProgress.estimatedTimeLeft > 0 && (
-                            <div className="text-xs text-gray-500">
+                            <div className="text-sm text-gray-600">
                               Estimated time remaining: {analysisProgress.estimatedTimeLeft} seconds
                             </div>
                           )}
                         </div>
 
                         {/* Steps List */}
-                        <div className="space-y-2">
+                        <div className="space-y-3 mb-6">
                           {analysisProgress.steps.map((step, index) => (
-                            <div key={index} className={`flex items-center text-xs ${
+                            <div key={index} className={`flex items-center text-sm ${
                               index < analysisProgress.currentStep ? 'text-green-600' :
                               index === analysisProgress.currentStep - 1 ? 'text-orange-600' :
                               'text-gray-400'
                             }`}>
-                              <div className={`w-4 h-4 rounded-full mr-3 flex items-center justify-center ${
-                                index < analysisProgress.currentStep ? 'bg-green-500' :
-                                index === analysisProgress.currentStep - 1 ? 'bg-orange-500' :
-                                'bg-gray-300'
+                              <div className={`w-5 h-5 rounded-full mr-3 flex items-center justify-center ${
+                                index < analysisProgress.currentStep ? 'bg-green-600' :
+                                index === analysisProgress.currentStep - 1 ? 'bg-orange-600' :
+                                'bg-gray-200'
                               }`}>
                                 {index < analysisProgress.currentStep ? (
-                                  <svg className="w-2 h-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                   </svg>
                                 ) : index === analysisProgress.currentStep - 1 ? (
-                                  <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+                                  <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
                                 ) : (
-                                  <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                                  <div className="w-2 h-2 bg-white rounded-full"></div>
                                 )}
                               </div>
-                              <span>{step.name}</span>
+                              <span className="font-medium">{step.name}</span>
                             </div>
                           ))}
                         </div>
 
-                        {/* Cancel Button - Proper Button Style */}
-                        <div className="mt-6 pt-4 border-t border-gray-100 text-center">
+                        {/* Cancel Button - Prominent Red Button */}
+                        <div className="mt-8 pt-6 border-t-2 border-gray-200 flex justify-center">
                           <button
                             onClick={() => {
                               if (window.confirm('Are you sure you want to cancel the analysis? This will stop the current process.')) {
@@ -670,16 +670,19 @@ const MarketMapApp = () => {
                                 }));
                               }
                             }}
-                            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+                            className="px-8 py-3 bg-red-500 text-white rounded-lg text-base font-semibold hover:bg-red-600 transition-colors shadow-lg hover:shadow-xl flex items-center space-x-2"
                           >
-                            Cancel Analysis
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            <span>Cancel Analysis</span>
                           </button>
                         </div>
 
-                        {/* Subtle help text */}
-                        <div className="mt-4 pt-4 border-t border-gray-100">
-                          <p className="text-xs text-gray-400 text-center">
-                            Please wait while we generate your comprehensive market analysis...
+                        {/* Help text */}
+                        <div className="mt-6">
+                          <p className="text-sm text-gray-500 text-center">
+                            Powered by Kimi K2 • Please wait while we generate your comprehensive market analysis...
                           </p>
                         </div>
                       </div>

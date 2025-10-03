@@ -28,14 +28,17 @@ const AdminPanel = ({ user, onClose }) => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
+      console.log('Fetching users from:', `${BACKEND_URL}/api/admin/users`);
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/users`,
+        `${BACKEND_URL}/api/admin/users`,
         { withCredentials: true }
       );
+      console.log('Users fetched:', response.data);
       setUsers(response.data);
       setError(null);
     } catch (err) {
       console.error('Error fetching users:', err);
+      console.error('Error details:', err.response);
       setError(err.response?.data?.detail || 'Failed to load users');
     } finally {
       setLoading(false);
@@ -44,13 +47,15 @@ const AdminPanel = ({ user, onClose }) => {
 
   const updateUserStatus = async (userId, updates) => {
     try {
+      console.log('Updating user:', userId, updates);
       await axios.patch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/users/${userId}`,
+        `${BACKEND_URL}/api/admin/users/${userId}`,
         updates,
         { withCredentials: true }
       );
       fetchUsers();
     } catch (err) {
+      console.error('Update error:', err);
       alert(err.response?.data?.detail || 'Failed to update user');
     }
   };
@@ -61,12 +66,14 @@ const AdminPanel = ({ user, onClose }) => {
     }
 
     try {
+      console.log('Deleting user:', userId);
       await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/users/${userId}`,
+        `${BACKEND_URL}/api/admin/users/${userId}`,
         { withCredentials: true }
       );
       fetchUsers();
     } catch (err) {
+      console.error('Delete error:', err);
       alert(err.response?.data?.detail || 'Failed to delete user');
     }
   };
@@ -81,8 +88,11 @@ const AdminPanel = ({ user, onClose }) => {
 
     setInviting(true);
     try {
-      await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/invite-user`,
+      console.log('Inviting user:', inviteEmail, inviteName);
+      console.log('Invite URL:', `${BACKEND_URL}/api/admin/invite-user`);
+      
+      const response = await axios.post(
+        `${BACKEND_URL}/api/admin/invite-user`,
         {
           email: inviteEmail,
           name: inviteName || inviteEmail.split('@')[0]
@@ -90,12 +100,16 @@ const AdminPanel = ({ user, onClose }) => {
         { withCredentials: true }
       );
       
+      console.log('Invite response:', response.data);
+      
       setInviteEmail('');
       setInviteName('');
       setShowInviteForm(false);
       fetchUsers();
       alert('User invited successfully! They can now log in with their Google account.');
     } catch (err) {
+      console.error('Invite error:', err);
+      console.error('Invite error details:', err.response);
       alert(err.response?.data?.detail || 'Failed to invite user');
     } finally {
       setInviting(false);

@@ -191,21 +191,34 @@ const MarketMapApp = () => {
 
   const exportPDF = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/export-pdf/${analysis.market_map.id}`);
-      if (response.ok) {
+      console.log('Starting PDF export for analysis:', analysis.market_map.id);
+      const url = `${process.env.REACT_APP_BACKEND_URL}/api/export-pdf/${analysis.market_map.id}`;
+      console.log('Fetching from:', url);
+      
+      const response = await fetch(url);
+      console.log('Response status:', response.status, 'OK:', response.ok);
+      
+      if (response.ok || response.status === 200) {
         const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
+        console.log('Blob size:', blob.size);
+        const downloadUrl = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
+        a.href = downloadUrl;
         a.download = `BCM-Market-Report-${analysis.market_input.product_name.replace(/\s+/g, '-')}.pdf`;
         document.body.appendChild(a);
         a.click();
-        window.URL.revokeObjectURL(url);
+        window.URL.revokeObjectURL(downloadUrl);
         document.body.removeChild(a);
+        console.log('PDF download triggered successfully');
+      } else {
+        console.error('Response not OK:', response.status, response.statusText);
+        const text = await response.text();
+        console.error('Response body:', text);
+        alert(`Failed to export PDF: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
       console.error('PDF export failed:', error);
-      alert('Failed to export PDF report. Please try again.');
+      alert(`Failed to export PDF report: ${error.message}`);
     }
   };
 

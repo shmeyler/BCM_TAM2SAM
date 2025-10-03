@@ -962,12 +962,6 @@ async def export_pdf(analysis_id: str):
         
         # Generate PDF using new generator
         pdf_data = create_market_report_pdf(market_map, market_input)
-
-        # Create PDF
-        buffer = io.BytesIO()
-        doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5*inch, bottomMargin=0.5*inch)
-        story = []
-        styles = getSampleStyleSheet()
         
         # Custom styles
         title_style = ParagraphStyle(

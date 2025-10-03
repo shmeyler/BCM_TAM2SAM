@@ -171,21 +171,34 @@ const MarketMapApp = () => {
 
   const exportMarketMap = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/export-market-map/${analysis.market_map.id}`);
-      if (response.ok) {
+      console.log('Starting Excel export for analysis:', analysis.market_map.id);
+      const url = `${process.env.REACT_APP_BACKEND_URL}/api/export-market-map/${analysis.market_map.id}`;
+      console.log('Fetching from:', url);
+      
+      const response = await fetch(url);
+      console.log('Response status:', response.status, 'OK:', response.ok);
+      
+      if (response.ok || response.status === 200) {
         const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
+        console.log('Blob size:', blob.size);
+        const downloadUrl = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
+        a.href = downloadUrl;
         a.download = `market-map-${analysis.market_input.product_name.replace(/\s+/g, '-').toLowerCase()}.xlsx`;
         document.body.appendChild(a);
         a.click();
-        window.URL.revokeObjectURL(url);
+        window.URL.revokeObjectURL(downloadUrl);
         document.body.removeChild(a);
+        console.log('Excel download triggered successfully');
+      } else {
+        console.error('Response not OK:', response.status, response.statusText);
+        const text = await response.text();
+        console.error('Response body:', text);
+        alert(`Failed to export Excel: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
       console.error('Export failed:', error);
-      alert('Failed to export market map. Please try again.');
+      alert(`Failed to export market map: ${error.message}`);
     }
   };
 

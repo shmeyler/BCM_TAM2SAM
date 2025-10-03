@@ -52,6 +52,9 @@ except Exception as e:
 # Create the main app without a prefix
 app = FastAPI()
 
+# Make database accessible to auth routes
+app.state.db = db
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 

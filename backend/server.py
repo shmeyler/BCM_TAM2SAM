@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Depends
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -18,6 +18,8 @@ import asyncio
 import sys
 import os
 from pdf_generator import create_market_report_pdf
+from auth_routes import auth_router, require_auth, get_db
+from auth_models import User
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 

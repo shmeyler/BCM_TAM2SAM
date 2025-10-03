@@ -211,30 +211,70 @@ const MarketMapApp = () => {
   const exportPDF = async () => {
     try {
       console.log('Starting PDF export for analysis:', analysis.market_map.id);
+      
+      // Show loading message
+      const loadingDiv = document.createElement('div');
+      loadingDiv.id = 'download-loading';
+      loadingDiv.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      loadingDiv.textContent = '⏳ Preparing PDF download...';
+      document.body.appendChild(loadingDiv);
+      
       const url = `${process.env.REACT_APP_BACKEND_URL}/api/export-pdf/${analysis.market_map.id}`;
       console.log('Fetching from:', url);
       
       const response = await fetch(url);
       console.log('Response status:', response.status, 'OK:', response.ok);
       
+      // Remove loading message
+      const loading = document.getElementById('download-loading');
+      if (loading) loading.remove();
+      
       if (response.ok || response.status === 200) {
         const blob = await response.blob();
-        console.log('Blob size:', blob.size);
+        console.log('Blob size:', blob.size, 'type:', blob.type);
+        
+        // Use direct link method (more reliable)
         const downloadUrl = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
+        a.style.display = 'none';
         a.href = downloadUrl;
         a.download = `BCM-Market-Report-${analysis.market_input.product_name.replace(/\s+/g, '-')}.pdf`;
+        a.target = '_blank';
+        
+        // Try multiple methods to trigger download
         document.body.appendChild(a);
+        
+        // Method 1: Click
         a.click();
-        window.URL.revokeObjectURL(downloadUrl);
-        document.body.removeChild(a);
+        
+        // Method 2: Dispatch event (for some browsers)
+        setTimeout(() => {
+          const clickEvent = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: false
+          });
+          a.dispatchEvent(clickEvent);
+        }, 100);
+        
+        // Cleanup after delay
+        setTimeout(() => {
+          window.URL.revokeObjectURL(downloadUrl);
+          document.body.removeChild(a);
+        }, 1000);
+        
         console.log('PDF download triggered successfully');
-        // Show success message
+        
+        // Show detailed success message
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
-        messageDiv.textContent = '✅ PDF report downloaded successfully!';
+        messageDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-md';
+        messageDiv.innerHTML = `
+          <div class="font-bold mb-1">✅ PDF Generated!</div>
+          <div class="text-sm">Check your browser's Downloads folder</div>
+          <div class="text-xs mt-1 opacity-90">File: BCM-Market-Report-${analysis.market_input.product_name.replace(/\s+/g, '-')}.pdf</div>
+        `;
         document.body.appendChild(messageDiv);
-        setTimeout(() => messageDiv.remove(), 3000);
+        setTimeout(() => messageDiv.remove(), 5000);
       } else {
         console.error('Response not OK:', response.status, response.statusText);
         const text = await response.text();
@@ -242,6 +282,8 @@ const MarketMapApp = () => {
         alert(`Failed to export PDF: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
+      const loading = document.getElementById('download-loading');
+      if (loading) loading.remove();
       console.error('PDF export failed:', error);
       alert(`Failed to export PDF report: ${error.message}`);
     }

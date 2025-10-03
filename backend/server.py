@@ -1099,8 +1099,9 @@ async def test_integrations():
             "error": str(e)
         }
 
-# Include the router in the main app
+# Include routers in the main app
 app.include_router(api_router)
+app.include_router(auth_router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,

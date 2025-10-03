@@ -534,14 +534,53 @@ const MarketMapApp = () => {
                 <p className="text-white text-opacity-90 text-sm">AI-Powered Comprehensive Market Intelligence</p>
               </div>
             </div>
-            {currentStep === 4 && (
-              <button
-                onClick={resetForm}
-                className="bg-white text-orange-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-              >
-                New Analysis
-              </button>
-            )}
+            <div className="flex items-center space-x-4">
+              {currentStep === 4 && (
+                <button
+                  onClick={resetForm}
+                  className="bg-white text-orange-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  New Analysis
+                </button>
+              )}
+              
+              {/* Admin Panel Button */}
+              {user.is_admin && (
+                <button
+                  onClick={() => setShowAdminPanel(true)}
+                  className="bg-white bg-opacity-20 text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-30 transition-colors flex items-center space-x-2"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                  <span>Admin Panel</span>
+                </button>
+              )}
+              
+              {/* User Menu */}
+              <div className="flex items-center space-x-3 bg-white bg-opacity-20 rounded-lg px-4 py-2">
+                {user.picture ? (
+                  <img src={user.picture} alt={user.name} className="w-8 h-8 rounded-full" />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-white text-orange-600 flex items-center justify-center font-semibold">
+                    {user.name.charAt(0)}
+                  </div>
+                )}
+                <div className="text-white">
+                  <div className="text-sm font-medium">{user.name}</div>
+                  <div className="text-xs opacity-90">{user.email}</div>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="ml-2 text-white hover:text-gray-200 transition-colors"
+                  title="Logout"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

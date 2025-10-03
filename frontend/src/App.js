@@ -4,8 +4,23 @@ import axios from 'axios';
 import Login from './components/Login';
 import AdminPanel from './components/AdminPanel';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+// Auto-detect backend URL based on current domain
+const getBackendUrl = () => {
+  const hostname = window.location.hostname;
+  
+  // If on custom domain, use same domain for backend
+  if (hostname === 'www.bcmventas.com' || hostname === 'bcmventas.com') {
+    return `https://${hostname}`;
+  }
+  
+  // If on preview/localhost, use environment variable or current origin
+  return process.env.REACT_APP_BACKEND_URL || window.location.origin;
+};
+
+const BACKEND_URL = getBackendUrl();
 const API = `${BACKEND_URL}/api`;
+
+console.log('Backend URL:', BACKEND_URL);
 
 const MarketMapApp = () => {
   // Authentication state

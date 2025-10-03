@@ -1386,12 +1386,41 @@ const MarketMapApp = () => {
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3">Data Sources</h4>
                   <ul className="space-y-2">
-                    {analysis.market_map.data_sources.map((source, index) => (
-                      <li key={index} className="flex items-center text-sm text-gray-600">
-                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></div>
-                        {source}
-                      </li>
-                    ))}
+                    {analysis.market_map.data_sources.map((source, index) => {
+                      // Map source names to URLs
+                      const sourceMapping = {
+                        "Gartner Market Research": "https://www.gartner.com/en/research",
+                        "McKinsey Industry Reports": "https://www.mckinsey.com/industries",
+                        "IBISWorld Market Analysis": "https://www.ibisworld.com",
+                        "Forrester Research": "https://www.forrester.com/research",
+                        "PwC Industry Insights": "https://www.pwc.com/us/en/industries.html",
+                        "Statista": "https://www.statista.com",
+                        "CB Insights": "https://www.cbinsights.com",
+                        "Crunchbase": "https://www.crunchbase.com"
+                      };
+                      
+                      const sourceName = typeof source === 'string' ? source : source.name;
+                      const sourceUrl = typeof source === 'object' && source.url ? source.url : sourceMapping[sourceName];
+                      
+                      return (
+                        <li key={index} className="flex items-start text-sm text-gray-600">
+                          <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2 mt-1.5 flex-shrink-0"></div>
+                          {sourceUrl ? (
+                            <a 
+                              href={sourceUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:text-blue-800 underline hover:no-underline transition-colors"
+                              title={`Visit ${sourceName}`}
+                            >
+                              {sourceName} 🔗
+                            </a>
+                          ) : (
+                            <span>{sourceName}</span>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
                 <div>

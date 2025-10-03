@@ -185,6 +185,27 @@ const MarketMapApp = () => {
       }
     } catch (error) {
       console.error('Export failed:', error);
+      alert('Failed to export market map. Please try again.');
+    }
+  };
+
+  const exportPDF = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/export-pdf/${analysis.market_map.id}`);
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `BCM-Market-Report-${analysis.market_input.product_name.replace(/\s+/g, '-')}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }
+    } catch (error) {
+      console.error('PDF export failed:', error);
+      alert('Failed to export PDF report. Please try again.');
     }
   };
 

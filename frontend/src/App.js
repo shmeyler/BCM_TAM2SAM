@@ -42,9 +42,74 @@ const MarketMapApp = () => {
   const [analysis, setAnalysis] = useState(null);
   const [history, setHistory] = useState([]);
 
+  // Check authentication on mount and handle OAuth redirect
   useEffect(() => {
-    loadHistory();
+    checkAuth();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      loadHistory();
+    }
+  }, [user]);
+
+  const checkAuth = async () => {
+    try {
+      // Check if we're coming back from OAuth with session_id
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id');
+
+      if (sessionId) {
+        // Create session from OAuth redirect
+        await createSession(sessionId);
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+        return;
+      }
+
+      // Check existing session
+      const response = await axios.get(`${API}/auth/me`, {
+        withCredentials: true
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.log('Not authenticated');
+      setUser(null);
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const createSession = async (sessionId) => {
+    try {
+      const response = await axios.post(
+        `${API}/auth/session`,
+        {},
+        {
+          headers: { 'X-Session-ID': sessionId },
+          withCredentials: true
+        }
+      );
+      setUser(response.data.user);
+      setAuthLoading(false);
+    } catch (error) {
+      console.error('Session creation failed:', error);
+      alert(error.response?.data?.detail || 'Authentication failed. Please try again.');
+      setAuthLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${API}/auth/logout`, {}, { withCredentials: true });
+      setUser(null);
+      setAnalysis(null);
+      setHistory([]);
+      setCurrentStep(1);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   const loadAnalysis = async (analysisId) => {
     try {

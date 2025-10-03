@@ -60,6 +60,37 @@ const AdminPanel = ({ user, onClose }) => {
     }
   };
 
+  const inviteUser = async (e) => {
+    e.preventDefault();
+    
+    if (!inviteEmail.endsWith('@beebyclarkmeyler.com')) {
+      alert('Only @beebyclarkmeyler.com email addresses can be invited');
+      return;
+    }
+
+    setInviting(true);
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/invite-user`,
+        {
+          email: inviteEmail,
+          name: inviteName || inviteEmail.split('@')[0]
+        },
+        { withCredentials: true }
+      );
+      
+      setInviteEmail('');
+      setInviteName('');
+      setShowInviteForm(false);
+      fetchUsers();
+      alert('User invited successfully! They can now log in with their Google account.');
+    } catch (err) {
+      alert(err.response?.data?.detail || 'Failed to invite user');
+    } finally {
+      setInviting(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Auto-detect backend URL (same logic as App.js)
+const getBackendUrl = () => {
+  const hostname = window.location.hostname;
+  if (hostname === 'www.bcmventas.com' || hostname === 'bcmventas.com') {
+    return `https://${hostname}`;
+  }
+  return process.env.REACT_APP_BACKEND_URL || window.location.origin;
+};
+
+const BACKEND_URL = getBackendUrl();
+
 const AdminPanel = ({ user, onClose }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);

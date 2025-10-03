@@ -204,7 +204,8 @@ const MarketMapApp = () => {
       
       // Start actual API call
       const apiPromise = axios.post(`${API}/analyze-market`, formData, {
-        timeout: 120000  // 120 seconds timeout (increased for executive summary generation)
+        timeout: 120000,  // 120 seconds timeout (increased for executive summary generation)
+        withCredentials: true
       });
 
       // Wait for both to complete

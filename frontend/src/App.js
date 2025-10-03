@@ -493,8 +493,30 @@ const MarketMapApp = () => {
     setCurrentStep(1);
   };
 
+  // Show loading while checking auth
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-orange-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show login page if not authenticated
+  if (!user) {
+    return <Login />;
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Admin Panel Modal */}
+      {showAdminPanel && (
+        <AdminPanel user={user} onClose={() => setShowAdminPanel(false)} />
+      )}
+
       {/* Orange Header Stripe */}
       <div className="bg-gradient-to-r from-orange-500 to-orange-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

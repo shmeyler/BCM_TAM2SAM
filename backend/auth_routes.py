@@ -87,18 +87,17 @@ async def create_session(request: Request, response: Response, db = Depends(get_
         if not session_id:
             raise HTTPException(status_code=400, detail="X-Session-ID header required")
         
-        # Call Emergent Auth to get session data
+        # Call Emergent Auth to get session data (correct endpoint from playbook)
         async with httpx.AsyncClient() as client:
-            # Try the correct endpoint format
             auth_response = await client.get(
-                "https://demobackend.emergentagent.com/auth/oauth/session-data",
+                "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
                 headers={"X-Session-ID": session_id},
                 timeout=10.0
             )
             
-            logger.info(f"Auth response status: {auth_response.status_code}")
+            logger.info(f"Emergent Auth response status: {auth_response.status_code}")
             if auth_response.status_code != 200:
-                logger.error(f"Auth response: {auth_response.text}")
+                logger.error(f"Emergent Auth error: {auth_response.text}")
             
             if auth_response.status_code != 200:
                 raise HTTPException(status_code=401, detail="Invalid session ID")

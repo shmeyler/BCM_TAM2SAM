@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import Login from './components/Login';
+import AdminPanel from './components/AdminPanel';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const MarketMapApp = () => {
+  // Authentication state
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
+
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     product_name: '',

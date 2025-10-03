@@ -113,7 +113,9 @@ const MarketMapApp = () => {
 
   const loadAnalysis = async (analysisId) => {
     try {
-      const response = await axios.get(`${API}/analysis/${analysisId}`);
+      const response = await axios.get(`${API}/analysis/${analysisId}`, {
+        withCredentials: true
+      });
       setAnalysis(response.data);
       setCurrentStep(4);
     } catch (error) {
@@ -124,7 +126,9 @@ const MarketMapApp = () => {
 
   const loadHistory = async () => {
     try {
-      const response = await axios.get(`${API}/analysis-history`);
+      const response = await axios.get(`${API}/analysis-history`, {
+        withCredentials: true
+      });
       setHistory(response.data.history);
     } catch (error) {
       console.error('Error loading history:', error);

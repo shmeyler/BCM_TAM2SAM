@@ -112,7 +112,15 @@ const MarketMapApp = () => {
       console.error('Response data:', error.response?.data);
       console.error('Error message:', error.message);
       
-      const errorMessage = error.response?.data?.detail || error.message || 'Authentication failed. Please try again.';
+      let errorMessage = error.response?.data?.detail || error.message || 'Authentication failed';
+      
+      // Make error more user-friendly
+      if (errorMessage.includes('Invalid session') || errorMessage.includes('expired')) {
+        errorMessage = 'Authentication session expired. This can happen if the login process takes too long. Please try logging in again.';
+      } else if (errorMessage.includes('not authenticated')) {
+        errorMessage = 'Authentication failed. Please try logging in again.';
+      }
+      
       console.error('Showing alert:', errorMessage);
       alert(errorMessage);
       

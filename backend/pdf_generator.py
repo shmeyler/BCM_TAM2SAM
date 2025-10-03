@@ -258,7 +258,9 @@ def create_market_report_pdf(market_map, market_input):
     for element in create_segmentation_section(
         "Geographic Segmentation",
         market_map.get('segmentation_by_geographics', []),
-        '#DBEAFE'
+        '#3B82F6',
+        '🌍',
+        'Country, City, Density, Language, Climate, Area, Population'
     ):
         story.append(element)
     
@@ -266,7 +268,9 @@ def create_market_report_pdf(market_map, market_input):
     for element in create_segmentation_section(
         "Demographic Segmentation",
         market_map.get('segmentation_by_demographics', []),
-        '#D1FAE5'
+        '#F97316',
+        '👥',
+        'Age, Gender, Income, Education, Social Status, Family, Life Stage, Occupation'
     ):
         story.append(element)
     
@@ -277,7 +281,9 @@ def create_market_report_pdf(market_map, market_input):
     for element in create_segmentation_section(
         "Psychographic Segmentation",
         market_map.get('segmentation_by_psychographics', []),
-        '#E9D5FF'
+        '#EAB308',
+        '🧠',
+        'Lifestyle, AIO (Activity/Interest/Opinion), Concerns, Personality, Values, Attitudes'
     ):
         story.append(element)
     
@@ -285,7 +291,9 @@ def create_market_report_pdf(market_map, market_input):
     for element in create_segmentation_section(
         "Behavioral Segmentation",
         market_map.get('segmentation_by_behavioral', []),
-        '#FED7AA'
+        '#8B5CF6',
+        '🛒',
+        'Behavior, Benefits, Perks, User Status, Usage Rate, Loyalty, Buyer Stage'
     ):
         story.append(element)
     

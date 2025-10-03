@@ -13,10 +13,16 @@ from together import Together
 import json
 import io
 import pandas as pd
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, Response
 import asyncio
 import sys
 import os
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, Image
+from reportlab.lib import colors
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 

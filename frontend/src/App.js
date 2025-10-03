@@ -55,11 +55,20 @@ const MarketMapApp = () => {
 
   const checkAuth = async () => {
     try {
-      // Check if we're coming back from OAuth with session_id or code
+      // Check if we're coming back from OAuth with session_id in query params or hash
       const urlParams = new URLSearchParams(window.location.search);
-      const sessionId = urlParams.get('session_id') || urlParams.get('code');
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      
+      const sessionId = urlParams.get('session_id') || 
+                       urlParams.get('code') || 
+                       hashParams.get('session_id') ||
+                       hashParams.get('code');
 
-      console.log('Checking auth... session_id:', sessionId, 'URL params:', window.location.search);
+      console.log('Checking auth...');
+      console.log('- Full URL:', window.location.href);
+      console.log('- Query params:', window.location.search);
+      console.log('- Hash:', window.location.hash);
+      console.log('- Session ID found:', sessionId);
 
       if (sessionId) {
         console.log('Found session_id, creating session...');

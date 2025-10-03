@@ -2,11 +2,16 @@ import React from 'react';
 
 const Login = () => {
   const handleGoogleLogin = () => {
-    // Redirect URL should be the main app root
+    // Redirect URL should be the main app root (current domain)
     const redirectUrl = window.location.origin;
-    const authBaseUrl = process.env.REACT_APP_AUTH_URL || 'https://auth.emergentagent.com';
+    const authBaseUrl = process.env.REACT_APP_AUTH_URL || 'https://auth.emergentagant.com';
     const authUrl = `${authBaseUrl}/?redirect=${encodeURIComponent(redirectUrl)}`;
-    console.log('Redirecting to:', authUrl);
+    
+    console.log('OAuth Login Details:');
+    console.log('- Current domain:', window.location.origin);
+    console.log('- Redirect URL:', redirectUrl);
+    console.log('- Auth URL:', authUrl);
+    
     window.location.href = authUrl;
   };
 

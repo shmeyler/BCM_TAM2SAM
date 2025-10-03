@@ -2,9 +2,10 @@ import React from 'react';
 
 const Login = () => {
   const handleGoogleLogin = () => {
-    // Redirect URL should be the main app (not login page)
-    const redirectUrl = `${window.location.origin}/dashboard`;
+    // Redirect URL should be the main app root
+    const redirectUrl = window.location.origin;
     const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
+    console.log('Redirecting to:', authUrl);
     window.location.href = authUrl;
   };
 

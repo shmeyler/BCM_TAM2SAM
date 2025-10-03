@@ -70,13 +70,19 @@ const MarketMapApp = () => {
       console.log('- Hash:', window.location.hash);
       console.log('- Session ID found:', sessionId);
 
+      // Debug: Log all parameters
+      console.log('All URL params:', Object.fromEntries(urlParams));
+      console.log('All hash params:', Object.fromEntries(hashParams));
+
       if (sessionId) {
-        console.log('Found session_id, creating session...');
+        console.log('✅ Found session_id, creating session...');
         // Create session from OAuth redirect
         await createSession(sessionId);
         // Clean URL
         window.history.replaceState({}, document.title, window.location.pathname);
         return;
+      } else {
+        console.log('❌ No session_id found in URL');
       }
 
       // Check existing session

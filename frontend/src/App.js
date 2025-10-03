@@ -92,6 +92,8 @@ const MarketMapApp = () => {
   const createSession = async (sessionId) => {
     try {
       console.log('Creating session with session_id:', sessionId);
+      console.log('API endpoint:', `${API}/auth/session`);
+      
       const response = await axios.post(
         `${API}/auth/session`,
         {},
@@ -100,13 +102,20 @@ const MarketMapApp = () => {
           withCredentials: true
         }
       );
-      console.log('Session created successfully:', response.data);
+      console.log('✅ Session created successfully:', response.data);
       setUser(response.data.user);
       setAuthLoading(false);
     } catch (error) {
-      console.error('Session creation failed:', error);
-      console.error('Error details:', error.response?.data);
-      alert(error.response?.data?.detail || 'Authentication failed. Please try again.');
+      console.error('❌ Session creation failed!');
+      console.error('Error object:', error);
+      console.error('Response status:', error.response?.status);
+      console.error('Response data:', error.response?.data);
+      console.error('Error message:', error.message);
+      
+      const errorMessage = error.response?.data?.detail || error.message || 'Authentication failed. Please try again.';
+      console.error('Showing alert:', errorMessage);
+      alert(errorMessage);
+      
       setAuthLoading(false);
       setUser(null);
     }

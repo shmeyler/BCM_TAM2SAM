@@ -5,6 +5,10 @@ const AdminPanel = ({ user, onClose }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showInviteForm, setShowInviteForm] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteName, setInviteName] = useState('');
+  const [inviting, setInviting] = useState(false);
 
   useEffect(() => {
     fetchUsers();

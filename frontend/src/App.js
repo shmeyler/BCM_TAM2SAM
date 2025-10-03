@@ -55,34 +55,23 @@ const MarketMapApp = () => {
 
   const checkAuth = async () => {
     try {
-      // Check if we're coming back from OAuth with session_id in query params or hash
-      const urlParams = new URLSearchParams(window.location.search);
-      const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      
-      const sessionId = urlParams.get('session_id') || 
-                       urlParams.get('code') || 
-                       hashParams.get('session_id') ||
-                       hashParams.get('code');
+      // Check if we're coming back from OAuth with session_id in URL FRAGMENT (after #)
+      const hashFragment = window.location.hash.substring(1); // Remove the #
+      const hashParams = new URLSearchParams(hashFragment);
+      const sessionId = hashParams.get('session_id');
 
       console.log('Checking auth...');
       console.log('- Full URL:', window.location.href);
-      console.log('- Query params:', window.location.search);
-      console.log('- Hash:', window.location.hash);
+      console.log('- Hash fragment:', hashFragment);
       console.log('- Session ID found:', sessionId);
 
-      // Debug: Log all parameters
-      console.log('All URL params:', Object.fromEntries(urlParams));
-      console.log('All hash params:', Object.fromEntries(hashParams));
-
       if (sessionId) {
-        console.log('✅ Found session_id, creating session...');
+        console.log('✅ Found session_id in hash, creating session...');
         // Create session from OAuth redirect
         await createSession(sessionId);
-        // Clean URL
+        // Clean URL hash
         window.history.replaceState({}, document.title, window.location.pathname);
         return;
-      } else {
-        console.log('❌ No session_id found in URL');
       }
 
       // Check existing session

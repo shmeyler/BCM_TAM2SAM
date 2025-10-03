@@ -949,7 +949,7 @@ async def export_market_map(analysis_id: str):
 
 @api_router.get("/export-pdf/{analysis_id}")
 async def export_pdf(analysis_id: str):
-    """Export market analysis as professional PDF with BCM branding"""
+    """Export market analysis as professional PDF matching web design"""
     try:
         # Get analysis from database
         market_map = await db.market_maps.find_one({"id": analysis_id})
@@ -959,6 +959,9 @@ async def export_pdf(analysis_id: str):
         market_input = await db.market_inputs.find_one({"id": market_map["market_input_id"]})
         if not market_input:
             raise HTTPException(status_code=404, detail="Market input not found")
+        
+        # Generate PDF using new generator
+        pdf_data = create_market_report_pdf(market_map, market_input)
 
         # Create PDF
         buffer = io.BytesIO()

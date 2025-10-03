@@ -359,6 +359,7 @@ class MarketIntelligenceAgent:
                 "opportunities": [list of 4-5 specific opportunities],
                 "threats": [list of 4-5 specific threats],
                 "recommendations": [list of 4-5 actionable recommendations],
+                "executive_summary": "A comprehensive 3-4 paragraph executive summary that includes: (1) Market Overview with TAM/SAM/SOM highlights, (2) Competitive Landscape key insights, (3) Strategic Opportunities and Recommendations, (4) Key Takeaways and Action Items. Make this client-ready and professional.",
                 "data_sources": [
                     {{"name": "Gartner Market Research", "url": "https://www.gartner.com/en/research"}},
                     {{"name": "McKinsey Industry Reports", "url": "https://www.mckinsey.com/industries"}},
@@ -369,6 +370,8 @@ class MarketIntelligenceAgent:
                 "confidence_level": "high/medium/low",
                 "methodology": "description of analysis methodology"
             }}
+
+            CRITICAL: The executive_summary MUST be a well-written, comprehensive 3-4 paragraph summary suitable for C-level executives. Include specific numbers, insights, and actionable recommendations.
 
             Return only valid JSON with accurate, researched market intelligence.
             """

@@ -1449,8 +1449,42 @@ const MarketMapApp = () => {
                       <h4 className="text-lg font-bold text-blue-900 mb-2">TAM - {formatCurrency(analysis.market_map.total_market_size)}</h4>
                       <p className="text-gray-700 text-sm leading-relaxed">
                         <strong>Total Addressable Market:</strong> Represents 100% of global revenue opportunity for {analysis.market_input.product_name} 
-                        across all customer segments in {analysis.market_input.geography}. Based on {analysis.market_map.data_sources.join(', ')} data, 
-                        growing at {(analysis.market_map.market_growth_rate * 100).toFixed(1)}% CAGR driven by {analysis.market_map.key_drivers.slice(0,2).join(' and ')}.
+                        across all customer segments in {analysis.market_input.geography}. Based on{' '}
+                        {analysis.market_map.data_sources.slice(0, 3).map((source, idx) => {
+                          const sourceMapping = {
+                            "Gartner Market Research": "https://www.gartner.com/en/research",
+                            "McKinsey Industry Reports": "https://www.mckinsey.com/industries",
+                            "IBISWorld Market Analysis": "https://www.ibisworld.com",
+                            "Forrester Research": "https://www.forrester.com/research",
+                            "PwC Industry Insights": "https://www.pwc.com/us/en/industries.html",
+                            "Statista": "https://www.statista.com",
+                            "CB Insights": "https://www.cbinsights.com"
+                          };
+                          
+                          const sourceName = typeof source === 'string' ? source : source.name;
+                          const sourceUrl = typeof source === 'object' && source.url ? source.url : sourceMapping[sourceName];
+                          
+                          return (
+                            <span key={idx}>
+                              {idx > 0 && (idx === analysis.market_map.data_sources.slice(0, 3).length - 1 ? ' and ' : ', ')}
+                              {sourceUrl ? (
+                                <a 
+                                  href={sourceUrl} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:text-blue-800 underline"
+                                  title={`Visit ${sourceName}`}
+                                >
+                                  {sourceName}
+                                </a>
+                              ) : (
+                                <span>{sourceName}</span>
+                              )}
+                              <sup className="text-blue-600">[{idx + 1}]</sup>
+                            </span>
+                          );
+                        })}
+                        {' '}data, growing at {(analysis.market_map.market_growth_rate * 100).toFixed(1)}% CAGR driven by {analysis.market_map.key_drivers.slice(0,2).join(' and ')}.
                       </p>
                     </div>
                   </div>

@@ -1198,17 +1198,38 @@ const MarketMapApp = () => {
 
             {/* Export Options */}
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Export Market Map</h3>
-              <div className="flex flex-wrap gap-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">📥 Export Market Analysis</h3>
+              <p className="text-sm text-gray-600 mb-4">Download your comprehensive market analysis in multiple formats</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button
+                  onClick={exportPDF}
+                  className="bg-red-500 text-white px-6 py-4 rounded-lg font-semibold hover:bg-red-600 flex items-center justify-center transition-colors shadow-lg hover:shadow-xl"
+                >
+                  <svg className="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                  </svg>
+                  <div className="text-left">
+                    <div className="text-sm font-bold">Download PDF Report</div>
+                    <div className="text-xs opacity-90">Client-ready with BCM branding</div>
+                  </div>
+                </button>
                 <button
                   onClick={exportMarketMap}
-                  className="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 flex items-center"
+                  className="bg-green-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-green-700 flex items-center justify-center transition-colors shadow-lg hover:shadow-xl"
                 >
-                  <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-6 w-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                   </svg>
-                  Download Comprehensive Excel Report
+                  <div className="text-left">
+                    <div className="text-sm font-bold">Download Excel Data</div>
+                    <div className="text-xs opacity-90">Raw data for analysis</div>
+                  </div>
                 </button>
+              </div>
+              <div className="mt-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
+                <p className="text-xs text-orange-800">
+                  <span className="font-semibold">💡 Tip:</span> Use PDF for client presentations and Excel for detailed data analysis or integration with simulation platforms.
+                </p>
               </div>
             </div>
 

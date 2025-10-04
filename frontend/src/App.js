@@ -1260,8 +1260,8 @@ const MarketMapApp = () => {
                     <div>
                       <h4 className="text-lg font-bold text-blue-300 mb-2">SOM - {formatCurrency(analysis.market_map.total_market_size * 0.03)}</h4>
                       <p className="text-gray-700 text-sm leading-relaxed">
-                        <strong>Serviceable Obtainable Market:</strong> 10% of SAM ({formatCurrency(analysis.market_map.total_market_size * 0.03)}) 
-                        based on realistic 3-5 year market penetration assuming competitive response from {analysis.market_map.competitors.slice(0,2).map(c => c.name).join(' and ')}. 
+                        <strong>Serviceable Obtainable Market:</strong> 10% of SAM ({formatCurrency(analysis.market_map.total_market_size * 0.03)}){' '}
+                        based on realistic 3-5 year market penetration assuming competitive response from {analysis.market_map.competitors.slice(0,2).map(c => c.name).join(' and ')}.{' '}
                         Achievable through {analysis.market_map.strategic_recommendations.slice(0,1)[0]?.toLowerCase() || 'focused market strategy'}.
                       </p>
                     </div>

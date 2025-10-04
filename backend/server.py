@@ -508,6 +508,9 @@ class MarketIntelligenceAgent:
                                  market_input.product_name.lower() not in ['new product', 'new service', 'startup', 'new company'])
         analysis_perspective = "existing_brand" if has_specific_brand else "new_entrant"
         
+        # Determine if this is B2B for firmographic analysis
+        is_b2b = any(term in market_input.industry.lower() for term in ['b2b', 'business', 'enterprise', 'saas', 'software', 'financial services', 'consulting', 'professional services'])
+        
         # Generate basic market analysis without curated data
         tam = 1000000000  # $1B default TAM
         sam = int(tam * 0.3)  # 30% SAM

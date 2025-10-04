@@ -852,6 +852,15 @@ class ComprehensiveAnalysisEngine:
                     growth_rate=float(seg.get("growth", 0.05)),
                     key_players=seg.get("key_players", ["Company A", "Company B"])
                 ))
+            
+            for seg in segmentation.get("by_firmographics", []):
+                firmographic_segments.append(MarketSegment(
+                    name=seg.get("name", "Firmographic Segment"),
+                    description=seg.get("description", "Firmographic segment"),
+                    size_estimate=float(seg.get("size", 1000000000)),
+                    growth_rate=float(seg.get("growth", 0.05)),
+                    key_players=seg.get("key_players", ["Company A", "Company B"])
+                ))
 
             return MarketMap(
                 id=str(uuid.uuid4()),

@@ -905,6 +905,11 @@ class ComprehensiveAnalysisEngine:
 
         except Exception as e:
             logger.error(f"Error generating market map: {e}")
+            # Determine analysis perspective for fallback
+            has_specific_brand = bool(market_input.product_name and 
+                                     market_input.product_name.strip() and 
+                                     market_input.product_name.lower() not in ['new product', 'new service', 'startup', 'new company'])
+            analysis_perspective = "existing_brand" if has_specific_brand else "new_entrant"
             # Return basic fallback market map
             return MarketMap(
                 id=str(uuid.uuid4()),

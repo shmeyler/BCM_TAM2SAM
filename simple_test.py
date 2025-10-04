@@ -58,7 +58,7 @@ def test_perspective_and_firmographics():
         {
             "name": "B2B CRM Software - Should have firmographic segmentation",
             "data": {
-                "product_name": "New CRM Solution",
+                "product_name": "startup",
                 "industry": "Software",
                 "geography": "North America",
                 "target_user": "Sales teams and managers",

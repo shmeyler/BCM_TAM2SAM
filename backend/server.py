@@ -563,98 +563,98 @@ class MarketIntelligenceAgent:
         # Build segmentation data
         segmentation = {
             "by_geographics": [
-                    {
-                        "name": "Major Metro Areas",
-                        "description": "Urban markets with high population density",
-                        "size": int(sam * 0.4),
-                        "growth": 0.07,
-                        "key_players": ["Market Leader", "Technology Innovator"]
-                    },
-                    {
-                        "name": "Suburban Markets",
-                        "description": "Suburban areas with growing populations",
-                        "size": int(sam * 0.35),
-                        "growth": 0.09,
-                        "key_players": ["Growth Challenger", "Value Player"]
-                    },
-                    {
-                        "name": "Secondary Cities",
-                        "description": "Mid-size cities and rural areas",
-                        "size": int(sam * 0.25),
-                        "growth": 0.11,
-                        "key_players": ["Value Player", "Market Leader"]
-                    }
-                ],
-                "by_demographics": [
-                    {
-                        "name": "Young Adults",
-                        "description": "Tech-savvy professionals 25-35",
-                        "size": int(sam * 0.4),
-                        "growth": 0.10,
-                        "key_players": ["Technology Innovator", "Growth Challenger"]
-                    },
-                    {
-                        "name": "Middle-aged",
-                        "description": "Established professionals 36-50",
-                        "size": int(sam * 0.4),
-                        "growth": 0.06,
-                        "key_players": ["Market Leader", "Technology Innovator"]
-                    },
-                    {
-                        "name": "Seniors",
-                        "description": "Mature consumers 51+",
-                        "size": int(sam * 0.2),
-                        "growth": 0.08,
-                        "key_players": ["Market Leader", "Value Player"]
-                    }
-                ],
-                "by_psychographics": [
-                    {
-                        "name": "Innovation Adopters",
-                        "description": "Early adopters of new technology",
-                        "size": int(sam * 0.4),
-                        "growth": 0.12,
-                        "key_players": ["Technology Innovator", "Growth Challenger"]
-                    },
-                    {
-                        "name": "Quality Focused",
-                        "description": "Premium quality seekers",
-                        "size": int(sam * 0.4),
-                        "growth": 0.09,
-                        "key_players": ["Market Leader", "Technology Innovator"]
-                    },
-                    {
-                        "name": "Budget Conscious",
-                        "description": "Value-oriented consumers",
-                        "size": int(sam * 0.2),
-                        "growth": 0.05,
-                        "key_players": ["Value Player", "Growth Challenger"]
-                    }
-                ],
-                "by_behavioral": [
-                    {
-                        "name": "Regular Users",
-                        "description": "Daily active users",
-                        "size": int(sam * 0.4),
-                        "growth": 0.08,
-                        "key_players": ["Market Leader", "Technology Innovator"]
-                    },
-                    {
-                        "name": "Occasional Users",
-                        "description": "Periodic usage patterns",
-                        "size": int(sam * 0.4),
-                        "growth": 0.06,
-                        "key_players": ["Growth Challenger", "Value Player"]
-                    },
-                    {
-                        "name": "New Users",
-                        "description": "First-time market entrants",
-                        "size": int(sam * 0.2),
-                        "growth": 0.15,
-                        "key_players": ["Growth Challenger", "Technology Innovator"]
-                    }
-                ]
-            }
+                {
+                    "name": "Major Metro Areas",
+                    "description": "Urban markets with high population density",
+                    "size": int(sam * 0.4),
+                    "growth": 0.07,
+                    "key_players": ["Market Leader", "Technology Innovator"]
+                },
+                {
+                    "name": "Suburban Markets",
+                    "description": "Suburban areas with growing populations",
+                    "size": int(sam * 0.35),
+                    "growth": 0.09,
+                    "key_players": ["Growth Challenger", "Value Player"]
+                },
+                {
+                    "name": "Secondary Cities",
+                    "description": "Mid-size cities and rural areas",
+                    "size": int(sam * 0.25),
+                    "growth": 0.11,
+                    "key_players": ["Value Player", "Market Leader"]
+                }
+            ],
+            "by_demographics": [
+                {
+                    "name": "Young Adults",
+                    "description": "Tech-savvy professionals 25-35",
+                    "size": int(sam * 0.4),
+                    "growth": 0.10,
+                    "key_players": ["Technology Innovator", "Growth Challenger"]
+                },
+                {
+                    "name": "Middle-aged",
+                    "description": "Established professionals 36-50",
+                    "size": int(sam * 0.4),
+                    "growth": 0.06,
+                    "key_players": ["Market Leader", "Technology Innovator"]
+                },
+                {
+                    "name": "Seniors",
+                    "description": "Mature consumers 51+",
+                    "size": int(sam * 0.2),
+                    "growth": 0.08,
+                    "key_players": ["Market Leader", "Value Player"]
+                }
+            ],
+            "by_psychographics": [
+                {
+                    "name": "Innovation Adopters",
+                    "description": "Early adopters of new technology",
+                    "size": int(sam * 0.4),
+                    "growth": 0.12,
+                    "key_players": ["Technology Innovator", "Growth Challenger"]
+                },
+                {
+                    "name": "Quality Focused",
+                    "description": "Premium quality seekers",
+                    "size": int(sam * 0.4),
+                    "growth": 0.09,
+                    "key_players": ["Market Leader", "Technology Innovator"]
+                },
+                {
+                    "name": "Budget Conscious",
+                    "description": "Value-oriented consumers",
+                    "size": int(sam * 0.2),
+                    "growth": 0.05,
+                    "key_players": ["Value Player", "Growth Challenger"]
+                }
+            ],
+            "by_behavioral": [
+                {
+                    "name": "Regular Users",
+                    "description": "Daily active users",
+                    "size": int(sam * 0.4),
+                    "growth": 0.08,
+                    "key_players": ["Market Leader", "Technology Innovator"]
+                },
+                {
+                    "name": "Occasional Users",
+                    "description": "Periodic usage patterns",
+                    "size": int(sam * 0.4),
+                    "growth": 0.06,
+                    "key_players": ["Growth Challenger", "Value Player"]
+                },
+                {
+                    "name": "New Users",
+                    "description": "First-time market entrants",
+                    "size": int(sam * 0.2),
+                    "growth": 0.15,
+                    "key_players": ["Growth Challenger", "Technology Innovator"]
+                }
+            ]
+        }
             
             # Add firmographic segmentation only for B2B
             if is_b2b:

@@ -563,6 +563,8 @@ class MarketIntelligenceAgent:
                 "som_estimation": f"10% of SAM: ${som:,}"
             },
             "analysis_perspective": analysis_perspective,
+            **({"brand_position": f"Fallback position analysis for {market_input.product_name}"} if analysis_perspective == "existing_brand" else {}),
+            "segmentation": {
                 "by_geographics": [
                     {
                         "name": "Major Metro Areas",

@@ -724,6 +724,7 @@ class VisualMapGenerator:
             "demographic_segments": [],
             "psychographic_segments": [],
             "behavioral_segments": [],
+            "firmographic_segments": [],
             "market_overview": market_data.get("market_overview", {})
         }
 

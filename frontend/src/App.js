@@ -1306,17 +1306,17 @@ const MarketMapApp = () => {
                     
                     <div className="absolute top-4 -right-32">
                       <div className="flex items-center">
-                        <div className="text-sm font-semibold text-gray-700 mr-3 text-right">Serviceable<br/>Addressable Market</div>
+                        <div className="w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-gray-400"></div>
                         <div className="h-px w-12 bg-gray-400"></div>
-                        <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-transparent border-l-gray-400"></div>
+                        <div className="text-sm font-semibold text-gray-700 ml-3 text-left">Serviceable<br/>Addressable Market</div>
                       </div>
                     </div>
                     
                     <div className="absolute bottom-4 -left-32">
                       <div className="flex items-center">
-                        <div className="w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-gray-400"></div>
+                        <div className="text-sm font-semibold text-gray-700 mr-3 text-right">Serviceable<br/>Obtainable Market</div>
                         <div className="h-px w-12 bg-gray-400"></div>
-                        <div className="text-sm font-semibold text-gray-700 ml-3">Serviceable<br/>Obtainable Market</div>
+                        <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-transparent border-l-gray-400"></div>
                       </div>
                     </div>
                   </div>

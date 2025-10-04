@@ -336,7 +336,7 @@ class MarketIntelligenceAgent:
                     "som_estimation": "SOM as realistic subset of SAM"
                 }},
                 "analysis_perspective": "{analysis_perspective}",
-                {'"brand_position": "Current market position and competitive standing of ' + market_input.product_name + '",' if analysis_perspective == "existing_brand" else ""}
+                {brand_position_json}
                 "segmentation": {{
                     "by_geographics": [
                         {{

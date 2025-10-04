@@ -1201,7 +1201,7 @@ const MarketMapApp = () => {
                     <div>
                       <h4 className="text-lg font-bold text-blue-900 mb-2">TAM - {formatCurrency(analysis.market_map.total_market_size)}</h4>
                       <p className="text-gray-700 text-sm leading-relaxed">
-                        <strong>Total Addressable Market:</strong> Represents 100% of global revenue opportunity for {analysis.market_input.product_name} 
+                        <strong>Total Addressable Market:</strong> Represents 100% of global revenue opportunity for {analysis.market_input.product_name}{' '}
                         across all customer segments in {analysis.market_input.geography}. Based on{' '}
                         {analysis.market_map.data_sources.slice(0, 3).map((source, idx) => {
                           const sourceMapping = {

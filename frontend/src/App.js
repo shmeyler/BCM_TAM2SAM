@@ -1729,8 +1729,72 @@ const MarketMapApp = () => {
               </div>
             </div>
 
-            {/* Data Sources & Methodology section removed */}
+          </div>
+        )}
 
+        {/* Data Sources & Methodology - Moved to Bottom */}
+        {analysis && (
+          <div className="bg-white rounded-lg shadow-md p-6 mt-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">📚 Resources & Footnotes</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3">📊 Data Sources</h4>
+                <ul className="space-y-2">
+                  {analysis.market_map.data_sources.map((source, index) => {
+                    // Map source names to URLs
+                    const sourceMapping = {
+                      "Gartner Market Research": "https://www.gartner.com/en/research",
+                      "McKinsey Industry Reports": "https://www.mckinsey.com/industries",
+                      "IBISWorld Market Analysis": "https://www.ibisworld.com",
+                      "Forrester Research": "https://www.forrester.com/research",
+                      "PwC Industry Insights": "https://www.pwc.com/us/en/industries.html",
+                      "Statista": "https://www.statista.com",
+                      "CB Insights": "https://www.cbinsights.com",
+                      "Crunchbase": "https://www.crunchbase.com"
+                    };
+                    
+                    const sourceName = typeof source === 'string' ? source : source.name;
+                    const sourceUrl = typeof source === 'object' && source.url ? source.url : sourceMapping[sourceName];
+                    
+                    return (
+                      <li key={index} className="flex items-start text-sm text-gray-600">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2 mt-1.5 flex-shrink-0"></div>
+                        <span className="mr-2 text-xs text-gray-400">[{index + 1}]</span>
+                        {sourceUrl ? (
+                          <a 
+                            href={sourceUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800 underline hover:no-underline transition-colors"
+                            title={`Visit ${sourceName}`}
+                          >
+                            {sourceName} 🔗
+                          </a>
+                        ) : (
+                          <span>{sourceName}</span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3">🔬 Methodology</h4>
+                <p className="text-sm text-gray-600">{analysis.market_map.methodology}</p>
+                <div className="mt-4">
+                  <span className="text-xs font-medium text-gray-500">Analysis Date: </span>
+                  <span className="text-xs text-gray-600">
+                    {new Date(analysis.market_map.timestamp).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className="mt-2">
+                  <span className="text-xs font-medium text-gray-500">Confidence Level: </span>
+                  <span className="text-xs text-gray-600 capitalize">
+                    {analysis.market_map.confidence_level}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 

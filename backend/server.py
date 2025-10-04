@@ -256,10 +256,22 @@ class MarketIntelligenceAgent:
             """
             
             firmographic_instruction = ""
+            firmographic_json = ""
             if is_b2b:
                 firmographic_instruction = """
             5. FIRMOGRAPHICS (B2B ONLY): Industry vertical, Company size (employees/revenue), Geographic location (city-level), Job titles/roles, Company revenue estimates
             """
+                firmographic_json = """,
+                    "by_firmographics": [
+                        {
+                            "name": "firmographic segment name",
+                            "description": "B2B segment description focusing on company characteristics and business attributes",
+                            "size": [size in dollars],
+                            "growth": [growth rate as decimal],
+                            "key_players": ["company1", "company2"],
+                            "firmographic_factors": ["Industry vertical", "Company size", "Geographic location", "Job titles/roles", "Company revenue"]
+                        }
+                    ]"""
             
             prompt = f"""
             You are a senior market research analyst conducting a specific analysis for {market_input.product_name} in the {market_input.industry} industry.

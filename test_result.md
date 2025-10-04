@@ -216,6 +216,42 @@ backend:
         agent: "testing"
         comment: "RESOLVED: Fixed data_sources validation error that was causing OpenAI analysis to fail and fall back to generic data. OpenAI now successfully generates unique analysis for different market categories with real company names and realistic market data. JSON parsing works correctly."
 
+  - task: "Perspective-Based Analysis"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "NEW FEATURE TESTED: Perspective-based analysis working correctly. Existing brands (Apple iPhone) return analysis_perspective='existing_brand' with brand_position field populated. Generic products (New Product, startup) return analysis_perspective='new_entrant' without brand_position. Logic correctly identifies brand specificity based on product name patterns."
+
+  - task: "Firmographic Segmentation"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "NEW FEATURE TESTED: Firmographic segmentation working correctly for B2B scenarios. B2B industries (Software, SaaS Platform, Financial Services) include segmentation_by_firmographics with proper structure containing Enterprise Clients, Mid-Market Companies, and Small Businesses segments. B2C industries (Mobile Applications, Consumer Goods) correctly exclude firmographic segmentation. Visual map integration includes firmographic_segments field."
+
+  - task: "Enhanced Data Structure"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "NEW FEATURE TESTED: Enhanced MarketMap data structure validated. All new fields present: analysis_perspective, brand_position (conditional), segmentation_by_firmographics. API endpoint /api/analyze-market returns proper structure. Visual map includes firmographic_segments. Both Together AI integration and fallback analysis support new features. Fixed syntax errors in conditional JSON generation and f-string formatting."
+
   - task: "DTCC Competitive Analysis Fix"
     implemented: true
     working: false

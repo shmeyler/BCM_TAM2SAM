@@ -233,6 +233,11 @@ class MarketIntelligenceAgent:
         # Determine if this is B2B for firmographic analysis
         is_b2b = any(term in market_input.industry.lower() for term in ['b2b', 'business', 'enterprise', 'saas', 'software', 'financial services', 'consulting', 'professional services'])
         
+        # Prepare brand position JSON
+        brand_position_json = ""
+        if analysis_perspective == "existing_brand":
+            brand_position_json = f'"brand_position": "Current market position and competitive standing of {market_input.product_name}",'
+        
         # Use Together AI Kimi K2 for dynamic market analysis
         try:
             perspective_instruction = ""

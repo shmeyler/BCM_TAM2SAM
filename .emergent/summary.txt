@@ -1,82 +1,133 @@
 <analysis>
-The previous AI engineer successfully transformed a basic application template into a comprehensive, AI-powered Market Map Generator with BCM branding. Initial work involved deploying the GitHub repository, configuring OpenAI integration (which required several debugging cycles to get working correctly), and resolving Git-related security errors by properly ignoring the  file. Subsequent efforts focused on refining the application based on user feedback, including significant UI/UX improvements (loading states, button styling, logo display) and core analytical enhancements. Key analytical improvements involved redesigning market segmentation to a 4-category framework, ensuring a minimum number of competitors, making strategic recommendations more actionable, and generating a professional executive summary. The AI also implemented and refined a TAM→SAM→SOM visual chart. The most recent challenges revolve around the precise positioning of the TAM chart and improving the uniqueness and accuracy of AI-generated market analysis, which the engineer was actively addressing when the summary was requested.
+The AI engineer's work spanned from stabilizing an existing MVP to significantly enhancing its functionality, user experience, and security. Initially, core services were brought online by resolving missing Python dependencies and environment variable configurations. A major technical pivot involved replacing the OpenAI LLM integration with Together AI's Kimi K2 Instruct 0905 model, which required careful adaptation of API calls and token management. UI/UX was improved by redesigning the analysis progress modal and export buttons. Crucially, a professional PDF export matching the web's segmentation layout, with clickable data sources, was developed. A significant portion of the work focused on implementing robust Google OAuth authentication for specific email domains, including a MongoDB-backed admin panel, which necessitated extensive debugging due to subtle integration issues like URL fragment parsing and rapid session expiry. Finally, custom domain support for authentication was added. The current task involves expanding the analysis capabilities with perspective-based views and firmographic segmentation, starting with backend model adjustments.
 </analysis>
 
 <product_requirements>
-The user required an Market Map Generator application to evolve from a basic template to an enterprise-grade, AI-powered tool. The core problem was to generate comprehensive market insights, including market sizing (TAM/SAM/SOM), segmentation, competitive analysis, and strategic recommendations.
-
-Key requirements and implemented features include:
-*   **Dynamic AI Analysis**: Transition from curated data to OpenAI GPT-4 for market intelligence, ensuring unique, industry-specific insights.
-*   **Visualizations**: Implement a professional TAM→SAM→SOM concentric circles chart with accurate, detailed, and analytical labels, and precise positioning.
-*   **Market Segmentation**: Adopt a 4-category breakdown (Geographic, Demographic, Psychographic, Behavioral) with granular detail.
-*   **Competitive Benchmarking**: Ensure at least 3-4 real companies are identified, including logos, with detailed analysis.
-*   **Actionable Recommendations**: Provide specific, measurable strategic recommendations.
-*   **Executive Reporting**: Generate a concise, strategic, AI-powered Executive Summary at the top of results, including real links for data sources.
-*   **UI/UX**: Refine loading UI, implement official BCM branding (logo without a white circle), and optimize performance to prevent timeouts.
-*   **Technical Stability**: Ensure robust API integration, proper service operation, and secure Git configuration.
+The goal is to develop a Market Map Generator application with enhanced functionality and a secure user experience. Key requirements include:
+1.  **Core Functionality:** Market analysis, TAM-SAM-SOM charts, company logo display, responsive design, curated market database.
+2.  **LLM Integration Upgrade:** Replace OpenAI with Together AI's Kimi K2 Instruct 0905 model for market analysis.
+3.  **UI/UX Improvements:** Redesign the analysis progress modal to be prominent and full-page, and make the Cancel button intuitive.
+4.  **Reporting & Export:**
+    *   Ensure comprehensive Executive Summary generation by the LLM.
+    *   Implement professional PDF export (BCM-branded, clear sections, matching web layout, with proper text wrapping).
+    *   Provide Excel data export.
+    *   Make all referenced data sources hotlinked and clickable in both the UI and exported reports.
+5.  **Authentication & User Management:**
+    *   Implement Google OAuth, restricting access to  email addresses.
+    *   Develop an Admin Panel for viewing, activating/deactivating, promoting, deleting, and inviting users, with user data stored in MongoDB.
+    *   Secure application routes, requiring authentication for market analysis.
+6.  **Deployment & Domain:** Ensure the application is deployment-ready and functions correctly with custom domains (e.g., ).
+7.  **Advanced Analysis:**
+    *   Introduce Perspective-based Analysis: Reports should be from the point of view of a specific company (if provided) or a new entrant (if no company is provided).
+    *   Add Firmographic Segmentation as a breakout for B2B analysis.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack Development**: React (frontend), FastAPI (backend), MongoDB (database).
--   **AI/LLM Integration**: OpenAI GPT-4 for dynamic content generation.
--   **Environment Management**: Kubernetes containers, Supervisor for service control,  for variables.
--   **Styling**: Tailwind CSS for UI design.
--   **Version Control**: Git,  for secrets.
+-   **Full-stack Development:** React (frontend), FastAPI (backend), MongoDB (database).
+-   **LLM Integration:** Together AI (Kimi K2 Instruct 0905).
+-   **Authentication:** Google OAuth via Emergent Auth for domain-restricted access, session management.
+-   **PDF Generation:**  Python library for custom report formatting.
+-   **API Design:** RESTful APIs with Pydantic models for data validation.
+-   **Environment Configuration:** Secure  file management.
 </key_technical_concepts>
 
 <code_architecture>
-The application follows a full-stack architecture with a React frontend, a FastAPI backend, and a MongoDB database. It is deployed within a Kubernetes container environment.
-
-
 
 -   ****:
-    -   **Importance**: This file contains the core FastAPI application, defining all API endpoints for market analysis, integrations, and data handling. It houses the business logic, including  for orchestrating AI calls and  data models.
-    -   **Changes Made**:
-        *   Initial codebase replacement and multiple fixes for OpenAI integration issues (client detection, API key usage).
-        *   Logic was modified to utilize OpenAI for market analysis over curated data.
-        *   Updated for 4-category market segmentation, more granular geographic data, and ensuring a minimum of 4 competitors in analysis and fallbacks.
-        *   Functionality added to generate, integrate, and structure the AI-powered Executive Summary.
-        *   API timeout increased, and token usage for AI calls optimized.
-        *   Data source generation updated to include real URLs.
-        *   Attempts made to refine OpenAI prompts for more unique analysis and handle JSON parsing errors.
+    -   **Summary:** The main FastAPI application, orchestrating API endpoints, database interactions, and LLM calls.
+    -   **Changes:** Handled environment variables (, , ), integrated Usage: together [OPTIONS] COMMAND [ARGS]...
+
+  This is a sample CLI tool.
+
+Options:
+  --api-key TEXT         API Key. Defaults to environment variable
+                         `TOGETHER_API_KEY`
+  --base-url TEXT        API Base URL. Defaults to Together AI endpoint.
+  --timeout INTEGER      Request timeout. Defaults to 600 seconds
+  --max-retries INTEGER  Maximum number of HTTP retries. Defaults to 5.
+  --version              Print version
+  --debug                Debug mode
+  --help                 Show this message and exit.
+
+Commands:
+  chat.completions  Generate chat completions from messages
+  chat.interactive  Interactive chat shell
+  completions       Generate text completions
+  endpoints         Endpoints API commands
+  evaluation        Evaluation API commands
+  files             File API commands
+  fine-tuning       Fine-tunes API commands
+  images            Images generations API commands
+  models            Models API commands client, refactored PDF export to use , included , protected  endpoint, updated LLM prompts for executive summary.
 -   ****:
-    -   **Importance**: The main React component responsible for rendering the entire user interface of the Market Map Generator. It manages the multi-step wizard, displays the analysis results (Executive Summary, TAM/SAM/SOM chart, segmentation, competitive analysis), and interacts with the backend API.
-    -   **Changes Made**:
-        *   Initial UI codebase replacement.
-        *   Improvements to the loading UI, including full-width progress indicators and styled cancel button.
-        *   BCM branding was integrated, initially as text, then as an image, with subsequent removal of the white circular background.
-        *   Display logic for the new 4-category market segmentation was implemented.
-        *   The AI-generated Executive Summary was added and repositioned to the top of the results page.
-        *   The professional TAM→SAM→SOM concentric circles chart was integrated, with subsequent refinements to its labels, descriptions, and concentric positioning.
-        *   Fixed a critical preview issue by correctly scoping the Executive Summary rendering.
-        *   Multiple attempts were made to move the TAM chart directly below the Executive Summary.
+    -   **Summary:** Defines Pydantic models for user and authentication-related data structures (e.g., , , ).
+    -   **Changes:** Newly created for authentication feature.
 -   ****:
-    -   **Importance**: Stores critical environment variables such as the  and , ensuring sensitive information is not hardcoded.
-    -   **Changes Made**: Updated with the user-provided OpenAI API key to enable AI integration.
+    -   **Summary:** Implements FastAPI authentication endpoints, including Google OAuth, user registration, session management, and admin panel functionalities (user listing, activation, roles, invitation).
+    -   **Changes:** Newly created, integrates with Emergent Auth, MongoDB for user storage, and handles session validation. Includes  endpoint.
 -   ****:
-    -   **Importance**: Prevents specified files (like ) from being committed to the Git repository, crucial for security.
-    -   **Changes Made**: Added  to prevent exposure of API keys in the public repository.
--   ** / **:
-    -   **Importance**: Manage Python and Node.js dependencies, respectively.
-    -   **Changes Made**: Updated to include all necessary libraries for the comprehensive Market Map Generator application.
+    -   **Summary:** A utility module dedicated to generating comprehensive, styled PDF reports using the  library, adhering to BCM branding and mimicking the web report's visual segmentation and clickable data sources.
+    -   **Changes:** Newly created to modularize PDF generation logic.
+-   ****:
+    -   **Summary:** Backend environment configuration for MongoDB connection and Together AI API key.
+    -   **Changes:** Created when missing,  replaced by .
+-   ****:
+    -   **Summary:** Lists Python package dependencies required by the backend.
+    -   **Changes:** Added Name: Debian GNU/Linux 12 (bookworm)
+Version: 12 (bookworm)
+Codename: bookworm, , , Usage: together [OPTIONS] COMMAND [ARGS]...
+
+  This is a sample CLI tool.
+
+Options:
+  --api-key TEXT         API Key. Defaults to environment variable
+                         `TOGETHER_API_KEY`
+  --base-url TEXT        API Base URL. Defaults to Together AI endpoint.
+  --timeout INTEGER      Request timeout. Defaults to 600 seconds
+  --max-retries INTEGER  Maximum number of HTTP retries. Defaults to 5.
+  --version              Print version
+  --debug                Debug mode
+  --help                 Show this message and exit.
+
+Commands:
+  chat.completions  Generate chat completions from messages
+  chat.interactive  Interactive chat shell
+  completions       Generate text completions
+  endpoints         Endpoints API commands
+  evaluation        Evaluation API commands
+  files             File API commands
+  fine-tuning       Fine-tunes API commands
+  images            Images generations API commands
+  models            Models API commands, .
+-   ****:
+    -   **Summary:** The root React component, managing global state, routing, API interactions, and conditional rendering based on authentication.
+    -   **Changes:** Enhanced UI for analysis progress, integrated PDF/Excel export buttons and improved download feedback. Made data sources clickable. Heavily modified for Google OAuth integration: added authentication state, context, login/logout functions, session validation from URL fragment, protected routes, and rendered / components. Updated  calls with . Configured  for custom domain support.
+-   ****:
+    -   **Summary:** React component for user login, initiating the Google OAuth flow.
+    -   **Changes:** Newly created, handles redirection to Emergent Auth, and configured for custom domains.
+-   ****:
+    -   **Summary:** React component providing an interface for administrators to manage user accounts and invite new users.
+    -   **Changes:** Newly created, displays user data from backend, includes controls for user roles/status, and an Invite User form. Adapted to use a passed  prop instead of direct environment variable access for consistency.
+-   ****:
+    -   **Summary:** Frontend environment configuration, primarily for the backend API URL and authentication URL.
+    -   **Changes:** Added  to support dynamic authentication URLs for custom domains.
+
 </code_architecture>
 
 <pending_tasks>
--   Refine AI analysis uniqueness: The AI is currently generating generic responses across different markets.
--   Move TAM→SAM→SOM Chart: Ensure its final position is directly underneath the Executive Summary and before the market breakdown into segments.
--   Enhance Research Quality: Investigate leveraging Deep Research (web search) for more accurate, real-time market data.
+-   Update backend models and LLM prompt for Perspective-based Analysis (company viewpoint or new entrant).
+-   Add Firmographic Segmentation as a new breakout in the market analysis.
+-   Test the newly added user invitation functionality in the Admin Panel.
 </pending_tasks>
 
 <current_work>
-The immediate focus is on addressing two user-identified critical issues with the Market Map Generator:
+The previous AI engineer was in the process of implementing two new features related to the market analysis:
+1.  **Perspective-based Analysis:** The user requested that the analysis report should dynamically adjust its viewpoint based on whether a product/service name is provided (existing company perspective) or not (new entrant perspective).
+2.  **Firmographic Segmentation:** For B2B analysis, the user wants to add Firmographic Segmentation as a new category of market breakout.
 
-1.  **TAM→SAM→SOM Chart Positioning**: Despite previous attempts, the chart is not consistently appearing in the desired location (underneath the Executive Summary and before market segmentation). The previous AI engineer encountered issues with the file edit during this re-positioning, specifically with the  tool failing due to scope or edit size in . The last action was to acknowledge this persistent issue and prioritize its fix.
-
-2.  **AI Analysis Uniqueness and Accuracy**: The user reported that the AI-generated analysis (segmentation, market size, growth rate, recommendations) is too generic and similar across different market categories, indicating a need for more unique, industry-specific insights. This implies a refinement of the OpenAI prompts within the  is required to force more differentiated outputs. The AI engineer initiated work on this, including attempting to make the executive summary more concise, but noted potential issues with OpenAI's JSON output parsing, which might be contributing to the generic fallbacks.
-
-The application is currently functional with BCM branding, an Executive Summary, and the TAM chart, but the precise layout and the quality of the AI's analysis for diverse inputs are the primary concerns.
+The last action recorded was  of , which shows the  and  Pydantic models. This indicates that the AI engineer was examining the existing data structures in the backend to determine how to best integrate the new analysis perspectives and segmentation types into the application's data flow and the Kimi LLM prompt. The work is currently at the stage of planning the necessary backend model and prompt modifications.
 </current_work>
 
 <optional_next_step>
-Move the TAM→SAM→SOM chart to be positioned right below the Executive Summary in .
+Define new Pydantic models or modify existing ones in  to support Firmographic Segmentation and adjust the Kimi K2 prompt for perspective-based analysis.
 </optional_next_step>

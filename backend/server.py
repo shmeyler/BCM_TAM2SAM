@@ -562,6 +562,7 @@ class MarketIntelligenceAgent:
                 "sam_calculation": f"30% of TAM: ${sam:,}",
                 "som_estimation": f"10% of SAM: ${som:,}"
             },
+            "analysis_perspective": analysis_perspective,
             "segmentation": {
                 "by_geographics": [
                     {

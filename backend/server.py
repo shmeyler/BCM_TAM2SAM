@@ -319,6 +319,13 @@ class MarketIntelligenceAgent:
 
             Return accurate, research-based data for {market_input.product_name} in {market_input.geography}.
 
+            TEXT FORMATTING REQUIREMENTS:
+            - Ensure proper spacing between all words and phrases
+            - Add spaces before and after company names in sentences
+            - Properly format numbers with appropriate spacing
+            - Use correct grammar and sentence structure
+            - Proofread all generated text for spacing errors
+
             IMPORTANT: Use proper market segmentation categories:
             
             1. GEOGRAPHICS: Must be GRANULAR - Country, State, Metro Area, Urban/Suburban, DMA, ZIP codes when relevant

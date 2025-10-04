@@ -16,7 +16,6 @@ import pandas as pd
 from fastapi.responses import StreamingResponse, Response
 import asyncio
 import sys
-import os
 from pdf_generator import create_market_report_pdf
 from auth_routes import auth_router, require_auth, get_db
 from auth_models import User
@@ -662,14 +661,14 @@ class MarketIntelligenceAgent:
             "opportunities": [
                 f"{market_input.demand_driver} driving market growth",
                 f"Underserved segments in {market_input.geography}",
-                f"Technology integration opportunities",
+                "Technology integration opportunities",
                 f"Partnership potential in {market_input.industry}"
             ],
             "threats": [
                 f"Intense competition in {market_input.industry}",
-                f"Market saturation risks",
-                f"Regulatory challenges",
-                f"Economic uncertainty"
+                "Market saturation risks",
+                "Regulatory challenges",
+                "Economic uncertainty"
             ],
             "recommendations": [
                 f"Focus on {market_input.target_user} segment differentiation",

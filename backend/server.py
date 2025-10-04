@@ -225,12 +225,49 @@ class MarketIntelligenceAgent:
             logger.warning("Together AI client not available, using fallback analysis")
             return MarketIntelligenceAgent._get_fallback_analysis(market_input)
         
+        # Determine analysis perspective based on product name
+        has_specific_brand = bool(market_input.product_name and 
+                                 market_input.product_name.strip() and 
+                                 market_input.product_name.lower() not in ['new product', 'new service', 'startup', 'new company'])
+        analysis_perspective = "existing_brand" if has_specific_brand else "new_entrant"
+        
+        # Determine if this is B2B for firmographic analysis
+        is_b2b = any(term in market_input.industry.lower() for term in ['b2b', 'business', 'enterprise', 'saas', 'software', 'financial services', 'consulting', 'professional services'])
+        
         # Use Together AI Kimi K2 for dynamic market analysis
         try:
+            perspective_instruction = ""
+            if analysis_perspective == "existing_brand":
+                perspective_instruction = f"""
+            ANALYSIS PERSPECTIVE: EXISTING BRAND ANALYSIS
+            This analysis is from the perspective of {market_input.product_name} as an existing player in the market.
+            - Focus on {market_input.product_name}'s current market position, competitive advantages, and growth opportunities
+            - Include {market_input.product_name} prominently in competitive analysis with current market position
+            - Provide strategic recommendations for {market_input.product_name}'s market expansion or defense
+            - Analyze how {market_input.product_name} can leverage its existing strengths against competitors
+            """
+            else:
+                perspective_instruction = f"""
+            ANALYSIS PERSPECTIVE: NEW ENTRANT ANALYSIS  
+            This analysis is from the perspective of a NEW ENTRANT entering the {market_input.industry} market.
+            - Focus on market entry opportunities and barriers for a new player
+            - Analyze competitive landscape from an outsider's perspective looking to disrupt
+            - Provide strategic recommendations for market entry and differentiation
+            - Identify gaps in the current market that a new entrant could exploit
+            """
+            
+            firmographic_instruction = ""
+            if is_b2b:
+                firmographic_instruction = """
+            5. FIRMOGRAPHICS (B2B ONLY): Industry vertical, Company size (employees/revenue), Geographic location (city-level), Job titles/roles, Company revenue estimates
+            """
+            
             prompt = f"""
             You are a senior market research analyst conducting a specific analysis for {market_input.product_name} in the {market_input.industry} industry.
 
             CRITICAL: This analysis must be UNIQUELY SPECIFIC to {market_input.product_name}. Do NOT use generic market analysis templates.
+
+            {perspective_instruction}
 
             MARKET TO ANALYZE:
             - Product/Service: {market_input.product_name}

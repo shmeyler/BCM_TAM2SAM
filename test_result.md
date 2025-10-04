@@ -176,6 +176,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "CRITICAL FIX APPLIED: Fixed JSON formatting error in OpenAI prompt. OpenAI integration now working properly - generating unique analysis with real company names (Fitbit, Asana, Starbucks) instead of generic fallback. Market sizes are realistic ($25B, $15B, $10B) and analysis is unique across different market categories. Data sources validation error resolved."
+      - working: true
+        agent: "testing"
+        comment: "ENHANCED FEATURES VALIDATED: Successfully tested new perspective-based analysis and firmographic segmentation features. All 8 comprehensive test scenarios passed: (1) Existing brands (Apple iPhone) correctly return analysis_perspective='existing_brand' with brand_position field, (2) Generic products (New Product, startup) return analysis_perspective='new_entrant' without brand_position, (3) B2B industries (Software, SaaS, Financial Services) include firmographic segmentation with proper structure (Enterprise, Mid-Market, Small Business segments), (4) B2C industries (Consumer Electronics, Mobile Apps, Consumer Goods) exclude firmographic segmentation, (5) All new fields properly integrated in MarketMap response and visual_map. Fixed syntax errors in f-string formatting and conditional JSON generation. Both Together AI integration and fallback analysis support new features correctly."
 
   - task: "Analysis History"
     implemented: true

@@ -372,17 +372,7 @@ class MarketIntelligenceAgent:
                             "key_players": ["company1", "company2"],
                             "behavioral_factors": ["Usage patterns", "Purchase frequency", "Buyer stage", "Engagement level"]
                         }}
-                    ]{"" if not is_b2b else """,
-                    "by_firmographics": [
-                        {{
-                            "name": "firmographic segment name",
-                            "description": "B2B segment description focusing on company characteristics and business attributes",
-                            "size": [size in dollars],
-                            "growth": [growth rate as decimal],
-                            "key_players": ["company1", "company2"],
-                            "firmographic_factors": ["Industry vertical", "Company size", "Geographic location", "Job titles/roles", "Company revenue"]
-                        }}
-                    ]"""}
+                    ]{firmographic_json}
                 }},
                 "competitors": [
                     {{

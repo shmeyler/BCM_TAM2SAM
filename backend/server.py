@@ -687,24 +687,23 @@ class MarketIntelligenceAgent:
             else:
                 segmentation["by_firmographics"] = []
             
-            return {
-                "market_overview": {
-                    "total_market_size": tam,
-                    "growth_rate": 0.08,
-                    "key_drivers": [
-                        market_input.demand_driver,
-                        "Technology adoption",
-                        "Market expansion",
-                        "Consumer demand growth"
-                    ],
-                    "tam_methodology": "Basic market estimation",
-                    "sam_calculation": f"30% of TAM: ${sam:,}",
-                    "som_estimation": f"10% of SAM: ${som:,}"
-                },
-                "analysis_perspective": analysis_perspective,
-                **({"brand_position": f"Fallback position analysis for {market_input.product_name}"} if analysis_perspective == "existing_brand" else {}),
-                "segmentation": segmentation,
+        return {
+            "market_overview": {
+                "total_market_size": tam,
+                "growth_rate": 0.08,
+                "key_drivers": [
+                    market_input.demand_driver,
+                    "Technology adoption",
+                    "Market expansion",
+                    "Consumer demand growth"
+                ],
+                "tam_methodology": "Basic market estimation",
+                "sam_calculation": f"30% of TAM: ${sam:,}",
+                "som_estimation": f"10% of SAM: ${som:,}"
             },
+            "analysis_perspective": analysis_perspective,
+            **({"brand_position": f"Fallback position analysis for {market_input.product_name}"} if analysis_perspective == "existing_brand" else {}),
+            "segmentation": segmentation,
             "competitors": competitors,
             "opportunities": [
                 f"{market_input.demand_driver} driving market growth",

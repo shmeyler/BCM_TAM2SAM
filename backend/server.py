@@ -303,6 +303,7 @@ class MarketIntelligenceAgent:
             5. Use credible data sources and methodology
             6. Geographic segmentation must be GRANULAR - include urban/suburban, specific states, DMA codes, metro areas
             7. Strategic recommendations must be ACTIONABLE and SPECIFIC
+            8. ENSURE PROPER SPACING in all text - add spaces around company names, product names, and between words
 
             COMPETITIVE ANALYSIS REQUIREMENTS:
             - {market_input.product_name} MUST be included as one of the key competitors for benchmarking

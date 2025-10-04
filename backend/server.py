@@ -96,11 +96,15 @@ class MarketMap(BaseModel):
     total_market_size: float
     market_growth_rate: float
     key_drivers: List[str]
+    # Analysis Perspective
+    analysis_perspective: str  # "existing_brand" or "new_entrant"
+    brand_position: Optional[str] = None  # Current position if existing brand
     # Market Segmentation
     segmentation_by_geographics: List[MarketSegment]
     segmentation_by_demographics: List[MarketSegment]
     segmentation_by_psychographics: List[MarketSegment]
     segmentation_by_behavioral: List[MarketSegment]
+    segmentation_by_firmographics: List[MarketSegment]  # NEW: B2B segmentation
     # Competitive Analysis
     competitors: List[Competitor]
     # Strategic Analysis

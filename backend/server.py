@@ -321,7 +321,7 @@ class MarketIntelligenceAgent:
                 }},
                 "analysis_perspective": "{analysis_perspective}",{"" if analysis_perspective != "existing_brand" else """
                 "brand_position": "Current market position and competitive standing of """ + market_input.product_name + """","""}
-                {"\"brand_position\": \"Fallback position analysis for " + market_input.product_name + "\"," if analysis_perspective == "existing_brand" else ""}
+                
                 "segmentation": {{
                     "by_geographics": [
                         {{

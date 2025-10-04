@@ -307,7 +307,7 @@ class MarketIntelligenceAgent:
             1. GEOGRAPHICS: Must be GRANULAR - Country, State, Metro Area, Urban/Suburban, DMA, ZIP codes when relevant
             2. DEMOGRAPHICS: Age, Gender, Income, Education, Social Status, Family, Life Stage, Occupation  
             3. PSYCHOGRAPHICS: Lifestyle, AIO (Activity/Interest/Opinion), Concerns, Personality, Values, Attitudes
-            4. BEHAVIORAL: Purchase, Usage, Intent, Occasion, Buyer Stage, Life Cycle Stage, Engagement
+            4. BEHAVIORAL: Purchase, Usage, Intent, Occasion, Buyer Stage, Life Cycle Stage, Engagement{firmographic_instruction}
 
             Provide a comprehensive JSON response with the following structure:
             {{

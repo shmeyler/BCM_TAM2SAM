@@ -814,6 +814,7 @@ class ComprehensiveAnalysisEngine:
             demographic_segments = []
             psychographic_segments = []
             behavioral_segments = []
+            firmographic_segments = []
             
             # Convert segments if they exist in the segmentation data
             for seg in segmentation.get("by_geographics", []):

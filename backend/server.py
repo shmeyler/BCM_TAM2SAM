@@ -493,6 +493,12 @@ class MarketIntelligenceAgent:
         """Minimal fallback analysis when OpenAI fails - no curated database"""
         logger.warning(f"Using minimal fallback analysis for {market_input.product_name}")
         
+        # Determine analysis perspective  
+        has_specific_brand = bool(market_input.product_name and 
+                                 market_input.product_name.strip() and 
+                                 market_input.product_name.lower() not in ['new product', 'new service', 'startup', 'new company'])
+        analysis_perspective = "existing_brand" if has_specific_brand else "new_entrant"
+        
         # Generate basic market analysis without curated data
         tam = 1000000000  # $1B default TAM
         sam = int(tam * 0.3)  # 30% SAM

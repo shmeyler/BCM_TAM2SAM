@@ -658,34 +658,34 @@ class MarketIntelligenceAgent:
         
         # Add firmographic segmentation only for B2B
         if is_b2b:
-                segmentation["by_firmographics"] = [
-                    {
-                        "name": "Enterprise Clients",
-                        "description": "Large corporations with 1000+ employees",
-                        "size": int(sam * 0.4),
-                        "growth": 0.06,
-                        "key_players": ["Market Leader", "Technology Innovator"],
-                        "firmographic_factors": ["Enterprise", "1000+ employees", "Global locations", "C-suite", "$1B+ revenue"]
-                    },
-                    {
-                        "name": "Mid-Market Companies",
-                        "description": "Growing companies with 100-1000 employees",
-                        "size": int(sam * 0.35),
-                        "growth": 0.09,
-                        "key_players": ["Growth Challenger", "Technology Innovator"],
-                        "firmographic_factors": ["Mid-market", "100-1000 employees", "Regional presence", "Director level", "$10M-$1B revenue"]
-                    },
-                    {
-                        "name": "Small Businesses",
-                        "description": "Small businesses with under 100 employees",
-                        "size": int(sam * 0.25),
-                        "growth": 0.12,
-                        "key_players": ["Value Player", "Growth Challenger"],
-                        "firmographic_factors": ["Small business", "Under 100 employees", "Local presence", "Manager level", "Under $10M revenue"]
-                    }
-                ]
-            else:
-                segmentation["by_firmographics"] = []
+            segmentation["by_firmographics"] = [
+                {
+                    "name": "Enterprise Clients",
+                    "description": "Large corporations with 1000+ employees",
+                    "size": int(sam * 0.4),
+                    "growth": 0.06,
+                    "key_players": ["Market Leader", "Technology Innovator"],
+                    "firmographic_factors": ["Enterprise", "1000+ employees", "Global locations", "C-suite", "$1B+ revenue"]
+                },
+                {
+                    "name": "Mid-Market Companies",
+                    "description": "Growing companies with 100-1000 employees",
+                    "size": int(sam * 0.35),
+                    "growth": 0.09,
+                    "key_players": ["Growth Challenger", "Technology Innovator"],
+                    "firmographic_factors": ["Mid-market", "100-1000 employees", "Regional presence", "Director level", "$10M-$1B revenue"]
+                },
+                {
+                    "name": "Small Businesses",
+                    "description": "Small businesses with under 100 employees",
+                    "size": int(sam * 0.25),
+                    "growth": 0.12,
+                    "key_players": ["Value Player", "Growth Challenger"],
+                    "firmographic_factors": ["Small business", "Under 100 employees", "Local presence", "Manager level", "Under $10M revenue"]
+                }
+            ]
+        else:
+            segmentation["by_firmographics"] = []
             
         return {
             "market_overview": {

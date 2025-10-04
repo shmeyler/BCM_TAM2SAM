@@ -769,6 +769,12 @@ class ComprehensiveAnalysisEngine:
     async def generate_market_map(market_input: MarketInput, ai_analysis: Dict[str, Any]) -> MarketMap:
         """Generate comprehensive market map from AI analysis"""
         try:
+            # Determine analysis perspective
+            has_specific_brand = bool(market_input.product_name and 
+                                     market_input.product_name.strip() and 
+                                     market_input.product_name.lower() not in ['new product', 'new service', 'startup', 'new company'])
+            analysis_perspective = "existing_brand" if has_specific_brand else "new_entrant"
+            
             market_overview = ai_analysis.get("market_overview", {})
             segmentation = ai_analysis.get("segmentation", {})
             competitors = ai_analysis.get("competitors", [])

@@ -360,8 +360,8 @@ class MarketIntelligenceAgent:
                             "key_players": ["company1", "company2"],
                             "behavioral_factors": ["Usage patterns", "Purchase frequency", "Buyer stage", "Engagement level"]
                         }}
-                    ]{("" if not is_b2b else """,
-                    "by_firmographics": [")}
+                    ]{"" if not is_b2b else """,
+                    "by_firmographics": [
                         {{
                             "name": "firmographic segment name",
                             "description": "B2B segment description focusing on company characteristics and business attributes",

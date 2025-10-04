@@ -562,7 +562,7 @@ class MarketIntelligenceAgent:
 
         # Build segmentation data
         segmentation = {
-                "by_geographics": [
+            "by_geographics": [
                     {
                         "name": "Major Metro Areas",
                         "description": "Urban markets with high population density",

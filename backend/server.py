@@ -655,9 +655,9 @@ class MarketIntelligenceAgent:
                 }
             ]
         }
-            
-            # Add firmographic segmentation only for B2B
-            if is_b2b:
+        
+        # Add firmographic segmentation only for B2B
+        if is_b2b:
                 segmentation["by_firmographics"] = [
                     {
                         "name": "Enterprise Clients",

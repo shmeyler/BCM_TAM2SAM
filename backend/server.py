@@ -795,7 +795,7 @@ class VisualMapGenerator:
             })
 
         # Process firmographic segments (B2B only)
-        firmographic_segments = segmentation.get("by_firmographics", [])
+        firmographic_segments = market_data.get("segmentation", {}).get("by_firmographics", [])
         for i, segment in enumerate(firmographic_segments):
             icon = "🏢" if i == 0 else "🏭" if i == 1 else "🏪" if i == 2 else "🏬"
             color = "teal" if i == 0 else "cyan" if i == 1 else "sky" if i == 2 else "slate"

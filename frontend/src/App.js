@@ -1247,9 +1247,9 @@ const MarketMapApp = () => {
                     <div>
                       <h4 className="text-lg font-bold text-blue-600 mb-2">SAM - {formatCurrency(analysis.market_map.total_market_size * 0.3)}</h4>
                       <p className="text-gray-700 text-sm leading-relaxed">
-                        <strong>Serviceable Addressable Market:</strong> 30% of TAM ({formatCurrency(analysis.market_map.total_market_size * 0.3)}) 
-                        representing segments we can realistically serve with our {analysis.market_input.transaction_type} business model. 
-                        Focused on {analysis.market_input.target_user} who prioritize {analysis.market_input.key_metrics.split(',')[0]} 
+                        <strong>Serviceable Addressable Market:</strong> 30% of TAM ({formatCurrency(analysis.market_map.total_market_size * 0.3)}){' '}
+                        representing segments we can realistically serve with our {analysis.market_input.transaction_type} business model.{' '}
+                        Focused on {analysis.market_input.target_user} who prioritize {analysis.market_input.key_metrics.split(',')[0]}{' '}
                         and are motivated by {analysis.market_input.demand_driver}.
                       </p>
                     </div>

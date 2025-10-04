@@ -1555,6 +1555,59 @@ const MarketMapApp = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Firmographic Segmentation - B2B Only */}
+                {analysis.market_map.segmentation_by_firmographics && analysis.market_map.segmentation_by_firmographics.length > 0 && (
+                  <div className="mt-8">
+                    <h4 className="text-xl font-bold text-gray-900 mb-6 text-center">B2B Firmographic Segmentation</h4>
+                    <div className="bg-gray-50 p-6 rounded-lg">
+                      <div className="text-center mb-6">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-100 mb-3">
+                          <span className="text-2xl">🏢</span>
+                        </div>
+                        <h4 className="text-lg font-bold text-gray-900">Firmographic Segmentation</h4>
+                        <div className="w-16 h-1 bg-teal-500 mx-auto mt-2"></div>
+                        <p className="text-xs text-gray-600 mt-2">Industry, Company Size, Geographic Location, Job Titles/Roles, Company Revenue</p>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        {analysis.market_map.segmentation_by_firmographics.map((segment, index) => (
+                          <div key={index} className="bg-white p-4 rounded-lg border">
+                            <div className="flex items-center mb-2">
+                              <span className="text-xl mr-3">🏢</span>
+                              <div className="flex-1">
+                                <div className="font-semibold text-gray-900">{segment.name}</div>
+                                <div className="text-sm text-gray-600">{segment.description}</div>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-2 text-xs mt-3">
+                              <div className="flex justify-between">
+                                <span className="font-medium">Market Size:</span>
+                                <span className="text-teal-600 font-semibold">{formatCurrency(segment.size_estimate)}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="font-medium">Growth:</span>
+                                <span className="text-green-600 font-semibold">{(segment.growth_rate * 100).toFixed(1)}%</span>
+                              </div>
+                            </div>
+                            {segment.key_players && segment.key_players.length > 0 && (
+                              <div className="mt-2">
+                                <div className="text-xs font-medium text-gray-600 mb-1">Key Players:</div>
+                                <div className="flex flex-wrap gap-1">
+                                  {segment.key_players.slice(0, 3).map((player, i) => (
+                                    <span key={i} className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                      {player}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

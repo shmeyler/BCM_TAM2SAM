@@ -563,7 +563,6 @@ class MarketIntelligenceAgent:
                 "som_estimation": f"10% of SAM: ${som:,}"
             },
             "analysis_perspective": analysis_perspective,
-            "segmentation": {
                 "by_geographics": [
                     {
                         "name": "Major Metro Areas",

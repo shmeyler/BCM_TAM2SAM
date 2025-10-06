@@ -1295,9 +1295,9 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    {/* Arrows pointing to each circle with concise labels */}
+                    {/* Arrows pointing to each specific circle */}
                     
-                    {/* TAM Arrow - Points to outermost circle */}
+                    {/* TAM Arrow - Points to outermost circle (this one is correct) */}
                     <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
                       <div className="flex flex-col items-center">
                         <div className="text-sm font-semibold text-gray-700 mb-2">TAM</div>
@@ -1306,20 +1306,20 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    {/* SAM Arrow - Points to middle circle */}
-                    <div className="absolute top-6 -right-20">
+                    {/* SAM Arrow - Points to middle circle edge (w-56 = 224px, so 112px from center) */}
+                    <div className="absolute top-1/2 right-8 transform -translate-y-1/2">
                       <div className="flex items-center">
                         <div className="text-sm font-semibold text-gray-700 mr-2">SAM</div>
-                        <div className="h-px w-8 bg-gray-400"></div>
+                        <div className="h-px w-4 bg-gray-400"></div>
                         <div className="w-0 h-0 border-t-2 border-b-2 border-l-4 border-transparent border-l-gray-400"></div>
                       </div>
                     </div>
                     
-                    {/* SOM Arrow - Points to innermost circle */}
-                    <div className="absolute bottom-6 -left-16">
+                    {/* SOM Arrow - Points to innermost circle edge (w-32 = 128px, so 64px from center) */}
+                    <div className="absolute bottom-1/2 left-24 transform translate-y-1/2">
                       <div className="flex items-center">
                         <div className="w-0 h-0 border-t-2 border-b-2 border-r-4 border-transparent border-r-gray-400"></div>
-                        <div className="h-px w-6 bg-gray-400"></div>
+                        <div className="h-px w-4 bg-gray-400"></div>
                         <div className="text-sm font-semibold text-gray-700 ml-2">SOM</div>
                       </div>
                     </div>

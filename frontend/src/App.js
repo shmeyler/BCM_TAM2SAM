@@ -1295,27 +1295,29 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    {/* Simple arrows pointing to each circle */}
+                    {/* Clean arrow layout pointing to each circle */}
                     
-                    {/* TAM Arrow - Points to outermost circle */}
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                      <div className="text-sm font-semibold text-gray-700 mb-1">TAM</div>
-                      <div className="w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-gray-400 mx-auto"></div>
-                    </div>
-                    
-                    {/* SAM Arrow - Points to middle circle (positioned at middle circle radius ~112px from center) */}
-                    <div className="absolute top-1/2 transform -translate-y-1/2" style={{right: '40px'}}>
-                      <div className="flex items-center">
-                        <div className="text-sm font-semibold text-gray-700 mr-1">SAM</div>
-                        <div className="w-0 h-0 border-t-2 border-b-2 border-l-3 border-transparent border-l-gray-400"></div>
+                    {/* TAM - Directly above chart pointing down to outermost circle */}
+                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+                      <div className="flex flex-col items-center">
+                        <div className="text-sm font-semibold text-gray-700 mb-2">TAM</div>
+                        <div className="w-0 h-0 border-l-4 border-r-4 border-t-6 border-transparent border-t-gray-400"></div>
                       </div>
                     </div>
                     
-                    {/* SOM Arrow - Points to innermost circle (positioned at inner circle radius ~64px from center) */}
-                    <div className="absolute bottom-1/3 transform translate-y-1/2" style={{left: '60px'}}>
+                    {/* SAM - To the right pointing left to second outermost circle */}
+                    <div className="absolute top-1/2 -right-16 transform -translate-y-1/2">
                       <div className="flex items-center">
-                        <div className="w-0 h-0 border-t-2 border-b-2 border-r-3 border-transparent border-r-gray-400"></div>
-                        <div className="text-sm font-semibold text-gray-700 ml-1">SOM</div>
+                        <div className="text-sm font-semibold text-gray-700 mr-2">SAM</div>
+                        <div className="w-0 h-0 border-t-4 border-b-4 border-l-6 border-transparent border-l-gray-400"></div>
+                      </div>
+                    </div>
+                    
+                    {/* SOM - At the bottom pointing up to innermost circle */}
+                    <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+                      <div className="flex flex-col items-center">
+                        <div className="w-0 h-0 border-l-4 border-r-4 border-b-6 border-transparent border-b-gray-400"></div>
+                        <div className="text-sm font-semibold text-gray-700 mt-2">SOM</div>
                       </div>
                     </div>
                   </div>

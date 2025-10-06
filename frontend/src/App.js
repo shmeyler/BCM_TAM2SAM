@@ -98,14 +98,14 @@ const getCompanyIcon = (companyName) => {
   if (name.includes('dropbox')) return <FaDropbox className="text-blue-500" />;
   if (name.includes('shopify')) return <FaShopify className="text-green-600" />;
   
-  // Travel & Tourism
-  if (name.includes('disney')) return <SiDisney className="text-blue-600" />;
-  if (name.includes('universal')) return <SiUniversalstudios className="text-blue-800" />;
-  if (name.includes('hilton')) return <SiHilton className="text-blue-700" />;
-  if (name.includes('marriott')) return <SiMarriott className="text-red-600" />;
-  if (name.includes('expedia')) return <SiExpedia className="text-yellow-500" />;
-  if (name.includes('booking')) return <SiBookingdotcom className="text-blue-600" />;
-  if (name.includes('tripadvisor')) return <SiTripAdvisor className="text-green-500" />;
+  // Travel & Tourism  
+  if (name.includes('disney')) return <FaTicketAlt className="text-blue-600" />;
+  if (name.includes('universal')) return <FaTicketAlt className="text-blue-800" />;
+  if (name.includes('hilton')) return <FaHotel className="text-blue-700" />;
+  if (name.includes('marriott')) return <FaHotel className="text-red-600" />;
+  if (name.includes('expedia')) return <FaPlane className="text-yellow-500" />;
+  if (name.includes('booking')) return <FaHotel className="text-blue-600" />;
+  if (name.includes('tripadvisor')) return <FaMapMarkerAlt className="text-green-500" />;
   if (name.includes('visit') || name.includes('tourism')) return <FaMapMarkerAlt className="text-red-500" />;
   if (name.includes('vacation') || name.includes('resort')) return <FaUmbrellaBeach className="text-blue-400" />;
   if (name.includes('hotel') || name.includes('lodge')) return <FaHotel className="text-indigo-600" />;

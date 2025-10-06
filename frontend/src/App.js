@@ -88,6 +88,67 @@ const API = `${BACKEND_URL}/api`;
 
 console.log('Backend URL:', BACKEND_URL);
 
+// Dynamic Company Icon Mapper
+const getCompanyIcon = (companyName) => {
+  const name = companyName.toLowerCase();
+  
+  // Tech Companies
+  if (name.includes('apple')) return <FaApple className="text-gray-600" />;
+  if (name.includes('google')) return <FaGoogle className="text-blue-500" />;
+  if (name.includes('microsoft')) return <FaMicrosoft className="text-blue-600" />;
+  if (name.includes('amazon')) return <FaAmazon className="text-orange-500" />;
+  if (name.includes('facebook') || name.includes('meta')) return <FaFacebook className="text-blue-600" />;
+  if (name.includes('netflix')) return <FaNetflix className="text-red-600" />;
+  if (name.includes('spotify')) return <FaSpotify className="text-green-500" />;
+  if (name.includes('uber')) return <FaUber className="text-black" />;
+  if (name.includes('airbnb')) return <FaAirbnb className="text-red-500" />;
+  if (name.includes('paypal')) return <FaPaypal className="text-blue-600" />;
+  if (name.includes('stripe')) return <FaStripe className="text-purple-600" />;
+  if (name.includes('salesforce')) return <FaSalesforce className="text-blue-500" />;
+  if (name.includes('slack')) return <FaSlack className="text-purple-500" />;
+  if (name.includes('dropbox')) return <FaDropbox className="text-blue-500" />;
+  if (name.includes('shopify')) return <FaShopify className="text-green-600" />;
+  
+  // Travel & Tourism
+  if (name.includes('disney')) return <SiDisney className="text-blue-600" />;
+  if (name.includes('universal')) return <SiUniversalstudios className="text-blue-800" />;
+  if (name.includes('hilton')) return <SiHilton className="text-blue-700" />;
+  if (name.includes('marriott')) return <SiMarriott className="text-red-600" />;
+  if (name.includes('expedia')) return <SiExpedia className="text-yellow-500" />;
+  if (name.includes('booking')) return <SiBookingdotcom className="text-blue-600" />;
+  if (name.includes('tripadvisor')) return <SiTripAdvisor className="text-green-500" />;
+  if (name.includes('visit') || name.includes('tourism')) return <FaMapMarkerAlt className="text-red-500" />;
+  if (name.includes('vacation') || name.includes('resort')) return <FaUmbrellaBeach className="text-blue-400" />;
+  if (name.includes('hotel') || name.includes('lodge')) return <FaHotel className="text-indigo-600" />;
+  if (name.includes('airline') || name.includes('airways') || name.includes('air ')) return <FaPlane className="text-sky-500" />;
+  if (name.includes('rental') || name.includes('car')) return <FaCar className="text-gray-600" />;
+  
+  // Food & Beverage
+  if (name.includes('starbucks')) return <FaStarbucks className="text-green-600" />;
+  if (name.includes('coffee') || name.includes('cafe')) return <FaCoffee className="text-brown-600" />;
+  if (name.includes('pizza')) return <FaPizzaSlice className="text-red-500" />;
+  if (name.includes('burger') || name.includes('fast food')) return <FaHamburger className="text-yellow-600" />;
+  if (name.includes('beer') || name.includes('brewery') || name.includes('brewing')) return <FaBeer className="text-amber-600" />;
+  if (name.includes('wine') || name.includes('winery')) return <FaWineGlass className="text-purple-600" />;
+  
+  // Payment & Finance
+  if (name.includes('visa')) return <SiVisa className="text-blue-600" />;
+  if (name.includes('mastercard')) return <SiMastercard className="text-red-600" />;
+  if (name.includes('amex') || name.includes('american express')) return <SiAmex className="text-blue-800" />;
+  
+  // Generic fallbacks by industry type
+  if (name.includes('group') || name.includes('corp') || name.includes('inc')) return <FaBuilding className="text-gray-600" />;
+  if (name.includes('destinations') || name.includes('parks')) return <FaTicketAlt className="text-purple-500" />;
+  if (name.includes('entertainment') || name.includes('media')) return <FaFilm className="text-red-500" />;
+  if (name.includes('music') || name.includes('audio')) return <FaMusic className="text-indigo-500" />;
+  if (name.includes('gaming') || name.includes('game')) return <FaGamepad className="text-green-500" />;
+  if (name.includes('photo') || name.includes('camera')) return <FaCamera className="text-gray-700" />;
+  if (name.includes('tech') || name.includes('software')) return <FaWifi className="text-blue-500" />;
+  
+  // Default fallback
+  return <FaBuilding className="text-gray-500" />;
+};
+
 const MarketMapApp = () => {
   // Authentication state
   const [user, setUser] = useState(null);

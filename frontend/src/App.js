@@ -113,7 +113,7 @@ const getCompanyIcon = (companyName) => {
   if (name.includes('rental') || name.includes('car')) return <FaCar className="text-gray-600" />;
   
   // Food & Beverage
-  if (name.includes('starbucks')) return <FaStarbucks className="text-green-600" />;
+  if (name.includes('starbucks')) return <FaCoffee className="text-green-600" />;
   if (name.includes('coffee') || name.includes('cafe')) return <FaCoffee className="text-brown-600" />;
   if (name.includes('pizza')) return <FaPizzaSlice className="text-red-500" />;
   if (name.includes('burger') || name.includes('fast food')) return <FaHamburger className="text-yellow-600" />;

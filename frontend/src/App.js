@@ -3,6 +3,26 @@ import './App.css';
 import axios from 'axios';
 import Login from './components/Login';
 import AdminPanel from './components/AdminPanel';
+// Import React Icons for professional icons
+import { 
+  FaGlobe, 
+  FaUsers, 
+  FaBrain, 
+  FaShoppingCart, 
+  FaBuilding,
+  FaApple,
+  FaGoogle,
+  FaMicrosoft,
+  FaAmazon,
+  FaFacebook
+} from 'react-icons/fa';
+import { 
+  HiOfficeBuilding,
+  HiLocationMarker,
+  HiUserGroup,
+  HiLightBulb,
+  HiShoppingBag
+} from 'react-icons/hi';
 
 // Auto-detect backend URL based on current domain
 const getBackendUrl = () => {

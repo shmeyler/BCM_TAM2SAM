@@ -1296,6 +1296,8 @@ const MarketMapApp = () => {
                     </div>
                     
                     {/* Enhanced Labels with arrows pointing to each circle */}
+                    
+                    {/* TAM Arrow - Points to outer circle edge */}
                     <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
                       <div className="flex flex-col items-center">
                         <div className="text-sm font-semibold text-gray-700 mb-2 text-center">Total Addressable Market</div>
@@ -1304,18 +1306,20 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    <div className="absolute top-4 -right-32">
+                    {/* SAM Arrow - Points to middle circle (positioned closer to center) */}
+                    <div className="absolute top-8 -right-24">
                       <div className="flex items-center">
                         <div className="w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-gray-400"></div>
-                        <div className="h-px w-12 bg-gray-400"></div>
+                        <div className="h-px w-8 bg-gray-400"></div>
                         <div className="text-sm font-semibold text-gray-700 ml-3 text-left">Serviceable<br/>Addressable Market</div>
                       </div>
                     </div>
                     
-                    <div className="absolute bottom-4 -left-32">
+                    {/* SOM Arrow - Points to inner circle (positioned much closer to center) */}
+                    <div className="absolute bottom-12 -left-20">
                       <div className="flex items-center">
                         <div className="text-sm font-semibold text-gray-700 mr-3 text-right">Serviceable<br/>Obtainable Market</div>
-                        <div className="h-px w-12 bg-gray-400"></div>
+                        <div className="h-px w-6 bg-gray-400"></div>
                         <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-transparent border-l-gray-400"></div>
                       </div>
                     </div>

@@ -87,7 +87,7 @@ const getCompanyIcon = (companyName) => {
   if (name.includes('microsoft')) return <FaMicrosoft className="text-blue-600" />;
   if (name.includes('amazon')) return <FaAmazon className="text-orange-500" />;
   if (name.includes('facebook') || name.includes('meta')) return <FaFacebook className="text-blue-600" />;
-  if (name.includes('netflix')) return <FaNetflix className="text-red-600" />;
+  if (name.includes('netflix')) return <FaFilm className="text-red-600" />;
   if (name.includes('spotify')) return <FaSpotify className="text-green-500" />;
   if (name.includes('uber')) return <FaUber className="text-black" />;
   if (name.includes('airbnb')) return <FaAirbnb className="text-red-500" />;

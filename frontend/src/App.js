@@ -1587,7 +1587,7 @@ const MarketMapApp = () => {
                         {analysis.market_map.segmentation_by_firmographics.map((segment, index) => (
                           <div key={index} className="bg-white p-4 rounded-lg border">
                             <div className="flex items-center mb-2">
-                              <span className="text-xl mr-3">🏢</span>
+                              <FaBuilding className="text-xl mr-3 text-teal-600" />
                               <div className="flex-1">
                                 <div className="font-semibold text-gray-900">{segment.name}</div>
                                 <div className="text-sm text-gray-600">{segment.description}</div>

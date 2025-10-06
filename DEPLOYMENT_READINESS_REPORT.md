@@ -81,7 +81,7 @@ Key Findings:
 - ✅ `POST /api/export-market-map/{id}` - Excel Export
 
 ### External (Production URL)
-- ✅ `GET https://segmentation-pro.preview.emergentagent.com/api/test-integrations`
+- ✅ `GET https://market-insights-60.preview.emergentagent.com/api/test-integrations`
   - Together AI: OK
   - Kimi Model: Verified
   - MongoDB: OK
@@ -103,7 +103,7 @@ TOGETHER_API_KEY=***SECURE*** ✅
 **Frontend (`/app/frontend/.env`):**
 ```
 WDS_SOCKET_PORT=443 ✅
-REACT_APP_BACKEND_URL=https://segmentation-pro.preview.emergentagent.com ✅
+REACT_APP_BACKEND_URL=https://market-insights-60.preview.emergentagent.com ✅
 ```
 
 ### Security Checks:
@@ -188,7 +188,7 @@ REACT_APP_BACKEND_URL=https://segmentation-pro.preview.emergentagent.com ✅
 - MongoDB: OK
 
 ### Test Case 3: External URL Accessibility
-**URL**: `https://segmentation-pro.preview.emergentagent.com`  
+**URL**: `https://market-insights-60.preview.emergentagent.com`  
 **Result**: ✅ SUCCESS
 
 ---

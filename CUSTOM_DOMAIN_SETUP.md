@@ -24,7 +24,7 @@ const getBackendUrl = () => {
 
 **What This Means:**
 - ✅ On `www.bcmventas.com` → Uses `https://www.bcmventas.com/api`
-- ✅ On preview → Uses `https://segmentation-pro.preview.emergentagent.com/api`
+- ✅ On preview → Uses `https://market-insights-60.preview.emergentagent.com/api`
 - ✅ Automatically switches based on current URL
 
 ### 2. OAuth Redirect Auto-Configuration
@@ -52,11 +52,11 @@ allow_origins=["*"]  # Allows both custom domain and preview
 
 ## How It Works Now
 
-### Preview Site (https://segmentation-pro.preview.emergentagent.com)
+### Preview Site (https://market-insights-60.preview.emergentagent.com)
 1. User clicks "Sign in with Google"
-2. Redirects to: `https://auth.emergentagent.com/?redirect=https://segmentation-pro.preview.emergentagent.com`
-3. After OAuth: Returns to `https://segmentation-pro.preview.emergentagent.com#session_id=...`
-4. Backend URL: `https://segmentation-pro.preview.emergentagent.com/api`
+2. Redirects to: `https://auth.emergentagent.com/?redirect=https://market-insights-60.preview.emergentagent.com`
+3. After OAuth: Returns to `https://market-insights-60.preview.emergentagent.com#session_id=...`
+4. Backend URL: `https://market-insights-60.preview.emergentagent.com/api`
 
 ### Custom Domain (https://www.bcmventas.com)
 1. User clicks "Sign in with Google"
@@ -69,8 +69,8 @@ allow_origins=["*"]  # Allows both custom domain and preview
 ## Testing
 
 ### On Preview Site:
-1. Go to: `https://segmentation-pro.preview.emergentagent.com`
-2. Open console (F12) - should see: `Backend URL: https://segmentation-pro.preview.emergentagent.com`
+1. Go to: `https://market-insights-60.preview.emergentagent.com`
+2. Open console (F12) - should see: `Backend URL: https://market-insights-60.preview.emergentagent.com`
 3. Login should work ✅
 
 ### On Custom Domain:
@@ -126,7 +126,7 @@ After signing in with Google:
 ### Preview (.env files in repo):
 ```bash
 # Frontend
-REACT_APP_BACKEND_URL=https://segmentation-pro.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://market-insights-60.preview.emergentagent.com
 REACT_APP_AUTH_URL=https://auth.emergentagent.com
 
 # Backend
@@ -162,7 +162,7 @@ After deploying to custom domain:
 ## Additional Notes
 
 ### Both Domains Work Simultaneously:
-- Preview: `https://segmentation-pro.preview.emergentagent.com` ✅
+- Preview: `https://market-insights-60.preview.emergentagent.com` ✅
 - Custom: `https://www.bcmventas.com` ✅
 - Both use same backend and database
 - Users can login on either domain

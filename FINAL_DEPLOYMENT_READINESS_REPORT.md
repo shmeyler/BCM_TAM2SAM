@@ -96,7 +96,7 @@ checks:
 ✅ `GET /api/analysis-history` → History retrieval working  
 
 ### External (Production URL)
-✅ `https://segmentation-pro.preview.emergentagent.com/api/test-integrations`  
+✅ `https://market-insights-60.preview.emergentagent.com/api/test-integrations`  
 - Together AI: OK
 - Kimi Model: Verified
 - MongoDB: OK
@@ -119,7 +119,7 @@ TOGETHER_API_KEY=***SECURE*** ✅
 **Frontend (`/app/frontend/.env`):**
 ```bash
 WDS_SOCKET_PORT=443 ✅
-REACT_APP_BACKEND_URL=https://segmentation-pro.preview.emergentagent.com ✅
+REACT_APP_BACKEND_URL=https://market-insights-60.preview.emergentagent.com ✅
 ```
 
 ### Security Checklist:
@@ -235,7 +235,7 @@ REACT_APP_BACKEND_URL=https://segmentation-pro.preview.emergentagent.com ✅
 - MongoDB: OK
 
 ### Test Case 4: External URL Accessibility
-**URL**: `https://segmentation-pro.preview.emergentagent.com`  
+**URL**: `https://market-insights-60.preview.emergentagent.com`  
 **Result**: ✅ SUCCESS
 
 ---

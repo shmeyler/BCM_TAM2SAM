@@ -1295,32 +1295,27 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    {/* Arrows pointing to each specific circle */}
+                    {/* Simple arrows pointing to each circle */}
                     
-                    {/* TAM Arrow - Points to outermost circle (this one is correct) */}
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
-                      <div className="flex flex-col items-center">
-                        <div className="text-sm font-semibold text-gray-700 mb-2">TAM</div>
-                        <div className="w-px h-6 bg-gray-400"></div>
-                        <div className="w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-gray-400"></div>
+                    {/* TAM Arrow - Points to outermost circle */}
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                      <div className="text-sm font-semibold text-gray-700 mb-1">TAM</div>
+                      <div className="w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-gray-400 mx-auto"></div>
+                    </div>
+                    
+                    {/* SAM Arrow - Points to middle circle (positioned at middle circle radius ~112px from center) */}
+                    <div className="absolute top-1/2 transform -translate-y-1/2" style={{right: '40px'}}>
+                      <div className="flex items-center">
+                        <div className="text-sm font-semibold text-gray-700 mr-1">SAM</div>
+                        <div className="w-0 h-0 border-t-2 border-b-2 border-l-3 border-transparent border-l-gray-400"></div>
                       </div>
                     </div>
                     
-                    {/* SAM Arrow - Points to middle circle edge (w-56 = 224px, so 112px from center) */}
-                    <div className="absolute top-1/2 right-8 transform -translate-y-1/2">
+                    {/* SOM Arrow - Points to innermost circle (positioned at inner circle radius ~64px from center) */}
+                    <div className="absolute bottom-1/3 transform translate-y-1/2" style={{left: '60px'}}>
                       <div className="flex items-center">
-                        <div className="text-sm font-semibold text-gray-700 mr-2">SAM</div>
-                        <div className="h-px w-4 bg-gray-400"></div>
-                        <div className="w-0 h-0 border-t-2 border-b-2 border-l-4 border-transparent border-l-gray-400"></div>
-                      </div>
-                    </div>
-                    
-                    {/* SOM Arrow - Points to innermost circle edge (w-32 = 128px, so 64px from center) */}
-                    <div className="absolute bottom-1/2 left-24 transform translate-y-1/2">
-                      <div className="flex items-center">
-                        <div className="w-0 h-0 border-t-2 border-b-2 border-r-4 border-transparent border-r-gray-400"></div>
-                        <div className="h-px w-4 bg-gray-400"></div>
-                        <div className="text-sm font-semibold text-gray-700 ml-2">SOM</div>
+                        <div className="w-0 h-0 border-t-2 border-b-2 border-r-3 border-transparent border-r-gray-400"></div>
+                        <div className="text-sm font-semibold text-gray-700 ml-1">SOM</div>
                       </div>
                     </div>
                   </div>

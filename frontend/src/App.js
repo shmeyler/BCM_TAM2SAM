@@ -1295,31 +1295,31 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    {/* Labels with lines pointing to each circle */}
+                    {/* Labels with lines connecting to specific circle edges */}
                     
-                    {/* TAM - Above chart with line to outermost circle */}
-                    <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
+                    {/* TAM - Line connects to top edge of outermost circle (w-80 = 320px radius = 160px) */}
+                    <div className="absolute -top-20 left-1/2 transform -translate-x-1/2">
                       <div className="flex flex-col items-center">
                         <div className="text-sm font-semibold text-gray-700 mb-2">TAM</div>
-                        <div className="w-px h-12 bg-gray-500"></div>
+                        <div className="w-px h-16 bg-gray-500"></div>
                         <div className="w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent border-t-gray-500"></div>
                       </div>
                     </div>
                     
-                    {/* SAM - Right side with line to middle circle */}
-                    <div className="absolute top-1/2 -right-20 transform -translate-y-1/2">
+                    {/* SAM - Line connects to right edge of middle circle (w-56 = 224px radius = 112px) */}
+                    <div className="absolute top-1/2 right-7 transform -translate-y-1/2">
                       <div className="flex items-center">
-                        <div className="text-sm font-semibold text-gray-700 mr-3">SAM</div>
-                        <div className="h-px w-12 bg-gray-500"></div>
-                        <div className="w-0 h-0 border-t-2 border-b-2 border-l-4 border-transparent border-l-gray-500"></div>
+                        <div className="w-0 h-0 border-t-2 border-b-2 border-r-4 border-transparent border-r-gray-500"></div>
+                        <div className="h-px w-14 bg-gray-500"></div>
+                        <div className="text-sm font-semibold text-gray-700 ml-3">SAM</div>
                       </div>
                     </div>
                     
-                    {/* SOM - Bottom with line to innermost circle */}
-                    <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
+                    {/* SOM - Line connects to bottom edge of innermost circle (w-32 = 128px radius = 64px) */}
+                    <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2">
                       <div className="flex flex-col items-center">
                         <div className="w-0 h-0 border-l-2 border-r-2 border-b-4 border-transparent border-b-gray-500"></div>
-                        <div className="w-px h-12 bg-gray-500"></div>
+                        <div className="w-px h-8 bg-gray-500"></div>
                         <div className="text-sm font-semibold text-gray-700 mt-2">SOM</div>
                       </div>
                     </div>

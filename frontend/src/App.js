@@ -1295,32 +1295,32 @@ const MarketMapApp = () => {
                       </div>
                     </div>
                     
-                    {/* Enhanced Labels with arrows pointing to each circle */}
+                    {/* Labels with arrows pointing to each specific circle */}
                     
-                    {/* TAM Arrow - Points to outer circle edge */}
+                    {/* TAM Arrow - Points to outermost circle (TAM) */}
                     <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
                       <div className="flex flex-col items-center">
                         <div className="text-sm font-semibold text-gray-700 mb-2 text-center">Total Addressable Market</div>
-                        <div className="w-px h-8 bg-gray-400"></div>
+                        <div className="w-px h-12 bg-gray-400"></div>
                         <div className="w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-gray-400"></div>
                       </div>
                     </div>
                     
-                    {/* SAM Arrow - Points to middle circle (positioned closer to center) */}
-                    <div className="absolute top-8 -right-24">
+                    {/* SAM Arrow - Points to middle circle (SAM) - positioned to hit SAM circle edge */}
+                    <div className="absolute top-1/2 -right-28 transform -translate-y-1/2">
                       <div className="flex items-center">
-                        <div className="w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-gray-400"></div>
-                        <div className="h-px w-8 bg-gray-400"></div>
-                        <div className="text-sm font-semibold text-gray-700 ml-3 text-left">Serviceable<br/>Addressable Market</div>
+                        <div className="text-sm font-semibold text-gray-700 mr-3 text-right">Serviceable<br/>Addressable Market</div>
+                        <div className="h-px w-16 bg-gray-400"></div>
+                        <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-transparent border-l-gray-400"></div>
                       </div>
                     </div>
                     
-                    {/* SOM Arrow - Points to inner circle (positioned much closer to center) */}
-                    <div className="absolute bottom-12 -left-20">
+                    {/* SOM Arrow - Points to innermost circle (SOM) - positioned to hit SOM circle edge */}
+                    <div className="absolute bottom-1/2 -left-28 transform translate-y-1/2">
                       <div className="flex items-center">
-                        <div className="text-sm font-semibold text-gray-700 mr-3 text-right">Serviceable<br/>Obtainable Market</div>
-                        <div className="h-px w-6 bg-gray-400"></div>
-                        <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-transparent border-l-gray-400"></div>
+                        <div className="w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-gray-400"></div>
+                        <div className="h-px w-12 bg-gray-400"></div>
+                        <div className="text-sm font-semibold text-gray-700 ml-3 text-left">Serviceable<br/>Obtainable Market</div>
                       </div>
                     </div>
                   </div>

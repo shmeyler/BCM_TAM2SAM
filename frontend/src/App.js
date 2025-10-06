@@ -1519,7 +1519,8 @@ const MarketMapApp = () => {
                               <div className="text-xs font-medium text-gray-600 mb-1">Key Players:</div>
                               <div className="flex flex-wrap gap-1">
                                 {segment.key_players.slice(0, 3).map((player, i) => (
-                                  <span key={i} className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                  <span key={i} className="inline-flex items-center bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                    <span className="mr-1">{getCompanyIcon(player)}</span>
                                     {player}
                                   </span>
                                 ))}
@@ -1567,7 +1568,8 @@ const MarketMapApp = () => {
                               <div className="text-xs font-medium text-gray-600 mb-1">Key Players:</div>
                               <div className="flex flex-wrap gap-1">
                                 {segment.key_players.slice(0, 3).map((player, i) => (
-                                  <span key={i} className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                  <span key={i} className="inline-flex items-center bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                    <span className="mr-1">{getCompanyIcon(player)}</span>
                                     {player}
                                   </span>
                                 ))}
@@ -1615,7 +1617,8 @@ const MarketMapApp = () => {
                               <div className="text-xs font-medium text-gray-600 mb-1">Key Players:</div>
                               <div className="flex flex-wrap gap-1">
                                 {segment.key_players.slice(0, 3).map((player, i) => (
-                                  <span key={i} className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                  <span key={i} className="inline-flex items-center bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                    <span className="mr-1">{getCompanyIcon(player)}</span>
                                     {player}
                                   </span>
                                 ))}
@@ -1663,7 +1666,8 @@ const MarketMapApp = () => {
                               <div className="text-xs font-medium text-gray-600 mb-1">Key Players:</div>
                               <div className="flex flex-wrap gap-1">
                                 {segment.key_players.slice(0, 3).map((player, i) => (
-                                  <span key={i} className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                  <span key={i} className="inline-flex items-center bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                    <span className="mr-1">{getCompanyIcon(player)}</span>
                                     {player}
                                   </span>
                                 ))}

@@ -123,7 +123,7 @@ const getCompanyIcon = (companyName) => {
   // Payment & Finance
   if (name.includes('visa')) return <SiVisa className="text-blue-600" />;
   if (name.includes('mastercard')) return <SiMastercard className="text-red-600" />;
-  if (name.includes('amex') || name.includes('american express')) return <SiAmex className="text-blue-800" />;
+  if (name.includes('amex') || name.includes('american express')) return <FaBuilding className="text-blue-800" />;
   
   // Generic fallbacks by industry type
   if (name.includes('group') || name.includes('corp') || name.includes('inc')) return <FaBuilding className="text-gray-600" />;

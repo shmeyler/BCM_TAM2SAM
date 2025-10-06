@@ -18,12 +18,10 @@ import {
   FaAirbnb,
   FaUber,
   FaSpotify,
-  FaNetflix,
   FaTwitter,
   FaInstagram,
   FaLinkedin,
   FaYoutube,
-  FaStarbucks,
   FaNike,
   FaPaypal,
   FaStripe,
@@ -51,18 +49,14 @@ import {
   FaWineGlass
 } from 'react-icons/fa';
 import { 
-  SiDisney,
-  SiHilton,
-  SiMarriott,
-  SiExpedia,
-  SiVisa,
-  SiMastercard,
   SiAdobe,
   SiAsana,
   SiTrello,
   SiNotion,
   SiFigma,
-  SiCanva
+  SiCanva,
+  SiVisa,
+  SiMastercard
 } from 'react-icons/si';
 
 // Auto-detect backend URL based on current domain

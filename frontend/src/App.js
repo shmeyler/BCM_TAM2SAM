@@ -1428,7 +1428,7 @@ const MarketMapApp = () => {
                   <div className="bg-gray-50 p-6 rounded-lg">
                     <div className="text-center mb-6">
                       <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 mb-3">
-                        <span className="text-2xl">👥</span>
+                        <FaUsers className="text-2xl text-orange-600" />
                       </div>
                       <h4 className="text-lg font-bold text-gray-900">Demographic Segmentation</h4>
                       <div className="w-16 h-1 bg-orange-500 mx-auto mt-2"></div>

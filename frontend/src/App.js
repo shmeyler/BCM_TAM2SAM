@@ -52,17 +52,12 @@ import {
 } from 'react-icons/fa';
 import { 
   SiDisney,
-  SiUniversalstudios,
   SiHilton,
   SiMarriott,
   SiExpedia,
-  SiBookingdotcom,
-  SiTripAdvisor,
   SiVisa,
   SiMastercard,
-  SiAmex,
   SiAdobe,
-  SiZoom,
   SiAsana,
   SiTrello,
   SiNotion,

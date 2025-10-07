@@ -406,7 +406,43 @@ class MarketIntelligenceAgent:
                             "size": [size in dollars],
                             "growth": [growth rate as decimal],
                             "key_players": ["company1", "company2"],
-                            "demographic_factors": ["Age range", "Income level", "Education", "Occupation"]
+                            "demographic_factors": ["Age range", "Income level", "Education", "Occupation"],
+                            "enhanced_persona": {{
+                                "demographics": {{
+                                    "age_range": "specific age range (e.g., 25-34)",
+                                    "generation": "generational cohort (e.g., Millennial, Gen Z)",
+                                    "income_bracket": "income range with purchasing power context",
+                                    "education": "education level and professional background",
+                                    "location_type": "urban/suburban/rural with lifestyle implications",
+                                    "life_stage": "life stage indicators (single, married, parents, etc.)"
+                                }},
+                                "psychographics": {{
+                                    "values": ["core values and motivations"],
+                                    "motivations": ["primary motivational drivers"],
+                                    "lifestyle": "lifestyle description",
+                                    "risk_tolerance": "risk tolerance level",
+                                    "environmental_consciousness": "sustainability attitudes"
+                                }},
+                                "behavioral_patterns": {{
+                                    "purchase_drivers": ["key purchase decision factors"],
+                                    "media_consumption": ["preferred media channels and content types"],
+                                    "shopping_preferences": ["preferred shopping channels and methods"],
+                                    "communication_style": "communication preferences",
+                                    "influence_sources": ["sources of influence and recommendations"]
+                                }},
+                                "resonate_mapping": {{
+                                    "primary_categories": ["relevant Resonate Elements categories"],
+                                    "attributes": ["specific Resonate taxonomy paths"],
+                                    "taxonomy_path": "example: Demographics > Demographics > Identity > Age Group > 25-34"
+                                }},
+                                "persona_applications": {{
+                                    "messaging_themes": ["key messaging themes for this persona"],
+                                    "content_preferences": ["preferred content types and formats"],
+                                    "channel_strategy": ["recommended marketing channels"],
+                                    "pain_points": ["specific pain points and challenges"],
+                                    "solution_fit": "assessment of how well the product fits this persona"
+                                }}
+                            }}
                         }}
                     ],
                     "by_psychographics": [

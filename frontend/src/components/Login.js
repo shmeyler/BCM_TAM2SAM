@@ -7,6 +7,11 @@ const Login = () => {
     const authBaseUrl = process.env.REACT_APP_AUTH_URL;
     const authUrl = `${authBaseUrl}/?redirect=${encodeURIComponent(redirectUrl)}`;
     
+    if (!authBaseUrl) {
+      console.error('REACT_APP_AUTH_URL environment variable is not set');
+      return;
+    }
+    
     console.log('OAuth Login Details:');
     console.log('- Current domain:', window.location.origin);
     console.log('- Redirect URL:', redirectUrl);

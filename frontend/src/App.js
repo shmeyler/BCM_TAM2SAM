@@ -409,6 +409,45 @@ const MarketMapApp = () => {
     }
   };
 
+  const exportPersonas = async (analysisId) => {
+    try {
+      setIsProcessing(true);
+      setProcessingMessage('Exporting persona data for Resonate rAI...');
+      
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/export-personas/${analysisId}`, {
+        credentials: 'include'
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to export persona data');
+      }
+      
+      const personaData = await response.json();
+      
+      // Create downloadable JSON file
+      const dataStr = JSON.stringify(personaData, null, 2);
+      const dataBlob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `resonate-personas-${personaData.analysis_info.product_name.replace(/\s+/g, '-')}-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      // Show success message with summary
+      alert(`✅ Persona Export Complete!\n\n📊 Summary:\n• ${personaData.persona_summary.total_segments} segments exported\n• ${personaData.persona_summary.resonate_ready_segments} Resonate-ready segments\n• ${personaData.persona_summary.total_taxonomy_mappings} taxonomy mappings\n\nReady for Resonate rAI integration!`);
+      
+    } catch (error) {
+      console.error('Export error:', error);
+      alert('Failed to export persona data. Please try again.');
+    } finally {
+      setIsProcessing(false);
+      setProcessingMessage('');
+    }
+  };
+
   const exportMarketMap = async () => {
     try {
       console.log('Starting Excel export for analysis:', analysis.market_map.id);

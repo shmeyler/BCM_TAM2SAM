@@ -1725,6 +1725,186 @@ const MarketMapApp = () => {
               </div>
             )}
 
+            {/* Enhanced Personas Section */}
+            {analysis && analysis.market_map && (
+              <div className="bg-white rounded-lg shadow-md p-8">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900">Enhanced Persona Insights</h3>
+                  <button
+                    onClick={() => exportPersonas(analysis.market_map.id)}
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center"
+                  >
+                    <span className="mr-2">📊</span>
+                    Export Personas for Resonate rAI
+                  </button>
+                </div>
+                
+                <p className="text-gray-600 mb-6">
+                  Detailed persona data optimized for persona development and Resonate rAI platform integration. 
+                  Each segment includes enhanced behavioral, demographic, and psychographic insights with direct taxonomy mapping.
+                </p>
+
+                {/* Enhanced Demographics */}
+                {analysis.market_map.segmentation_by_demographics && analysis.market_map.segmentation_by_demographics.length > 0 && (
+                  <div className="mb-8">
+                    <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                      <FaUsers className="mr-2 text-orange-600" />
+                      Demographic Personas
+                    </h4>
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {analysis.market_map.segmentation_by_demographics.map((segment, index) => (
+                        <div key={index} className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-lg border border-orange-200">
+                          <div className="flex items-center mb-4">
+                            <FaUsers className="text-orange-600 mr-2" />
+                            <h5 className="font-bold text-gray-900">{segment.name}</h5>
+                          </div>
+                          
+                          <p className="text-sm text-gray-700 mb-4">{segment.description}</p>
+                          
+                          {segment.enhanced_persona && (
+                            <div className="space-y-3">
+                              {/* Demographics Details */}
+                              {segment.enhanced_persona.demographics && (
+                                <div className="bg-white p-3 rounded border">
+                                  <div className="text-xs font-medium text-orange-700 mb-2">DEMOGRAPHICS</div>
+                                  <div className="grid grid-cols-2 gap-2 text-xs">
+                                    {segment.enhanced_persona.demographics.age_range && (
+                                      <div><strong>Age:</strong> {segment.enhanced_persona.demographics.age_range}</div>
+                                    )}
+                                    {segment.enhanced_persona.demographics.income_bracket && (
+                                      <div><strong>Income:</strong> {segment.enhanced_persona.demographics.income_bracket}</div>
+                                    )}
+                                    {segment.enhanced_persona.demographics.education && (
+                                      <div><strong>Education:</strong> {segment.enhanced_persona.demographics.education}</div>
+                                    )}
+                                    {segment.enhanced_persona.demographics.location_type && (
+                                      <div><strong>Location:</strong> {segment.enhanced_persona.demographics.location_type}</div>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {/* Resonate Mapping */}
+                              {segment.enhanced_persona.resonate_mapping && (
+                                <div className="bg-purple-50 p-3 rounded border border-purple-200">
+                                  <div className="text-xs font-medium text-purple-700 mb-2">RESONATE TAXONOMY MAPPING</div>
+                                  {segment.enhanced_persona.resonate_mapping.primary_categories && segment.enhanced_persona.resonate_mapping.primary_categories.length > 0 && (
+                                    <div className="flex flex-wrap gap-1 mb-2">
+                                      {segment.enhanced_persona.resonate_mapping.primary_categories.map((category, i) => (
+                                        <span key={i} className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">
+                                          {category}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  )}
+                                  {segment.enhanced_persona.resonate_mapping.taxonomy_path && (
+                                    <div className="text-xs text-purple-600 font-mono">
+                                      {segment.enhanced_persona.resonate_mapping.taxonomy_path}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                              
+                              {/* Persona Applications */}
+                              {segment.enhanced_persona.persona_applications && (
+                                <div className="bg-green-50 p-3 rounded border border-green-200">
+                                  <div className="text-xs font-medium text-green-700 mb-2">MARKETING APPLICATIONS</div>
+                                  {segment.enhanced_persona.persona_applications.messaging_themes && segment.enhanced_persona.persona_applications.messaging_themes.length > 0 && (
+                                    <div className="mb-2">
+                                      <div className="text-xs font-medium text-gray-600">Messaging Themes:</div>
+                                      <div className="text-xs text-gray-700">
+                                        {segment.enhanced_persona.persona_applications.messaging_themes.slice(0, 2).join(', ')}
+                                      </div>
+                                    </div>
+                                  )}
+                                  {segment.enhanced_persona.persona_applications.channel_strategy && segment.enhanced_persona.persona_applications.channel_strategy.length > 0 && (
+                                    <div className="text-xs">
+                                      <span className="font-medium text-gray-600">Channels:</span> {segment.enhanced_persona.persona_applications.channel_strategy.slice(0, 3).join(', ')}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          
+                          <div className="mt-4 flex justify-between text-xs">
+                            <span className="text-gray-600">Market Size: ${(segment.size_estimate / 1000000000).toFixed(1)}B</span>
+                            <span className="text-green-600 font-semibold">Growth: {(segment.growth_rate * 100).toFixed(1)}%</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Enhanced Psychographics */}
+                {analysis.market_map.segmentation_by_psychographics && analysis.market_map.segmentation_by_psychographics.length > 0 && (
+                  <div className="mb-8">
+                    <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                      <FaBrain className="mr-2 text-yellow-600" />
+                      Psychographic Personas
+                    </h4>
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {analysis.market_map.segmentation_by_psychographics.map((segment, index) => (
+                        <div key={index} className="bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 rounded-lg border border-yellow-200">
+                          <div className="flex items-center mb-4">
+                            <FaBrain className="text-yellow-600 mr-2" />
+                            <h5 className="font-bold text-gray-900">{segment.name}</h5>
+                          </div>
+                          
+                          <p className="text-sm text-gray-700 mb-4">{segment.description}</p>
+                          
+                          {segment.enhanced_persona && (
+                            <div className="space-y-3">
+                              {/* Values & Motivations */}
+                              {segment.enhanced_persona.psychographics && (
+                                <div className="bg-white p-3 rounded border">
+                                  <div className="text-xs font-medium text-yellow-700 mb-2">VALUES & MOTIVATIONS</div>
+                                  {segment.enhanced_persona.psychographics.values && segment.enhanced_persona.psychographics.values.length > 0 && (
+                                    <div className="mb-2">
+                                      <div className="text-xs font-medium text-gray-600">Core Values:</div>
+                                      <div className="flex flex-wrap gap-1">
+                                        {segment.enhanced_persona.psychographics.values.slice(0, 4).map((value, i) => (
+                                          <span key={i} className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">
+                                            {value}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                  {segment.enhanced_persona.psychographics.motivations && segment.enhanced_persona.psychographics.motivations.length > 0 && (
+                                    <div className="text-xs">
+                                      <span className="font-medium text-gray-600">Motivations:</span> {segment.enhanced_persona.psychographics.motivations.slice(0, 2).join(', ')}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                              
+                              {/* Similar Resonate mapping and applications sections as above */}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <div className="flex items-center mb-2">
+                    <span className="text-blue-600 mr-2">💡</span>
+                    <span className="font-medium text-blue-900">Persona Development Ready</span>
+                  </div>
+                  <p className="text-sm text-blue-700">
+                    This enhanced segmentation data includes detailed demographic, psychographic, and behavioral insights 
+                    mapped to Resonate's 16-category taxonomy. Export the persona data to integrate with Resonate rAI platform 
+                    or use directly for persona development and marketing campaign targeting.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Competitive Benchmarking */}
             {analysis.market_map.competitors && analysis.market_map.competitors.length > 0 && (
               <div className="bg-white rounded-lg shadow-md p-8">

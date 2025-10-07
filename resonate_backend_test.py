@@ -175,10 +175,20 @@ class ResonateAPITester:
     def test_export_personas(self) -> Tuple[bool, str]:
         """Test the new /api/export-personas/{analysis_id} endpoint"""
         if not self.analysis_id:
-            print("No analysis ID available, running market analysis first...")
-            success, _ = self.test_enhanced_market_analysis()
-            if not success:
-                return False, "Failed to get analysis ID for export test"
+            print("No analysis ID available, getting from analysis history...")
+            # Get analysis history to find an existing analysis
+            response = self.session.get(f"{self.api_url}/analysis-history")
+            if response.status_code != 200:
+                return False, f"Failed to get analysis history: {response.status_code}"
+            
+            history_data = response.json()
+            history = history_data.get("history", [])
+            
+            if not history:
+                return False, "No existing analyses found for export test"
+            
+            self.analysis_id = history[0]["id"]
+            print(f"Using analysis ID from history: {self.analysis_id}")
         
         try:
             response = self.session.get(f"{self.api_url}/export-personas/{self.analysis_id}")

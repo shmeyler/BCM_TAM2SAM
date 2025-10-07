@@ -490,7 +490,34 @@ class MarketIntelligenceAgent:
                             "size": [size in dollars],
                             "growth": [growth rate as decimal], 
                             "key_players": ["company1", "company2"],
-                            "behavioral_factors": ["Usage patterns", "Purchase frequency", "Buyer stage", "Engagement level"]
+                            "behavioral_factors": ["Usage patterns", "Purchase frequency", "Buyer stage", "Engagement level"],
+                            "enhanced_persona": {{
+                                "behavioral_patterns": {{
+                                    "purchase_drivers": ["specific triggers that lead to purchase decisions"],
+                                    "media_consumption": ["digital and traditional media consumption patterns"],
+                                    "shopping_preferences": ["preferred shopping journey and touchpoints"],
+                                    "communication_style": ["how they prefer to receive information and interact"],
+                                    "influence_sources": ["who and what influences their decisions"]
+                                }},
+                                "usage_patterns": {{
+                                    "frequency": "usage frequency and timing patterns",
+                                    "context": "when, where, and how they use similar products",
+                                    "engagement_level": "depth of engagement and feature usage",
+                                    "loyalty_indicators": "factors that drive repeat usage and advocacy"
+                                }},
+                                "resonate_mapping": {{
+                                    "primary_categories": ["Consumer Preferences", "Media", "Retail"],
+                                    "attributes": ["behavioral taxonomy paths in Resonate Elements"],
+                                    "taxonomy_path": "example: Consumer Preferences > Shopping Behavior > Research Intensive > High"
+                                }},
+                                "persona_applications": {{
+                                    "messaging_themes": ["behavior-triggered messaging and timing"],
+                                    "content_preferences": ["content aligned with usage context and journey stage"],
+                                    "channel_strategy": ["channels matching behavioral patterns and touchpoints"],
+                                    "pain_points": ["behavioral friction points and usage barriers"],
+                                    "solution_fit": "behavioral alignment and usage optimization opportunities"
+                                }}
+                            }}
                         }}
                     ]{firmographic_json}
                 }},

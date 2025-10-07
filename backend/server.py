@@ -105,8 +105,8 @@ class MarketSegment(BaseModel):
     size_estimate: float
     growth_rate: float
     key_players: List[str]
-    # Enhanced persona data
-    enhanced_persona: Optional[EnhancedPersona] = None
+    # Resonate-ready segment mapping
+    resonate_mapping: Optional[ResonateSegmentMapping] = None
 
 class Competitor(BaseModel):
     name: str

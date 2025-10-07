@@ -465,32 +465,31 @@ class MarketIntelligenceAgent:
                             "growth": [growth rate as decimal], 
                             "key_players": ["company1", "company2"],
                             "behavioral_factors": ["Usage patterns", "Purchase frequency", "Buyer stage", "Engagement level"],
-                            "enhanced_persona": {{
-                                "behavioral_patterns": {{
-                                    "purchase_drivers": ["specific triggers that lead to purchase decisions"],
-                                    "media_consumption": ["digital and traditional media consumption patterns"],
-                                    "shopping_preferences": ["preferred shopping journey and touchpoints"],
-                                    "communication_style": ["how they prefer to receive information and interact"],
-                                    "influence_sources": ["who and what influences their decisions"]
+                            "resonate_mapping": {{
+                                "demographics": {{
+                                    "age_range": "age range (e.g., '25-34', '35-44', '45-54')",
+                                    "gender": "gender composition (e.g., 'Male', 'Female', 'Mixed')", 
+                                    "household_income": "income bracket (e.g., '$50K-$75K', '$75K-$100K', '$100K+')",
+                                    "education": "education level (e.g., 'College Graduate', 'High School', 'Post Graduate')",
+                                    "employment": "employment type (e.g., 'Professional', 'Management', 'Service')"
                                 }},
-                                "usage_patterns": {{
-                                    "frequency": "usage frequency and timing patterns",
-                                    "context": "when, where, and how they use similar products",
-                                    "engagement_level": "depth of engagement and feature usage",
-                                    "loyalty_indicators": "factors that drive repeat usage and advocacy"
+                                "geographics": {{
+                                    "region": "geographic region (e.g., 'Northeast', 'West Coast', 'Midwest')",
+                                    "market_size": "market size (e.g., 'Major Metro', 'Mid-size City', 'Small City')", 
+                                    "geography_type": "geography (e.g., 'Urban', 'Suburban', 'Rural')"
                                 }},
-                                "resonate_mapping": {{
-                                    "primary_categories": ["Consumer Preferences", "Media", "Retail"],
-                                    "attributes": ["behavioral taxonomy paths in Resonate Elements"],
-                                    "taxonomy_path": "example: Consumer Preferences > Shopping Behavior > Research Intensive > High"
+                                "media_usage": {{
+                                    "primary_media": ["media consumption patterns based on behavior"],
+                                    "digital_engagement": "digital usage level (e.g., 'High', 'Medium', 'Low')",
+                                    "content_preferences": ["content types that drive behavior"]
                                 }},
-                                "persona_applications": {{
-                                    "messaging_themes": ["behavior-triggered messaging and timing"],
-                                    "content_preferences": ["content aligned with usage context and journey stage"],
-                                    "channel_strategy": ["channels matching behavioral patterns and touchpoints"],
-                                    "pain_points": ["behavioral friction points and usage barriers"],
-                                    "solution_fit": "behavioral alignment and usage optimization opportunities"
-                                }}
+                                "resonate_taxonomy_paths": [
+                                    "Demographics > Demographics > Identity > Age Group > [age_range]",
+                                    "Demographics > Demographics > SocioEconomic > Household Income > [income_bracket]",
+                                    "Media > Media Consumption > Digital Engagement > [engagement_level]",
+                                    "Consumer Preferences > Shopping Behavior > [behavior_type] > [intensity]"
+                                ],
+                                "mapping_confidence": "confidence level (High, Medium, Low)"
                             }}
                         }}
                     ]{firmographic_json}

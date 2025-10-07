@@ -1459,16 +1459,18 @@ async def export_personas(analysis_id: str):
 
         # Calculate summary statistics
         total_segments = len(personas["demographic_personas"]) + len(personas["psychographic_personas"]) + len(personas["behavioral_personas"])
-        enhanced_count = sum(1 for p in personas["demographic_personas"] + personas["psychographic_personas"] + personas["behavioral_personas"] if p.get("enhanced_persona"))
+        resonate_ready_count = sum(1 for p in personas["demographic_personas"] + personas["psychographic_personas"] + personas["behavioral_personas"] if p.get("resonate_ready_data"))
         
-        all_categories = []
+        # Collect unique taxonomy categories
+        all_taxonomy_paths = []
         for mapping in personas["resonate_taxonomy_mapping"]:
-            all_categories.extend(mapping.get("resonate_categories", []))
+            all_taxonomy_paths.extend(mapping.get("taxonomy_paths", []))
         
         personas["persona_summary"] = {
             "total_segments": total_segments,
-            "personas_with_enhanced_data": enhanced_count,
-            "resonate_categories_covered": list(set(all_categories))
+            "resonate_ready_segments": resonate_ready_count,
+            "total_taxonomy_mappings": len(all_taxonomy_paths),
+            "resonate_integration_ready": resonate_ready_count > 0
         }
 
         return personas

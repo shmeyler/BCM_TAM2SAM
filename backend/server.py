@@ -1015,16 +1015,16 @@ class ComprehensiveAnalysisEngine:
                 ))
             
             for seg in segmentation.get("by_demographics", []):
-                # Process enhanced persona data if available
-                enhanced_persona = None
-                if "enhanced_persona" in seg:
-                    ep_data = seg["enhanced_persona"]
-                    enhanced_persona = EnhancedPersona(
-                        demographics=PersonaDemographics(**ep_data.get("demographics", {})) if "demographics" in ep_data else None,
-                        psychographics=PersonaPsychographics(**ep_data.get("psychographics", {})) if "psychographics" in ep_data else None,
-                        behavioral_patterns=PersonaBehaviorals(**ep_data.get("behavioral_patterns", {})) if "behavioral_patterns" in ep_data else None,
-                        resonate_mapping=ResonateMapping(**ep_data.get("resonate_mapping", {})) if "resonate_mapping" in ep_data else None,
-                        persona_applications=PersonaApplications(**ep_data.get("persona_applications", {})) if "persona_applications" in ep_data else None
+                # Process resonate mapping data if available
+                resonate_mapping = None
+                if "resonate_mapping" in seg:
+                    rm_data = seg["resonate_mapping"]
+                    resonate_mapping = ResonateSegmentMapping(
+                        demographics=ResonateBaseDemographics(**rm_data.get("demographics", {})) if "demographics" in rm_data else None,
+                        geographics=ResonateGeographics(**rm_data.get("geographics", {})) if "geographics" in rm_data else None,
+                        media_usage=ResonateMediaUsage(**rm_data.get("media_usage", {})) if "media_usage" in rm_data else None,
+                        resonate_taxonomy_paths=rm_data.get("resonate_taxonomy_paths", []),
+                        mapping_confidence=rm_data.get("mapping_confidence")
                     )
                 
                 demographic_segments.append(MarketSegment(
@@ -1033,7 +1033,7 @@ class ComprehensiveAnalysisEngine:
                     size_estimate=float(seg.get("size", 1000000000)),
                     growth_rate=float(seg.get("growth", 0.05)),
                     key_players=seg.get("key_players", ["Company A", "Company B"]),
-                    enhanced_persona=enhanced_persona
+                    resonate_mapping=resonate_mapping
                 ))
             
             for seg in segmentation.get("by_psychographics", []):

@@ -1361,6 +1361,127 @@ async def get_analysis(analysis_id: str):
         logging.error(f"Error in get_analysis: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@api_router.get("/export-personas/{analysis_id}")
+async def export_personas(analysis_id: str):
+    """Export enhanced persona data for persona development and Resonate rAI integration"""
+    try:
+        # Get market map from database
+        market_map = await db.market_maps.find_one({"id": analysis_id})
+        if not market_map:
+            raise HTTPException(status_code=404, detail="Analysis not found")
+
+        market_input = await db.market_inputs.find_one({"id": market_map["market_input_id"]})
+        if not market_input:
+            raise HTTPException(status_code=404, detail="Market input not found")
+
+        # Extract personas from all segment types
+        personas = {
+            "analysis_info": {
+                "product_name": market_input["product_name"],
+                "industry": market_input["industry"],
+                "geography": market_input["geography"],
+                "analysis_date": market_map.get("timestamp", ""),
+                "market_size": market_map.get("total_market_size", 0)
+            },
+            "demographic_personas": [],
+            "psychographic_personas": [],
+            "behavioral_personas": [],
+            "resonate_taxonomy_mapping": [],
+            "persona_summary": {
+                "total_segments": 0,
+                "personas_with_enhanced_data": 0,
+                "resonate_categories_covered": []
+            }
+        }
+
+        # Process demographic segments
+        for segment in market_map.get("segmentation_by_demographics", []):
+            persona_data = {
+                "segment_name": segment.get("name"),
+                "description": segment.get("description"),
+                "market_size": segment.get("size_estimate", 0),
+                "growth_rate": segment.get("growth_rate", 0),
+                "enhanced_persona": segment.get("enhanced_persona")
+            }
+            personas["demographic_personas"].append(persona_data)
+            
+            # Extract Resonate mappings
+            if persona_data["enhanced_persona"] and persona_data["enhanced_persona"].get("resonate_mapping"):
+                mapping = persona_data["enhanced_persona"]["resonate_mapping"]
+                personas["resonate_taxonomy_mapping"].append({
+                    "segment_name": segment.get("name"),
+                    "segment_type": "demographic",
+                    "resonate_categories": mapping.get("primary_categories", []),
+                    "resonate_attributes": mapping.get("attributes", []),
+                    "taxonomy_path": mapping.get("taxonomy_path", "")
+                })
+
+        # Process psychographic segments  
+        for segment in market_map.get("segmentation_by_psychographics", []):
+            persona_data = {
+                "segment_name": segment.get("name"),
+                "description": segment.get("description"), 
+                "market_size": segment.get("size_estimate", 0),
+                "growth_rate": segment.get("growth_rate", 0),
+                "enhanced_persona": segment.get("enhanced_persona")
+            }
+            personas["psychographic_personas"].append(persona_data)
+            
+            # Extract Resonate mappings
+            if persona_data["enhanced_persona"] and persona_data["enhanced_persona"].get("resonate_mapping"):
+                mapping = persona_data["enhanced_persona"]["resonate_mapping"]
+                personas["resonate_taxonomy_mapping"].append({
+                    "segment_name": segment.get("name"),
+                    "segment_type": "psychographic", 
+                    "resonate_categories": mapping.get("primary_categories", []),
+                    "resonate_attributes": mapping.get("attributes", []),
+                    "taxonomy_path": mapping.get("taxonomy_path", "")
+                })
+
+        # Process behavioral segments
+        for segment in market_map.get("segmentation_by_behavioral", []):
+            persona_data = {
+                "segment_name": segment.get("name"),
+                "description": segment.get("description"),
+                "market_size": segment.get("size_estimate", 0), 
+                "growth_rate": segment.get("growth_rate", 0),
+                "enhanced_persona": segment.get("enhanced_persona")
+            }
+            personas["behavioral_personas"].append(persona_data)
+            
+            # Extract Resonate mappings
+            if persona_data["enhanced_persona"] and persona_data["enhanced_persona"].get("resonate_mapping"):
+                mapping = persona_data["enhanced_persona"]["resonate_mapping"]
+                personas["resonate_taxonomy_mapping"].append({
+                    "segment_name": segment.get("name"),
+                    "segment_type": "behavioral",
+                    "resonate_categories": mapping.get("primary_categories", []),
+                    "resonate_attributes": mapping.get("attributes", []),
+                    "taxonomy_path": mapping.get("taxonomy_path", "")
+                })
+
+        # Calculate summary statistics
+        total_segments = len(personas["demographic_personas"]) + len(personas["psychographic_personas"]) + len(personas["behavioral_personas"])
+        enhanced_count = sum(1 for p in personas["demographic_personas"] + personas["psychographic_personas"] + personas["behavioral_personas"] if p.get("enhanced_persona"))
+        
+        all_categories = []
+        for mapping in personas["resonate_taxonomy_mapping"]:
+            all_categories.extend(mapping.get("resonate_categories", []))
+        
+        personas["persona_summary"] = {
+            "total_segments": total_segments,
+            "personas_with_enhanced_data": enhanced_count,
+            "resonate_categories_covered": list(set(all_categories))
+        }
+
+        return personas
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Error in export_personas: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @api_router.get("/analysis-history")
 async def get_analysis_history():
     try:

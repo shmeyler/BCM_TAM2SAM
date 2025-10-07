@@ -1149,10 +1149,21 @@ async def get_analysis(analysis_id: str):
         if not market_input:
             raise HTTPException(status_code=404, detail="Market input not found")
 
+        # Handle backward compatibility for older reports missing new fields
+        market_map_data = dict(market_map)
+        
+        # Add default values for missing fields in older reports
+        if "analysis_perspective" not in market_map_data:
+            market_map_data["analysis_perspective"] = "new_entrant"
+        if "brand_position" not in market_map_data:
+            market_map_data["brand_position"] = None
+        if "segmentation_by_firmographics" not in market_map_data:
+            market_map_data["segmentation_by_firmographics"] = []
+        
         # Recreate analysis object
         analysis = MarketAnalysis(
             market_input=MarketInput(**market_input),
-            market_map=MarketMap(**market_map)
+            market_map=MarketMap(**market_map_data)
         )
 
         # Generate visual map using the existing segmentation data

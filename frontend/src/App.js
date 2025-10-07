@@ -172,6 +172,8 @@ const MarketMapApp = () => {
   });
   const [analysis, setAnalysis] = useState(null);
   const [history, setHistory] = useState([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [processingMessage, setProcessingMessage] = useState('');
 
   // Check authentication on mount and handle OAuth redirect
   useEffect(() => {

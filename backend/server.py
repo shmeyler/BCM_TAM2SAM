@@ -430,33 +430,30 @@ class MarketIntelligenceAgent:
                             "growth": [growth rate as decimal],
                             "key_players": ["company1", "company2"],
                             "psychographic_factors": ["Lifestyle", "Values", "Attitudes", "Interests"],
-                            "enhanced_persona": {{
-                                "psychographics": {{
-                                    "values": ["primary values (innovation, security, sustainability, etc.)"],
-                                    "motivations": ["core motivational drivers and aspirations"],
-                                    "lifestyle": "detailed lifestyle description and preferences",
-                                    "risk_tolerance": "risk appetite and decision-making style",
-                                    "environmental_consciousness": "sustainability and social responsibility attitudes"
+                            "resonate_mapping": {{
+                                "demographics": {{
+                                    "age_range": "age range (e.g., '25-34', '35-44', '45-54')",
+                                    "gender": "gender mix (e.g., 'Male', 'Female', 'Mixed')", 
+                                    "household_income": "income level (e.g., '$50K-$75K', '$75K-$100K', '$100K+')",
+                                    "education": "education (e.g., 'College Graduate', 'High School', 'Post Graduate')",
+                                    "employment": "job category (e.g., 'Professional', 'Management', 'Creative')"
                                 }},
-                                "behavioral_patterns": {{
-                                    "purchase_drivers": ["emotional and rational purchase triggers"],
-                                    "media_consumption": ["content types, platforms, and consumption habits"],
-                                    "shopping_preferences": ["research behavior, channel preferences, timing"],
-                                    "communication_style": ["preferred tone, format, and interaction style"],
-                                    "influence_sources": ["trusted sources and social influence patterns"]
+                                "geographics": {{
+                                    "region": "region (e.g., 'Northeast', 'West Coast', 'Midwest')",
+                                    "market_size": "market type (e.g., 'Major Metro', 'Mid-size City')", 
+                                    "geography_type": "area (e.g., 'Urban', 'Suburban')"
                                 }},
-                                "resonate_mapping": {{
-                                    "primary_categories": ["Values & Motivations", "Consumer Preferences", "Media"],
-                                    "attributes": ["specific Resonate Elements paths for values and lifestyle"],
-                                    "taxonomy_path": "example: Values & Motivations > Environmental > Sustainability > High Importance"
+                                "media_usage": {{
+                                    "primary_media": ["media channels based on psychographic profile"],
+                                    "digital_engagement": "engagement level (e.g., 'High', 'Medium', 'Low')",
+                                    "content_preferences": ["content aligned with values and lifestyle"]
                                 }},
-                                "persona_applications": {{
-                                    "messaging_themes": ["values-based messaging and emotional appeals"],
-                                    "content_preferences": ["content formats that resonate with lifestyle"],
-                                    "channel_strategy": ["media channels aligned with values and habits"],
-                                    "pain_points": ["lifestyle and value-based frustrations"],
-                                    "solution_fit": "alignment assessment with values and lifestyle preferences"
-                                }}
+                                "resonate_taxonomy_paths": [
+                                    "Demographics > Demographics > Identity > Age Group > [age_range]",
+                                    "Demographics > Demographics > SocioEconomic > Household Income > [income_bracket]",
+                                    "Media > Media Consumption > Digital Engagement > [engagement_level]"
+                                ],
+                                "mapping_confidence": "mapping confidence (High, Medium, Low)"
                             }}
                         }}
                     ],

@@ -394,41 +394,31 @@ class MarketIntelligenceAgent:
                             "growth": [growth rate as decimal],
                             "key_players": ["company1", "company2"],
                             "demographic_factors": ["Age range", "Income level", "Education", "Occupation"],
-                            "enhanced_persona": {{
+                            "resonate_mapping": {{
                                 "demographics": {{
-                                    "age_range": "specific age range (e.g., 25-34)",
-                                    "generation": "generational cohort (e.g., Millennial, Gen Z)",
-                                    "income_bracket": "income range with purchasing power context",
-                                    "education": "education level and professional background",
-                                    "location_type": "urban/suburban/rural with lifestyle implications",
-                                    "life_stage": "life stage indicators (single, married, parents, etc.)"
+                                    "age_range": "specific age range for Resonate (e.g., '25-34', '35-44', '45-54')",
+                                    "gender": "gender composition (e.g., 'Male', 'Female', 'Mixed')", 
+                                    "household_income": "household income bracket (e.g., '$50K-$75K', '$75K-$100K', '$100K+')",
+                                    "education": "education level (e.g., 'College Graduate', 'High School', 'Post Graduate')",
+                                    "employment": "employment category (e.g., 'Professional', 'Management', 'Service', 'Retired')"
                                 }},
-                                "psychographics": {{
-                                    "values": ["core values and motivations"],
-                                    "motivations": ["primary motivational drivers"],
-                                    "lifestyle": "lifestyle description",
-                                    "risk_tolerance": "risk tolerance level",
-                                    "environmental_consciousness": "sustainability attitudes"
+                                "geographics": {{
+                                    "region": "geographic region (e.g., 'Northeast', 'Southeast', 'West Coast', 'Midwest')",
+                                    "market_size": "market type (e.g., 'Major Metro', 'Mid-size City', 'Small City', 'Rural')", 
+                                    "geography_type": "area type (e.g., 'Urban', 'Suburban', 'Rural')"
                                 }},
-                                "behavioral_patterns": {{
-                                    "purchase_drivers": ["key purchase decision factors"],
-                                    "media_consumption": ["preferred media channels and content types"],
-                                    "shopping_preferences": ["preferred shopping channels and methods"],
-                                    "communication_style": "communication preferences",
-                                    "influence_sources": ["sources of influence and recommendations"]
+                                "media_usage": {{
+                                    "primary_media": ["main media channels (e.g., 'Social Media', 'TV', 'Digital', 'Radio', 'Print')"],
+                                    "digital_engagement": "digital engagement level (e.g., 'High', 'Medium', 'Low')",
+                                    "content_preferences": ["content types (e.g., 'Video', 'Articles', 'Podcasts', 'Social Content')"]
                                 }},
-                                "resonate_mapping": {{
-                                    "primary_categories": ["relevant Resonate Elements categories"],
-                                    "attributes": ["specific Resonate taxonomy paths"],
-                                    "taxonomy_path": "example: Demographics > Demographics > Identity > Age Group > 25-34"
-                                }},
-                                "persona_applications": {{
-                                    "messaging_themes": ["key messaging themes for this persona"],
-                                    "content_preferences": ["preferred content types and formats"],
-                                    "channel_strategy": ["recommended marketing channels"],
-                                    "pain_points": ["specific pain points and challenges"],
-                                    "solution_fit": "assessment of how well the product fits this persona"
-                                }}
+                                "resonate_taxonomy_paths": [
+                                    "Demographics > Demographics > Identity > Age Group > [age_range]",
+                                    "Demographics > Demographics > Identity > Gender > [gender]", 
+                                    "Demographics > Demographics > SocioEconomic > Household Income > [income_bracket]",
+                                    "Demographics > Demographics > SocioEconomic > Education > [education_level]"
+                                ],
+                                "mapping_confidence": "confidence level for Resonate mapping (High, Medium, Low)"
                             }}
                         }}
                     ],

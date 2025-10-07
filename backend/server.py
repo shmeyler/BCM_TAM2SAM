@@ -1399,46 +1399,62 @@ async def export_personas(analysis_id: str):
 
         # Process psychographic segments  
         for segment in market_map.get("segmentation_by_psychographics", []):
+            resonate_mapping = segment.get("resonate_mapping", {})
             persona_data = {
                 "segment_name": segment.get("name"),
                 "description": segment.get("description"), 
                 "market_size": segment.get("size_estimate", 0),
                 "growth_rate": segment.get("growth_rate", 0),
-                "enhanced_persona": segment.get("enhanced_persona")
+                "resonate_ready_data": {
+                    "demographics": resonate_mapping.get("demographics", {}),
+                    "geographics": resonate_mapping.get("geographics", {}),
+                    "media_usage": resonate_mapping.get("media_usage", {}),
+                    "taxonomy_paths": resonate_mapping.get("resonate_taxonomy_paths", []),
+                    "confidence": resonate_mapping.get("mapping_confidence", "Medium")
+                }
             }
             personas["psychographic_personas"].append(persona_data)
             
             # Extract Resonate mappings
-            if persona_data["enhanced_persona"] and persona_data["enhanced_persona"].get("resonate_mapping"):
-                mapping = persona_data["enhanced_persona"]["resonate_mapping"]
+            if resonate_mapping:
                 personas["resonate_taxonomy_mapping"].append({
                     "segment_name": segment.get("name"),
                     "segment_type": "psychographic", 
-                    "resonate_categories": mapping.get("primary_categories", []),
-                    "resonate_attributes": mapping.get("attributes", []),
-                    "taxonomy_path": mapping.get("taxonomy_path", "")
+                    "demographics": resonate_mapping.get("demographics", {}),
+                    "geographics": resonate_mapping.get("geographics", {}),
+                    "media_usage": resonate_mapping.get("media_usage", {}),
+                    "taxonomy_paths": resonate_mapping.get("resonate_taxonomy_paths", []),
+                    "confidence": resonate_mapping.get("mapping_confidence", "Medium")
                 })
 
         # Process behavioral segments
         for segment in market_map.get("segmentation_by_behavioral", []):
+            resonate_mapping = segment.get("resonate_mapping", {})
             persona_data = {
                 "segment_name": segment.get("name"),
                 "description": segment.get("description"),
                 "market_size": segment.get("size_estimate", 0), 
                 "growth_rate": segment.get("growth_rate", 0),
-                "enhanced_persona": segment.get("enhanced_persona")
+                "resonate_ready_data": {
+                    "demographics": resonate_mapping.get("demographics", {}),
+                    "geographics": resonate_mapping.get("geographics", {}),
+                    "media_usage": resonate_mapping.get("media_usage", {}),
+                    "taxonomy_paths": resonate_mapping.get("resonate_taxonomy_paths", []),
+                    "confidence": resonate_mapping.get("mapping_confidence", "Medium")
+                }
             }
             personas["behavioral_personas"].append(persona_data)
             
             # Extract Resonate mappings
-            if persona_data["enhanced_persona"] and persona_data["enhanced_persona"].get("resonate_mapping"):
-                mapping = persona_data["enhanced_persona"]["resonate_mapping"]
+            if resonate_mapping:
                 personas["resonate_taxonomy_mapping"].append({
                     "segment_name": segment.get("name"),
                     "segment_type": "behavioral",
-                    "resonate_categories": mapping.get("primary_categories", []),
-                    "resonate_attributes": mapping.get("attributes", []),
-                    "taxonomy_path": mapping.get("taxonomy_path", "")
+                    "demographics": resonate_mapping.get("demographics", {}),
+                    "geographics": resonate_mapping.get("geographics", {}),
+                    "media_usage": resonate_mapping.get("media_usage", {}),
+                    "taxonomy_paths": resonate_mapping.get("resonate_taxonomy_paths", []),
+                    "confidence": resonate_mapping.get("mapping_confidence", "Medium")
                 })
 
         # Calculate summary statistics

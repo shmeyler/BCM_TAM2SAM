@@ -71,12 +71,55 @@ class MarketInput(BaseModel):
     output_format: str = "excel"
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
+class PersonaDemographics(BaseModel):
+    age_range: Optional[str] = None
+    generation: Optional[str] = None
+    income_bracket: Optional[str] = None
+    education: Optional[str] = None
+    location_type: Optional[str] = None
+    life_stage: Optional[str] = None
+
+class PersonaPsychographics(BaseModel):
+    values: List[str] = []
+    motivations: List[str] = []
+    lifestyle: Optional[str] = None
+    risk_tolerance: Optional[str] = None
+    environmental_consciousness: Optional[str] = None
+
+class PersonaBehaviorals(BaseModel):
+    purchase_drivers: List[str] = []
+    media_consumption: List[str] = []
+    shopping_preferences: List[str] = []
+    communication_style: Optional[str] = None
+    influence_sources: List[str] = []
+
+class ResonateMapping(BaseModel):
+    primary_categories: List[str] = []
+    attributes: List[str] = []
+    taxonomy_path: Optional[str] = None
+
+class PersonaApplications(BaseModel):
+    messaging_themes: List[str] = []
+    content_preferences: List[str] = []
+    channel_strategy: List[str] = []
+    pain_points: List[str] = []
+    solution_fit: Optional[str] = None
+
+class EnhancedPersona(BaseModel):
+    demographics: Optional[PersonaDemographics] = None
+    psychographics: Optional[PersonaPsychographics] = None
+    behavioral_patterns: Optional[PersonaBehaviorals] = None
+    resonate_mapping: Optional[ResonateMapping] = None
+    persona_applications: Optional[PersonaApplications] = None
+
 class MarketSegment(BaseModel):
     name: str
     description: str
     size_estimate: float
     growth_rate: float
     key_players: List[str]
+    # Enhanced persona data
+    enhanced_persona: Optional[EnhancedPersona] = None
 
 class Competitor(BaseModel):
     name: str

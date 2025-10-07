@@ -1086,12 +1086,25 @@ class ComprehensiveAnalysisEngine:
                 ))
             
             for seg in segmentation.get("by_behavioral", []):
+                # Process enhanced persona data if available
+                enhanced_persona = None
+                if "enhanced_persona" in seg:
+                    ep_data = seg["enhanced_persona"]
+                    enhanced_persona = EnhancedPersona(
+                        demographics=PersonaDemographics(**ep_data.get("demographics", {})) if "demographics" in ep_data else None,
+                        psychographics=PersonaPsychographics(**ep_data.get("psychographics", {})) if "psychographics" in ep_data else None,
+                        behavioral_patterns=PersonaBehaviorals(**ep_data.get("behavioral_patterns", {})) if "behavioral_patterns" in ep_data else None,
+                        resonate_mapping=ResonateMapping(**ep_data.get("resonate_mapping", {})) if "resonate_mapping" in ep_data else None,
+                        persona_applications=PersonaApplications(**ep_data.get("persona_applications", {})) if "persona_applications" in ep_data else None
+                    )
+                
                 behavioral_segments.append(MarketSegment(
                     name=seg.get("name", "Behavioral Segment"),
                     description=seg.get("description", "Behavioral segment"),
                     size_estimate=float(seg.get("size", 1000000000)),
                     growth_rate=float(seg.get("growth", 0.05)),
-                    key_players=seg.get("key_players", ["Company A", "Company B"])
+                    key_players=seg.get("key_players", ["Company A", "Company B"]),
+                    enhanced_persona=enhanced_persona
                 ))
             
             for seg in segmentation.get("by_firmographics", []):

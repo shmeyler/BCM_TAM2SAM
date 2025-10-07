@@ -71,46 +71,33 @@ class MarketInput(BaseModel):
     output_format: str = "excel"
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
-class PersonaDemographics(BaseModel):
-    age_range: Optional[str] = None
-    generation: Optional[str] = None
-    income_bracket: Optional[str] = None
-    education: Optional[str] = None
-    location_type: Optional[str] = None
-    life_stage: Optional[str] = None
+# Simplified Resonate-focused persona data models
+class ResonateBaseDemographics(BaseModel):
+    age_range: Optional[str] = None  # e.g., "25-34", "35-44"
+    gender: Optional[str] = None     # e.g., "Male", "Female", "Mixed"
+    household_income: Optional[str] = None  # e.g., "$50K-$75K", "$75K-$100K"
+    education: Optional[str] = None  # e.g., "College Graduate", "High School"
+    employment: Optional[str] = None # e.g., "Professional", "Management", "Service"
 
-class PersonaPsychographics(BaseModel):
-    values: List[str] = []
-    motivations: List[str] = []
-    lifestyle: Optional[str] = None
-    risk_tolerance: Optional[str] = None
-    environmental_consciousness: Optional[str] = None
+class ResonateGeographics(BaseModel):
+    region: Optional[str] = None     # e.g., "Northeast", "West Coast"
+    market_size: Optional[str] = None # e.g., "Major Metro", "Small City"
+    geography_type: Optional[str] = None # e.g., "Urban", "Suburban", "Rural"
 
-class PersonaBehaviorals(BaseModel):
-    purchase_drivers: List[str] = []
-    media_consumption: List[str] = []
-    shopping_preferences: List[str] = []
-    communication_style: Optional[str] = None
-    influence_sources: List[str] = []
+class ResonateMediaUsage(BaseModel):
+    primary_media: List[str] = []    # e.g., ["Social Media", "TV", "Digital"]
+    digital_engagement: Optional[str] = None # e.g., "High", "Medium", "Low"
+    content_preferences: List[str] = [] # e.g., ["Video", "Articles", "Podcasts"]
 
-class ResonateMapping(BaseModel):
-    primary_categories: List[str] = []
-    attributes: List[str] = []
-    taxonomy_path: Optional[str] = None
-
-class PersonaApplications(BaseModel):
-    messaging_themes: List[str] = []
-    content_preferences: List[str] = []
-    channel_strategy: List[str] = []
-    pain_points: List[str] = []
-    solution_fit: Optional[str] = None
-
-class EnhancedPersona(BaseModel):
-    demographics: Optional[PersonaDemographics] = None
-    psychographics: Optional[PersonaPsychographics] = None
-    behavioral_patterns: Optional[PersonaBehaviorals] = None
-    resonate_mapping: Optional[ResonateMapping] = None
-    persona_applications: Optional[PersonaApplications] = None
+class ResonateSegmentMapping(BaseModel):
+    # Core Resonate taxonomy categories this segment maps to
+    demographics: Optional[ResonateBaseDemographics] = None
+    geographics: Optional[ResonateGeographics] = None  
+    media_usage: Optional[ResonateMediaUsage] = None
+    # Direct taxonomy paths for easy Resonate entry
+    resonate_taxonomy_paths: List[str] = []
+    # Confidence level for mapping accuracy
+    mapping_confidence: Optional[str] = None
 
 class MarketSegment(BaseModel):
     name: str

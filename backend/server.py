@@ -1369,7 +1369,62 @@ async def export_personas(analysis_id: str):
 
         # Process demographic segments
         for segment in market_map.get("segmentation_by_demographics", []):
-            resonate_mapping = segment.get("resonate_mapping", {})
+            resonate_mapping = segment.get("resonate_mapping", {}) or {}
+            
+            # For older analyses without enhanced data, provide basic inference
+            if not resonate_mapping or not any(resonate_mapping.values()):
+                # Generate basic demographic data from segment description and name
+                segment_desc = segment.get("description", "").lower()
+                segment_name = segment.get("name", "").lower()
+                
+                # Infer basic demographics from description
+                age_range = "25-54"  # Default professional range
+                if "young" in segment_desc or "millennial" in segment_desc:
+                    age_range = "25-34"
+                elif "senior" in segment_desc or "mature" in segment_desc:
+                    age_range = "45-64"
+                
+                income_bracket = "$50K-$100K"  # Default middle class
+                if "high income" in segment_desc or "affluent" in segment_desc or "executive" in segment_desc:
+                    income_bracket = "$100K+"
+                elif "budget" in segment_desc or "cost-conscious" in segment_desc:
+                    income_bracket = "$25K-$50K"
+                
+                education = "College Graduate"
+                if "professional" in segment_desc or "corporate" in segment_desc:
+                    education = "College Graduate"
+                
+                employment = "Professional"
+                if "manager" in segment_desc or "executive" in segment_desc:
+                    employment = "Management"
+                
+                # Create basic resonate mapping for legacy data
+                resonate_mapping = {
+                    "demographics": {
+                        "age_range": age_range,
+                        "gender": "Mixed",
+                        "household_income": income_bracket,
+                        "education": education,
+                        "employment": employment
+                    },
+                    "geographics": {
+                        "region": market_input.get("geography", "United States"),
+                        "market_size": "Major Metro",
+                        "geography_type": "Urban"
+                    },
+                    "media_usage": {
+                        "primary_media": ["Digital", "Social Media"],
+                        "digital_engagement": "High",
+                        "content_preferences": ["Professional Content", "Industry News"]
+                    },
+                    "resonate_taxonomy_paths": [
+                        f"Demographics > Demographics > Identity > Age Group > {age_range}",
+                        f"Demographics > Demographics > SocioEconomic > Household Income > {income_bracket}",
+                        f"Demographics > Demographics > SocioEconomic > Education > {education}"
+                    ],
+                    "mapping_confidence": "Medium (Inferred)"
+                }
+            
             persona_data = {
                 "segment_name": segment.get("name"),
                 "description": segment.get("description"),

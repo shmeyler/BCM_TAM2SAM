@@ -452,7 +452,35 @@ class MarketIntelligenceAgent:
                             "size": [size in dollars], 
                             "growth": [growth rate as decimal],
                             "key_players": ["company1", "company2"],
-                            "psychographic_factors": ["Lifestyle", "Values", "Attitudes", "Interests"]
+                            "psychographic_factors": ["Lifestyle", "Values", "Attitudes", "Interests"],
+                            "enhanced_persona": {{
+                                "psychographics": {{
+                                    "values": ["primary values (innovation, security, sustainability, etc.)"],
+                                    "motivations": ["core motivational drivers and aspirations"],
+                                    "lifestyle": "detailed lifestyle description and preferences",
+                                    "risk_tolerance": "risk appetite and decision-making style",
+                                    "environmental_consciousness": "sustainability and social responsibility attitudes"
+                                }},
+                                "behavioral_patterns": {{
+                                    "purchase_drivers": ["emotional and rational purchase triggers"],
+                                    "media_consumption": ["content types, platforms, and consumption habits"],
+                                    "shopping_preferences": ["research behavior, channel preferences, timing"],
+                                    "communication_style": ["preferred tone, format, and interaction style"],
+                                    "influence_sources": ["trusted sources and social influence patterns"]
+                                }},
+                                "resonate_mapping": {{
+                                    "primary_categories": ["Values & Motivations", "Consumer Preferences", "Media"],
+                                    "attributes": ["specific Resonate Elements paths for values and lifestyle"],
+                                    "taxonomy_path": "example: Values & Motivations > Environmental > Sustainability > High Importance"
+                                }},
+                                "persona_applications": {{
+                                    "messaging_themes": ["values-based messaging and emotional appeals"],
+                                    "content_preferences": ["content formats that resonate with lifestyle"],
+                                    "channel_strategy": ["media channels aligned with values and habits"],
+                                    "pain_points": ["lifestyle and value-based frustrations"],
+                                    "solution_fit": "alignment assessment with values and lifestyle preferences"
+                                }}
+                            }}
                         }}
                     ],
                     "by_behavioral": [

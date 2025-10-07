@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Resonate Export</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .btn { background: #6366f1; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .btn:hover { background: #4f46e5; }
+        .result { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background: #f0f9ff; border-color: #0ea5e9; }
+        .error { background: #fef2f2; border-color: #ef4444; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 5px; overflow-x: auto; max-height: 400px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Resonate rAI Export Tester</h1>
+        
+        <div style="background: #f0f9ff; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h3>📋 Instructions:</h3>
+            <ol>
+                <li><strong>Test Existing Analysis</strong>: Click "Test Export" to test with current analysis</li>
+                <li><strong>View Results</strong>: Check demographics, geographics, and media usage data</li>
+                <li><strong>Download JSON</strong>: Use the main app's "Export for Resonate rAI" button</li>
+                <li><strong>For Best Results</strong>: Run a new market analysis to get AI-generated Resonate data</li>
+            </ol>
+        </div>
+
+        <button class="btn" onclick="testExport()">🧪 Test Resonate Export</button>
+        <button class="btn" onclick="getAnalysisHistory()">📋 Get Analysis History</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'https://market-insights-60.preview.emergentagent.com/api';
+        
+        async function testExport() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="result">🔄 Testing Resonate export...</div>';
+            
+            try {
+                // Get latest analysis
+                const historyResponse = await fetch(`${BACKEND_URL}/analysis-history`, {
+                    credentials: 'include'
+                });
+                
+                if (!historyResponse.ok) {
+                    throw new Error(`History request failed: ${historyResponse.status}`);
+                }
+                
+                const history = await historyResponse.json();
+                if (!history.history || history.history.length === 0) {
+                    throw new Error('No analyses found');
+                }
+                
+                const latestAnalysis = history.history[0];
+                
+                // Test export
+                const exportResponse = await fetch(`${BACKEND_URL}/export-personas/${latestAnalysis.id}`, {
+                    credentials: 'include'
+                });
+                
+                if (!exportResponse.ok) {
+                    throw new Error(`Export request failed: ${exportResponse.status}`);
+                }
+                
+                const exportData = await exportResponse.json();
+                
+                // Display results
+                const demo = exportData.demographic_personas[0] || {};
+                const resonateData = demo.resonate_ready_data || {};
+                
+                resultsDiv.innerHTML = `
+                    <div class="result success">
+                        <h3>✅ Export Test Successful</h3>
+                        <p><strong>Analysis:</strong> ${latestAnalysis.product_name} (${latestAnalysis.timestamp.split('T')[0]})</p>
+                        <p><strong>Total Segments:</strong> ${exportData.persona_summary.total_segments}</p>
+                        <p><strong>Resonate Ready:</strong> ${exportData.persona_summary.resonate_ready_segments}</p>
+                    </div>
+                    
+                    <div class="result">
+                        <h4>📊 Sample Demographic Persona: ${demo.segment_name}</h4>
+                        <p><strong>Description:</strong> ${demo.description}</p>
+                        
+                        <h5>👥 Demographics:</h5>
+                        <ul>
+                            <li><strong>Age Range:</strong> ${resonateData.demographics?.age_range || 'N/A'}</li>
+                            <li><strong>Gender:</strong> ${resonateData.demographics?.gender || 'N/A'}</li>
+                            <li><strong>Household Income:</strong> ${resonateData.demographics?.household_income || 'N/A'}</li>
+                            <li><strong>Education:</strong> ${resonateData.demographics?.education || 'N/A'}</li>
+                            <li><strong>Employment:</strong> ${resonateData.demographics?.employment || 'N/A'}</li>
+                        </ul>
+                        
+                        <h5>🗺️ Geographics:</h5>
+                        <ul>
+                            <li><strong>Region:</strong> ${resonateData.geographics?.region || 'N/A'}</li>
+                            <li><strong>Market Size:</strong> ${resonateData.geographics?.market_size || 'N/A'}</li>
+                            <li><strong>Geography Type:</strong> ${resonateData.geographics?.geography_type || 'N/A'}</li>
+                        </ul>
+                        
+                        <h5>📺 Media Usage:</h5>
+                        <ul>
+                            <li><strong>Primary Media:</strong> ${resonateData.media_usage?.primary_media?.join(', ') || 'N/A'}</li>
+                            <li><strong>Digital Engagement:</strong> ${resonateData.media_usage?.digital_engagement || 'N/A'}</li>
+                            <li><strong>Content Preferences:</strong> ${resonateData.media_usage?.content_preferences?.join(', ') || 'N/A'}</li>
+                        </ul>
+                        
+                        <h5>🎯 Resonate Taxonomy:</h5>
+                        <ul>
+                            ${(resonateData.taxonomy_paths || []).map(path => `<li><code>${path}</code></li>`).join('')}
+                        </ul>
+                        
+                        <p><strong>Confidence:</strong> ${resonateData.confidence}</p>
+                    </div>
+                    
+                    <div class="result">
+                        <h4>💾 Full Export Data (First 1000 chars)</h4>
+                        <pre>${JSON.stringify(exportData, null, 2).substring(0, 1000)}...</pre>
+                    </div>
+                `;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="result error">
+                        <h3>❌ Export Test Failed</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p>Make sure you're logged into the main application first.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        async function getAnalysisHistory() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="result">🔄 Getting analysis history...</div>';
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/analysis-history`, {
+                    credentials: 'include'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Request failed: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                resultsDiv.innerHTML = `
+                    <div class="result success">
+                        <h3>📋 Analysis History (${data.history.length} analyses)</h3>
+                        ${data.history.slice(0, 5).map(analysis => `
+                            <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                                <strong>${analysis.product_name}</strong><br>
+                                <small>ID: ${analysis.id}</small><br>
+                                <small>Date: ${analysis.timestamp.split('T')[0]}</small>
+                                <button class="btn" onclick="testSpecificExport('${analysis.id}', '${analysis.product_name}')" style="margin-left: 0; margin-top: 5px;">
+                                    Test Export
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="result error">
+                        <h3>❌ Failed to get history</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        async function testSpecificExport(analysisId, productName) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `<div class="result">🔄 Testing export for ${productName}...</div>`;
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/export-personas/${analysisId}`, {
+                    credentials: 'include'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Export failed: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                resultsDiv.innerHTML = `
+                    <div class="result success">
+                        <h3>✅ Export Test for "${productName}"</h3>
+                        <p><strong>Demographics:</strong> ${data.demographic_personas.length} segments</p>
+                        <p><strong>Psychographics:</strong> ${data.psychographic_personas.length} segments</p>
+                        <p><strong>Behavioral:</strong> ${data.behavioral_personas.length} segments</p>
+                        <p><strong>Resonate Ready:</strong> ${data.persona_summary.resonate_ready_segments}/${data.persona_summary.total_segments}</p>
+                        
+                        ${data.demographic_personas[0] ? `
+                            <h4>Sample: ${data.demographic_personas[0].segment_name}</h4>
+                            <p><strong>Demographics:</strong> ${JSON.stringify(data.demographic_personas[0].resonate_ready_data.demographics)}</p>
+                            <p><strong>Geographics:</strong> ${JSON.stringify(data.demographic_personas[0].resonate_ready_data.geographics)}</p>
+                        ` : ''}
+                    </div>
+                `;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="result error">
+                        <h3>❌ Export Failed</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

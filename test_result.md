@@ -288,6 +288,18 @@ backend:
         agent: "testing"
         comment: "PERSPECTIVE ANALYSIS FIX FULLY VALIDATED: Tested both existing brand and new entrant scenarios successfully. Existing brand analysis working correctly: 'Bloomberg Law Platform' returns analysis_perspective='existing_brand' with proper brand_position field populated ('Bloomberg Law is the #3 premium legal-research SaaS...'). New entrant analysis working correctly: 'New Product' returns analysis_perspective='new_entrant' with brand_position=null (correct behavior). Brand detection logic properly identifies specific brand names vs generic terms ('new product', 'startup', 'new company'). Both Together AI integration and fallback analysis support perspective-based analysis correctly."
 
+  - task: "Backward Compatibility Fix for Older Reports"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "BACKWARD COMPATIBILITY FIX FULLY VALIDATED: Comprehensive testing confirms the fix for 'Error loading analysis' when users tried to load older reports is working perfectly. TESTED ALL REQUIREMENTS: (1) ✅ Loading multiple analysis IDs from history - successfully loaded all 5 different analysis IDs from analysis history, (2) ✅ Default values for missing fields - all older analyses now have proper default values: analysis_perspective='new_entrant', brand_position=None, segmentation_by_firmographics=[], (3) ✅ Both new and old analyses retrieval - retrieved 10 analyses successfully with proper distribution (8 existing_brand, 2 new_entrant), (4) ✅ Analysis history endpoint - working correctly with 10 entries, (5) ✅ Visual map generation compatibility - generated visual maps successfully with proper firmographic segment handling for both old and new data structures, (6) ✅ Export functionality compatibility - all exports work correctly with backward compatibility. CRITICAL SUCCESS: Modified get_analysis endpoint in server.py handles missing fields gracefully by adding default values in lines 1156-1161. Visual map generation updated to handle missing firmographics data. No more 'Error loading analysis' errors for historical reports."
+
 metadata:
   created_by: "testing_agent"
   version: "1.0"

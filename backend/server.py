@@ -1224,31 +1224,47 @@ async def root():
 @api_router.post("/analyze-market", response_model=MarketAnalysis)
 async def analyze_market(market_input: MarketInput, user: User = Depends(require_auth)):
     try:
+        logger.info(f"Starting market analysis for: {market_input.product_name}")
+        
         # Step 1: Comprehensive AI Market Intelligence
+        logger.info("Step 1: Starting AI market intelligence analysis...")
         ai_analysis = await MarketIntelligenceAgent.analyze_market_landscape(market_input)
+        logger.info("Step 1: AI analysis completed successfully")
 
         # Step 2: Generate Market Map
+        logger.info("Step 2: Starting market map generation...")
         market_map = await ComprehensiveAnalysisEngine.generate_market_map(market_input, ai_analysis)
+        logger.info("Step 2: Market map generation completed successfully")
 
         # Step 3: Generate Visual Map
+        logger.info("Step 3: Starting visual map generation...")
         visual_map = VisualMapGenerator.generate_visual_market_map(ai_analysis, market_input.product_name)
+        logger.info("Step 3: Visual map generation completed successfully")
 
-        # Save to database
+        # Step 4: Save to database
+        logger.info("Step 4: Saving data to database...")
         await db.market_inputs.insert_one(market_input.dict())
+        logger.info("Step 4a: Market input saved to database")
+        
         await db.market_maps.insert_one(market_map.dict())
+        logger.info("Step 4b: Market map saved to database")
 
-        # Generate analysis
+        # Step 5: Generate final analysis
+        logger.info("Step 5: Generating final analysis response...")
         analysis = MarketAnalysis(
             market_input=market_input,
             market_map=market_map,
             visual_map=visual_map
         )
+        logger.info("Step 5: Final analysis generated successfully")
 
+        logger.info(f"Market analysis completed successfully for: {market_input.product_name}")
         return analysis
 
     except Exception as e:
-        logging.error(f"Error in analyze_market: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error in analyze_market for {market_input.product_name}: {e}")
+        logger.error(f"Error details: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Market analysis failed: {str(e)}")
 
 @api_router.get("/export-market-map/{analysis_id}")
 async def export_market_map(analysis_id: str):

@@ -183,6 +183,21 @@ class MarketIntelligenceAgent:
                 "sources": ["Grand View Research", "Allied Market Research"],
                 "confidence": "high"
             },
+            # Event Equipment Rental Markets
+            ("event equipment rental", "event services", "united states"): {
+                "tam": 18500000000,  # $18.5B
+                "growth_rate": 0.058,  # 5.8% CAGR
+                "competitors": ["United Rentals", "Home Depot Tool Rental", "Party City", "Abbey Party Rents", "Classic Party Rentals", "Tent Rental Plus"],
+                "sources": ["IBISWorld", "American Rental Association", "Event Rental Systems"],
+                "confidence": "high"
+            },
+            ("event planning", "event services", "united states"): {
+                "tam": 5200000000,  # $5.2B
+                "growth_rate": 0.087,  # 8.7% CAGR
+                "competitors": ["Eventbrite", "Cvent", "Meeting Professionals International", "International Live Events Association"],
+                "sources": ["IBISWorld", "Grand View Research"],
+                "confidence": "high"
+            },
             # Software Markets
             ("project management software", "software", "global"): {
                 "tam": 6800000000,  # $6.8B

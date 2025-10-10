@@ -1088,14 +1088,18 @@ class ComprehensiveAnalysisEngine:
                 # Process resonate mapping data if available
                 resonate_mapping = None
                 if "resonate_mapping" in seg:
-                    rm_data = seg["resonate_mapping"]
-                    resonate_mapping = ResonateSegmentMapping(
-                        demographics=ResonateBaseDemographics(**rm_data.get("demographics", {})) if "demographics" in rm_data else None,
-                        geographics=ResonateGeographics(**rm_data.get("geographics", {})) if "geographics" in rm_data else None,
-                        media_usage=ResonateMediaUsage(**rm_data.get("media_usage", {})) if "media_usage" in rm_data else None,
-                        resonate_taxonomy_paths=rm_data.get("resonate_taxonomy_paths", []),
-                        mapping_confidence=rm_data.get("mapping_confidence")
-                    )
+                    try:
+                        rm_data = seg["resonate_mapping"]
+                        resonate_mapping = ResonateSegmentMapping(
+                            demographics=ResonateBaseDemographics(**rm_data.get("demographics", {})) if "demographics" in rm_data else None,
+                            geographics=ResonateGeographics(**rm_data.get("geographics", {})) if "geographics" in rm_data else None,
+                            media_usage=ResonateMediaUsage(**rm_data.get("media_usage", {})) if "media_usage" in rm_data else None,
+                            resonate_taxonomy_paths=rm_data.get("resonate_taxonomy_paths", []),
+                            mapping_confidence=rm_data.get("mapping_confidence")
+                        )
+                    except Exception as e:
+                        logger.warning(f"Failed to create Resonate mapping for psychographic segment {seg.get('name', 'Unknown')}: {e}")
+                        resonate_mapping = None
                 
                 psychographic_segments.append(MarketSegment(
                     name=seg.get("name", "Psychographic Segment"),

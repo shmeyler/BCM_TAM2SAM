@@ -604,7 +604,21 @@ class MarketIntelligenceAgent:
                     content = content[3:]
                 
                 content = content.strip()
-                ai_analysis = json.loads(content)
+                
+                # Sanitize JSON content to remove invalid control characters
+                def sanitize_json_content(json_str):
+                    """Remove invalid control characters that break JSON parsing"""
+                    # Remove control characters except for \n, \r, \t which are valid in JSON strings
+                    json_str = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', json_str)
+                    # Fix common control character issues
+                    json_str = json_str.replace('\n', '\\n').replace('\r', '\\r').replace('\t', '\\t')
+                    # Handle unescaped quotes within strings
+                    json_str = re.sub(r'(?<!\\)"(?=.*".*:)', '\\"', json_str)
+                    return json_str
+                
+                # Apply sanitization before parsing
+                sanitized_content = sanitize_json_content(content)
+                ai_analysis = json.loads(sanitized_content)
                 logger.info("Successfully parsed AI analysis for %s", market_input.product_name)
                 
                 return ai_analysis

@@ -625,7 +625,21 @@ class MarketIntelligenceAgent:
                 
             except (json.JSONDecodeError, ValueError) as e:
                 logger.error(f"JSON parsing error for {market_input.product_name}: {e}")
-                logger.error("Raw content: %s", content[:500])
+                logger.error("Raw content length: %d characters", len(content))
+                logger.error("Raw content sample: %s", content[:500])
+                logger.error("Sanitized content sample: %s", sanitized_content[:500] if 'sanitized_content' in locals() else "N/A")
+                
+                # Try a more aggressive cleanup as last resort
+                try:
+                    # Remove all control characters and try again
+                    emergency_clean = re.sub(r'[\x00-\x1F\x7F-\x9F]', ' ', content)
+                    emergency_clean = re.sub(r'\s+', ' ', emergency_clean)  # Normalize whitespace
+                    ai_analysis = json.loads(emergency_clean)
+                    logger.warning(f"Emergency JSON cleanup successful for {market_input.product_name}")
+                    return ai_analysis
+                except:
+                    logger.error(f"Emergency cleanup also failed for {market_input.product_name}")
+                
                 # Fall through to fallback analysis
                 logger.info(f"Falling back to curated data for {market_input.product_name}")
                 return MarketIntelligenceAgent._get_fallback_analysis(market_input)

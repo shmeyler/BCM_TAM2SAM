@@ -1876,6 +1876,104 @@ const MarketMapApp = () => {
               </div>
             )}
 
+            {/* Competitive Digital Marketing Assessment */}
+            {analysis.market_map.competitive_digital_assessment && Object.keys(analysis.market_map.competitive_digital_assessment).length > 0 && (
+              <div className="bg-white rounded-lg shadow-md p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">📱 Competitive Digital Marketing Assessment</h3>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {Object.entries(analysis.market_map.competitive_digital_assessment).map(([companyName, digitalData], index) => (
+                    <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6">
+                      {/* Company Header */}
+                      <div className="flex items-center mb-4 pb-3 border-b border-blue-200">
+                        <div className="w-10 h-10 mr-3 flex items-center justify-center bg-white border border-blue-300 rounded-lg shadow-sm">
+                          {getCompanyLogo(companyName)}
+                        </div>
+                        <h4 className="font-bold text-gray-900 text-lg">{companyName}</h4>
+                      </div>
+                      
+                      {/* Digital Strategy Overview */}
+                      <div className="space-y-4">
+                        {/* Advertising Spend */}
+                        {digitalData.advertising_spend_estimate && (
+                          <div className="bg-white p-3 rounded border border-blue-100">
+                            <div className="text-xs font-medium text-blue-700 mb-1">💰 AD SPEND ESTIMATE</div>
+                            <div className="text-sm font-semibold text-gray-800">{digitalData.advertising_spend_estimate}</div>
+                          </div>
+                        )}
+                        
+                        {/* Primary Channels */}
+                        {digitalData.primary_channels && digitalData.primary_channels.length > 0 && (
+                          <div className="bg-white p-3 rounded border border-blue-100">
+                            <div className="text-xs font-medium text-blue-700 mb-2">📺 PRIMARY CHANNELS</div>
+                            <div className="flex flex-wrap gap-2">
+                              {digitalData.primary_channels.slice(0, 4).map((channel, i) => (
+                                <div key={i} className="flex items-center bg-blue-50 text-blue-800 px-2 py-1 rounded text-xs">
+                                  <span className="mr-1">{getMediaIcon(channel)}</span>
+                                  {channel}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        
+                        {/* Social Media Presence */}
+                        {digitalData.social_media_presence && (
+                          <div className="bg-white p-3 rounded border border-blue-100">
+                            <div className="text-xs font-medium text-blue-700 mb-1">📱 SOCIAL MEDIA</div>
+                            <div className="text-xs text-gray-700">{digitalData.social_media_presence}</div>
+                          </div>
+                        )}
+                        
+                        {/* SEO Positioning */}
+                        {digitalData.seo_positioning && (
+                          <div className="bg-white p-3 rounded border border-blue-100">
+                            <div className="text-xs font-medium text-blue-700 mb-1">🔍 SEO STRENGTH</div>
+                            <div className="text-xs text-gray-700">{digitalData.seo_positioning}</div>
+                          </div>
+                        )}
+                        
+                        {/* Marketing Strengths & Gaps */}
+                        <div className="grid grid-cols-2 gap-3">
+                          {digitalData.marketing_strengths && digitalData.marketing_strengths.length > 0 && (
+                            <div className="bg-green-50 p-3 rounded border border-green-200">
+                              <div className="text-xs font-medium text-green-700 mb-2">✅ STRENGTHS</div>
+                              <div className="space-y-1">
+                                {digitalData.marketing_strengths.slice(0, 2).map((strength, i) => (
+                                  <div key={i} className="text-xs text-green-800">{strength}</div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          
+                          {digitalData.marketing_gaps && digitalData.marketing_gaps.length > 0 && (
+                            <div className="bg-red-50 p-3 rounded border border-red-200">
+                              <div className="text-xs font-medium text-red-700 mb-2">⚠️ GAPS</div>
+                              <div className="space-y-1">
+                                {digitalData.marketing_gaps.slice(0, 2).map((gap, i) => (
+                                  <div key={i} className="text-xs text-red-800">{gap}</div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-6 bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-lg border border-purple-200">
+                  <div className="flex items-center mb-2">
+                    <span className="text-purple-600 mr-2">💡</span>
+                    <span className="font-medium text-purple-900">Digital Marketing Intelligence</span>
+                  </div>
+                  <p className="text-sm text-purple-700">
+                    This competitive assessment analyzes digital marketing strategies, advertising spend estimates, channel preferences, and marketing execution strengths/gaps to identify opportunities for differentiation and growth.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Strategic Analysis */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Opportunities */}

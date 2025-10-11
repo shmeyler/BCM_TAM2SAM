@@ -12,7 +12,19 @@ import {
   FilmIcon,
   NewspaperIcon,
   TvIcon,
-  RadioIcon
+  RadioIcon,
+  ChartBarIcon,
+  LightBulbIcon,
+  MagnifyingGlassIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  ArrowTrendingUpIcon,
+  BanknotesIcon,
+  TrophyIcon,
+  RocketLaunchIcon,
+  StarIcon,
+  EyeIcon,
+  FireIcon
 } from '@heroicons/react/24/outline';
 
 import { 

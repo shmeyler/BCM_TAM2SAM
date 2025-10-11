@@ -555,9 +555,44 @@ class MarketIntelligenceAgent:
                         "user_segment": "target segment"
                     }}
                 ],
-                "opportunities": [list of 4-5 specific opportunities],
-                "threats": [list of 4-5 specific threats],
-                "recommendations": [list of 4-5 actionable recommendations],
+                "competitive_digital_assessment": {{
+                    "{market_input.product_name}": {{
+                        "digital_marketing_strategy": "Current digital marketing approach and channels",
+                        "advertising_spend_estimate": "Estimated annual advertising budget",
+                        "primary_channels": ["channel1", "channel2", "channel3"],
+                        "social_media_presence": "Assessment of social media strategy and engagement",
+                        "content_marketing": "Content strategy and thought leadership approach",
+                        "paid_advertising": "Paid search, display, social advertising strategy",
+                        "seo_positioning": "Organic search presence and keyword strategy",
+                        "marketing_strengths": ["strength1", "strength2"],
+                        "marketing_gaps": ["gap1", "gap2"]
+                    }},
+                    "competitor_1": {{
+                        "digital_marketing_strategy": "Competitor's digital approach",
+                        "advertising_spend_estimate": "Estimated budget",
+                        "primary_channels": ["channels they use"],
+                        "social_media_presence": "Social strategy assessment",
+                        "content_marketing": "Content approach",
+                        "paid_advertising": "Paid strategy",
+                        "seo_positioning": "SEO strength",
+                        "marketing_strengths": ["what they do well"],
+                        "marketing_gaps": ["their weaknesses"]
+                    }},
+                    "competitor_2": {{
+                        "digital_marketing_strategy": "Competitor's digital approach",
+                        "advertising_spend_estimate": "Estimated budget", 
+                        "primary_channels": ["channels they use"],
+                        "social_media_presence": "Social strategy assessment",
+                        "content_marketing": "Content approach",
+                        "paid_advertising": "Paid strategy",
+                        "seo_positioning": "SEO strength",
+                        "marketing_strengths": ["what they do well"],
+                        "marketing_gaps": ["their weaknesses"]
+                    }}
+                }},
+                "marketing_opportunities": [list of 4-5 marketing-specific opportunities],
+                "marketing_threats": [list of 4-5 marketing-specific competitive threats],
+                "marketing_recommendations": [list of 4-5 actionable marketing recommendations],
                 "executive_summary": "A comprehensive executive summary with the following 6 structured sections: **1. MAIN QUESTION TO BE RESOLVED** - Formulate a SMART question (Specific, Measurable, Action-oriented, Relevant, Time-bound) for {market_input.product_name}, e.g., 'How can {market_input.product_name} increase market share by X% through Y strategy before 2027?' **2. CONTEXT** - Describe the market environment, industry trends, competitive position, capability gaps, and financial considerations. **3. SUCCESS CRITERIA** - Define quantitative and qualitative success measures including timing, visibility, capability building needs, and mindset shifts. **4. SCOPE AND CONSTRAINTS** - Outline what markets/segments are included, what's excluded, and any constraints like organic growth focus only. **5. STAKEHOLDERS** - Identify key decision-makers, influencers, and potential blockers in the organization and market. **6. KEY SOURCES OF INSIGHT** - List internal expertise, data sources, and external resources (suppliers, customers, experts) needed for implementation. Make this executive-ready and professionally structured.",
                 "data_sources": [
                     {{"name": "Gartner Market Research", "url": "https://www.gartner.com/en/research"}},

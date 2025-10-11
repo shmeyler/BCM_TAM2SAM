@@ -141,6 +141,11 @@ class MarketMap(BaseModel):
     opportunities: List[str]
     threats: List[str]
     strategic_recommendations: List[str]
+    # Marketing-Specific Analysis
+    marketing_opportunities: Optional[List[str]] = []
+    marketing_threats: Optional[List[str]] = []
+    marketing_recommendations: Optional[List[str]] = []
+    competitive_digital_assessment: Optional[Dict[str, Any]] = {}
     # Executive Summary
     executive_summary: str
     # Sources and Methodology

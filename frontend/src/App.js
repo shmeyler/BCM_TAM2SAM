@@ -1887,7 +1887,7 @@ const MarketMapApp = () => {
                       {/* Company Header */}
                       <div className="flex items-center mb-4 pb-3 border-b border-blue-200">
                         <div className="w-10 h-10 mr-3 flex items-center justify-center bg-white border border-blue-300 rounded-lg shadow-sm">
-                          {getCompanyLogo(companyName)}
+                          <BrandLogo companyName={companyName} size={32} />
                         </div>
                         <h4 className="font-bold text-gray-900 text-lg">{companyName}</h4>
                       </div>

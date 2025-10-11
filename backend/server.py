@@ -600,6 +600,9 @@ class MarketIntelligenceAgent:
                         "marketing_gaps": ["their weaknesses"]
                     }}
                 }},
+                "opportunities": [list of 4-5 marketing-specific market opportunities],
+                "threats": [list of 4-5 marketing-specific competitive threats], 
+                "recommendations": [list of 4-5 actionable marketing recommendations],
                 "marketing_opportunities": [list of 4-5 marketing-specific opportunities],
                 "marketing_threats": [list of 4-5 marketing-specific competitive threats],
                 "marketing_recommendations": [list of 4-5 actionable marketing recommendations],

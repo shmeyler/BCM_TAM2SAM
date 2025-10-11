@@ -2150,7 +2150,7 @@ const MarketMapApp = () => {
                 
                 <div className="bg-gradient-to-r from-indigo-50 to-blue-50 p-4 rounded-lg border border-indigo-200">
                   <div className="flex items-center mb-2">
-                    <span className="text-indigo-600 mr-2">🔍</span>
+                    <MagnifyingGlassIcon className="w-5 h-5 text-indigo-600 mr-2" />
                     <span className="font-medium text-indigo-900">PPC Intelligence Insights</span>
                   </div>
                   <p className="text-sm text-indigo-700">

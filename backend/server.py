@@ -33,6 +33,9 @@ logger = logging.getLogger(__name__)
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
+# Import SpyFu service after environment is loaded
+from spyfu_service import spyfu_service, extract_domain_from_company, PPCIntelligenceReport
+
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
 mongo_client = AsyncIOMotorClient(mongo_url)

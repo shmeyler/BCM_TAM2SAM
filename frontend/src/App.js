@@ -2101,7 +2101,10 @@ const MarketMapApp = () => {
                 {/* Top PPC Competitors */}
                 {analysis.market_map.ppc_intelligence.top_ppc_competitors && analysis.market_map.ppc_intelligence.top_ppc_competitors.length > 0 && (
                   <div className="mb-6">
-                    <h4 className="font-bold text-gray-900 mb-4">🏆 Top PPC Competitors</h4>
+                    <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+                      <TrophyIcon className="w-5 h-5 mr-2 text-yellow-600" />
+                      Top PPC Competitors
+                    </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {analysis.market_map.ppc_intelligence.top_ppc_competitors.slice(0, 6).map((competitor, index) => (
                         <div key={index} className="bg-gray-50 p-4 rounded-lg border border-gray-200">

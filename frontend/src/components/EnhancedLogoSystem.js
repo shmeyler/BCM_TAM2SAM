@@ -235,6 +235,11 @@ export const getEnhancedCompanyIcon = (companyName, size = 24) => {
   return <RealBrandLogo companyName={companyName} size={size} className="inline-flex" />;
 };
 
+// Direct Brand Logo Component for use in JSX
+export const BrandLogo = ({ companyName, size = 32, className = "" }) => {
+  return <RealBrandLogo companyName={companyName} size={size} className={className} />;
+};
+
 // Media Channel Icons (for advertising analysis)
 export const getMediaChannelIcon = (channelName) => {
   const name = channelName.toLowerCase();

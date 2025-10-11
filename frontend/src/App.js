@@ -2076,7 +2076,10 @@ const MarketMapApp = () => {
               
               <div className="mt-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
                 <p className="text-xs text-orange-800">
-                  <span className="font-semibold">💡 Tip:</span> Use PDF for client presentations and Excel for detailed data analysis or integration with simulation platforms.
+                  <span className="font-semibold flex items-center">
+                    <FaBrain className="mr-1" />
+                    Tip:
+                  </span> Use PDF for client presentations and Excel for detailed data analysis or integration with simulation platforms.
                 </p>
               </div>
             </div>

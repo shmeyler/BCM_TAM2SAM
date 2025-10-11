@@ -1345,7 +1345,7 @@ async def analyze_market(market_input: MarketInput, user: User = Depends(require
 
         # Step 2: Generate Market Map
         logger.info("Step 2: Starting market map generation...")
-        market_map = await ComprehensiveAnalysisEngine.generate_market_map(market_input, ai_analysis)
+        market_map = await ComprehensiveAnalysisEngine.generate_market_map(market_input, ai_analysis, ppc_intelligence)
         logger.info("Step 2: Market map generation completed successfully")
 
         # Step 3: Generate Visual Map

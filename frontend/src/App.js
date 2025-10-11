@@ -2090,7 +2090,10 @@ const MarketMapApp = () => {
         {/* Data Sources & Methodology - Moved to Bottom */}
         {analysis && (
           <div className="bg-white rounded-lg shadow-md p-6 mt-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">📚 Resources & Footnotes</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              <FaBrain className="mr-2 text-blue-600" />
+              Resources & Footnotes
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-semibold text-gray-900 mb-3 flex items-center">

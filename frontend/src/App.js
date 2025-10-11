@@ -1944,7 +1944,10 @@ const MarketMapApp = () => {
                         <div className="grid grid-cols-2 gap-3">
                           {digitalData.marketing_strengths && digitalData.marketing_strengths.length > 0 && (
                             <div className="bg-green-50 p-3 rounded border border-green-200">
-                              <div className="text-xs font-medium text-green-700 mb-2">✅ STRENGTHS</div>
+                              <div className="text-xs font-medium text-green-700 mb-2 flex items-center">
+                                <CheckCircleIcon className="w-4 h-4 mr-1" />
+                                STRENGTHS
+                              </div>
                               <div className="space-y-1">
                                 {digitalData.marketing_strengths.slice(0, 2).map((strength, i) => (
                                   <div key={i} className="text-xs text-green-800">{strength}</div>

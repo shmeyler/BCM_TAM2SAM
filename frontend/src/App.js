@@ -64,7 +64,10 @@ import {
   ChartBarIcon,
   TvIcon,
   MagnifyingGlassIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  TrophyIcon,
+  StarIcon
 } from '@heroicons/react/24/outline';
 
 // Auto-detect backend URL based on current domain

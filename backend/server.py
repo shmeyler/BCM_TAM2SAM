@@ -1212,6 +1212,7 @@ class ComprehensiveAnalysisEngine:
                 marketing_threats=ai_analysis.get("marketing_threats", []),
                 marketing_recommendations=ai_analysis.get("marketing_recommendations", []),
                 competitive_digital_assessment=ai_analysis.get("competitive_digital_assessment", {}),
+                ppc_intelligence=ppc_intelligence,
                 data_sources=[
                     source.get("name", str(source)) if isinstance(source, dict) else str(source)
                     for source in ai_analysis.get("data_sources", ["Industry reports", "Market research", "Public data"])

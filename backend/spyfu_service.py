@@ -62,7 +62,7 @@ class SpyFuService:
     
     def __init__(self):
         self.api_key = os.environ.get('SPYFU_API_KEY')
-        self.base_url = "https://www.spyfu.com/apis"
+        self.base_url = "https://www.spyfu.com/v3"
         
         if not self.api_key:
             logger.warning("SpyFu API key not found. PPC intelligence will be limited.")

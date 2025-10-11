@@ -9,6 +9,12 @@ import sys
 import os
 import asyncio
 import json
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from backend/.env
+backend_dir = Path('/app/backend')
+load_dotenv(backend_dir / '.env')
 
 # Add backend directory to path
 sys.path.append('/app/backend')

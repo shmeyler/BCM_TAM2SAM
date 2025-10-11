@@ -169,10 +169,10 @@ class SpyFuService:
             
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
-                url = f"{self.base_url}/ad_history_api/domain_ads"
+                url = f"{self.base_url}/ad_history_api/domain_ad_history"
                 params = {
-                    "domain": domain,
-                    "limit": limit
+                    "r": domain,  # SpyFu uses 'r' parameter for domain
+                    "api_key": self.api_key
                 }
                 
                 response = await client.get(

@@ -1918,7 +1918,10 @@ const MarketMapApp = () => {
                         {/* Social Media Presence */}
                         {digitalData.social_media_presence && (
                           <div className="bg-white p-3 rounded border border-blue-100">
-                            <div className="text-xs font-medium text-blue-700 mb-1">📱 SOCIAL MEDIA</div>
+                            <div className="text-xs font-medium text-blue-700 mb-1 flex items-center">
+                              <FaBuilding className="mr-1" />
+                              SOCIAL MEDIA
+                            </div>
                             <div className="text-xs text-gray-700">{digitalData.social_media_presence}</div>
                           </div>
                         )}

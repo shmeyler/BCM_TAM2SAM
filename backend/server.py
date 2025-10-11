@@ -1252,6 +1252,7 @@ class ComprehensiveAnalysisEngine:
                 marketing_threats=["Competitor digital presence", "Rising advertising costs"],
                 marketing_recommendations=["Invest in content marketing", "Optimize conversion funnels"],
                 competitive_digital_assessment={},
+                ppc_intelligence={},
                 executive_summary=f"""
                 **1. MARKETING CHALLENGE**
                 How can {market_input.product_name} increase market share by 15-25% through enhanced digital marketing campaigns and targeted advertising strategies within the next 2-3 years?

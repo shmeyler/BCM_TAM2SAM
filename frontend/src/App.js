@@ -1828,15 +1828,7 @@ const MarketMapApp = () => {
                           <td className="py-4 px-3">
                             <div className="flex items-center">
                               <div className="w-8 h-8 mr-3 flex items-center justify-center bg-gray-50 border border-gray-200 rounded">
-                                <img
-                                  src={getCompanyLogo(competitor.name)}
-                                  alt={`${competitor.name} logo`}
-                                  className="w-6 h-6 object-contain"
-                                  onError={(e) => {
-                                    // Fallback to a generic business icon
-                                    e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23374151'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E";
-                                  }}
-                                />
+                                <BrandLogo companyName={competitor.name} size={24} />
                               </div>
                               <div className="font-bold text-gray-900">{competitor.name}</div>
                             </div>

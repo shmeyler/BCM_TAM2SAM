@@ -1965,7 +1965,7 @@ const MarketMapApp = () => {
                 
                 <div className="mt-6 bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-lg border border-purple-200">
                   <div className="flex items-center mb-2">
-                    <span className="text-purple-600 mr-2">💡</span>
+                    <FaBrain className="text-purple-600 mr-2" />
                     <span className="font-medium text-purple-900">Digital Marketing Intelligence</span>
                   </div>
                   <p className="text-sm text-purple-700">

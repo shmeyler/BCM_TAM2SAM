@@ -195,7 +195,7 @@ class SpyFuIntegrationTester:
             print(f"Generated PPC intelligence report for: {report.target_domain}")
             print(f"Report contains:")
             print(f"  - Paid keywords: {len(report.paid_keywords)}")
-            print(f"  - Competitors: {len(report.competitors)}")
+            print(f"  - Competitors: {len(report.top_competitors)}")
             print(f"  - Ad history: {len(report.ad_history)}")
             
             # Validate report structure
@@ -216,10 +216,10 @@ class SpyFuIntegrationTester:
             if report.paid_keywords:
                 print(f"Sample keyword: {report.paid_keywords[0].keyword}")
             
-            if report.competitors:
-                print(f"Sample competitor: {report.competitors[0].domain}")
+            if report.top_competitors:
+                print(f"Sample competitor: {report.top_competitors[0].domain}")
             
-            return True, f"PPC intelligence report generation working - complete report with {len(report.paid_keywords)} keywords and {len(report.competitors)} competitors"
+            return True, f"PPC intelligence report generation working - complete report with {len(report.paid_keywords)} keywords and {len(report.top_competitors)} competitors"
             
         except Exception as e:
             return False, f"PPC intelligence report test failed: {str(e)}"

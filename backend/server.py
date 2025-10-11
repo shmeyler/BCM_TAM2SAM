@@ -1244,6 +1244,10 @@ class ComprehensiveAnalysisEngine:
                 opportunities=["Market opportunity 1", "Market opportunity 2"],
                 threats=["Market threat 1", "Market threat 2"],
                 strategic_recommendations=["Focus on differentiation", "Build partnerships"],
+                marketing_opportunities=["Digital marketing expansion", "Social media engagement"],
+                marketing_threats=["Competitor digital presence", "Rising advertising costs"],
+                marketing_recommendations=["Invest in content marketing", "Optimize conversion funnels"],
+                competitive_digital_assessment={},
                 executive_summary=f"""
                 **1. MAIN QUESTION TO BE RESOLVED**
                 How can {market_input.product_name} capture a larger share of the {market_input.industry} market through improved {market_input.key_metrics} and strategic positioning within the next 2-3 years?

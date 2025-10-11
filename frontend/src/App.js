@@ -1903,7 +1903,10 @@ const MarketMapApp = () => {
                         {/* Primary Channels */}
                         {digitalData.primary_channels && digitalData.primary_channels.length > 0 && (
                           <div className="bg-white p-3 rounded border border-blue-100">
-                            <div className="text-xs font-medium text-blue-700 mb-2">📺 PRIMARY CHANNELS</div>
+                            <div className="text-xs font-medium text-blue-700 mb-2 flex items-center">
+                              <TvIcon className="w-4 h-4 mr-1" />
+                              PRIMARY CHANNELS
+                            </div>
                             <div className="flex flex-wrap gap-2">
                               {digitalData.primary_channels.slice(0, 4).map((channel, i) => (
                                 <div key={i} className="flex items-center bg-blue-50 text-blue-800 px-2 py-1 rounded text-xs">

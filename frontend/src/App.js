@@ -2068,7 +2068,8 @@ const MarketMapApp = () => {
                     rel="noopener noreferrer"
                     className="text-xs px-3 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
                   >
-                    📊 Open Excel in new tab
+                    <FaBrain className="mr-2" />
+                    Open Excel in new tab
                   </a>
                 </div>
               </div>

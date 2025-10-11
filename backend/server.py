@@ -20,6 +20,7 @@ import sys
 from pdf_generator import create_market_report_pdf
 from auth_routes import auth_router, require_auth, get_db
 from auth_models import User
+from spyfu_service import spyfu_service, extract_domain_from_company, PPCIntelligenceReport
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 

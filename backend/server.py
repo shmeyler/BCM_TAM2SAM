@@ -567,7 +567,7 @@ class MarketIntelligenceAgent:
                 "methodology": "description of analysis methodology"
             }}
 
-            CRITICAL: The executive_summary MUST be a well-written, comprehensive 3-4 paragraph summary suitable for C-level executives. Include specific numbers, insights, and actionable recommendations.
+            CRITICAL: The executive_summary MUST follow the 6-section structure outlined above and be suitable for C-level executives. Include specific numbers, insights, and actionable recommendations. The analysis perspective is: {analysis_perspective} - ensure the summary is written accordingly.
 
             Return only valid JSON with accurate, researched market intelligence.
             """

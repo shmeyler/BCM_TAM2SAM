@@ -1995,7 +1995,10 @@ const MarketMapApp = () => {
 
               {/* Threats */}
               <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">⚠️ Market Threats</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                  <FaShoppingCart className="mr-2 text-red-600" />
+                  Market Threats
+                </h3>
                 <div className="space-y-3">
                   {analysis.market_map.threats.map((threat, index) => (
                     <div key={index} className="flex items-start">

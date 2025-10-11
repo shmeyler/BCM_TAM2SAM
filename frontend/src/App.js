@@ -1782,7 +1782,7 @@ const MarketMapApp = () => {
 
                 <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-lg border border-orange-200">
                   <div className="flex items-center mb-4">
-                    <span className="text-orange-600 mr-2">🎯</span>
+                    <FaUsers className="text-orange-600 mr-2" />
                     <h4 className="font-bold text-gray-900">Ready for Resonate rAI Platform</h4>
                   </div>
                   <p className="text-gray-700 mb-4">

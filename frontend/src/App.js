@@ -395,7 +395,7 @@ const MarketMapApp = () => {
       URL.revokeObjectURL(url);
       
       // Show success message with summary
-      alert(`✅ Persona Export Complete!\n\n📊 Summary:\n• ${personaData.persona_summary.total_segments} segments exported\n• ${personaData.persona_summary.resonate_ready_segments} Resonate-ready segments\n• ${personaData.persona_summary.total_taxonomy_mappings} taxonomy mappings\n\nReady for Resonate rAI integration!`);
+      alert(`✅ Persona Export Complete!\n\nSummary:\n• ${personaData.persona_summary.total_segments} segments exported\n• ${personaData.persona_summary.resonate_ready_segments} Resonate-ready segments\n• ${personaData.persona_summary.total_taxonomy_mappings} taxonomy mappings\n\nReady for Resonate rAI integration!`);
       
     } catch (error) {
       console.error('Export error:', error);

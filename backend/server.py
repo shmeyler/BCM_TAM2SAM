@@ -1030,7 +1030,7 @@ class VisualMapGenerator:
 
 class ComprehensiveAnalysisEngine:
     @staticmethod
-    async def generate_market_map(market_input: MarketInput, ai_analysis: Dict[str, Any]) -> MarketMap:
+    async def generate_market_map(market_input: MarketInput, ai_analysis: Dict[str, Any], ppc_intelligence: Dict[str, Any] = None) -> MarketMap:
         """Generate comprehensive market map from AI analysis"""
         try:
             # Determine analysis perspective

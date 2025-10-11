@@ -108,7 +108,7 @@ checks:
 ✅ `GET /api/analysis-history` → User's analysis history
 
 ### External URL Test
-✅ `https://market-insights-60.preview.emergentagent.com/api/` → Working
+✅ `https://marketvision-20.preview.emergentagent.com/api/` → Working
 
 **All endpoints accessible and functional.**
 
@@ -128,7 +128,7 @@ TOGETHER_API_KEY=***SECURE*** ✅
 **Frontend (`/app/frontend/.env`):**
 ```bash
 WDS_SOCKET_PORT=443 ✅
-REACT_APP_BACKEND_URL=https://market-insights-60.preview.emergentagent.com ✅
+REACT_APP_BACKEND_URL=https://marketvision-20.preview.emergentagent.com ✅
 REACT_APP_AUTH_URL=https://auth.emergentagent.com ✅
 ```
 

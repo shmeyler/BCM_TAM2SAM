@@ -49,7 +49,7 @@ The session identifier could be in:
 
 ```
 Checking auth...
-- Full URL: https://market-insights-60.preview.emergentagent.com/?some_param=value
+- Full URL: https://marketvision-20.preview.emergentagent.com/?some_param=value
 - Query params: ?some_param=value
 - Hash: #another_param=value
 - Session ID found: null
@@ -66,13 +66,13 @@ After you're redirected back from Google:
 
 Example:
 ```
-https://market-insights-60.preview.emergentagent.com/?session_id=abc123
+https://marketvision-20.preview.emergentagent.com/?session_id=abc123
 ```
 
 or
 
 ```
-https://market-insights-60.preview.emergentagent.com/#session_id=abc123
+https://marketvision-20.preview.emergentagent.com/#session_id=abc123
 ```
 
 ## What Happens Next

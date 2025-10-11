@@ -1297,6 +1297,50 @@ async def analyze_market(market_input: MarketInput, user: User = Depends(require
         ai_analysis = await MarketIntelligenceAgent.analyze_market_landscape(market_input)
         logger.info("Step 1: AI analysis completed successfully")
 
+        # Step 1.5: PPC Competitive Intelligence
+        logger.info("Step 1.5: Starting PPC competitive intelligence analysis...")
+        ppc_intelligence = {}
+        try:
+            # Extract domain from product name for PPC analysis
+            target_domain = extract_domain_from_company(market_input.product_name)
+            ppc_report = await spyfu_service.generate_ppc_intelligence_report(target_domain)
+            
+            ppc_intelligence = {
+                "target_domain": ppc_report.target_domain,
+                "paid_keywords_count": len(ppc_report.paid_keywords),
+                "top_keywords": [
+                    {
+                        "keyword": kw.keyword,
+                        "monthly_searches": kw.monthly_searches,
+                        "cpc": kw.cpc,
+                        "competition": kw.competition,
+                        "estimated_monthly_cost": kw.estimated_monthly_cost
+                    } for kw in ppc_report.paid_keywords[:10]
+                ],
+                "competitors_count": len(ppc_report.top_competitors),
+                "top_ppc_competitors": [
+                    {
+                        "domain": comp.domain,
+                        "overlapping_keywords": comp.overlapping_keywords,
+                        "estimated_monthly_spend": comp.estimated_monthly_spend
+                    } for comp in ppc_report.top_competitors[:10]
+                ],
+                "ad_history_count": len(ppc_report.ad_history),
+                "recent_ads": [
+                    {
+                        "ad_text": ad.ad_text,
+                        "keyword": ad.keyword,
+                        "position": ad.position
+                    } for ad in ppc_report.ad_history[:5]
+                ],
+                "domain_stats": ppc_report.domain_stats.dict() if ppc_report.domain_stats else None,
+                "confidence_level": ppc_report.confidence_level
+            }
+            logger.info("Step 1.5: PPC intelligence analysis completed successfully")
+        except Exception as e:
+            logger.warning(f"Step 1.5: PPC intelligence analysis failed: {e}")
+            ppc_intelligence = {"error": str(e), "confidence_level": "Low - PPC Data Not Available"}
+
         # Step 2: Generate Market Map
         logger.info("Step 2: Starting market map generation...")
         market_map = await ComprehensiveAnalysisEngine.generate_market_map(market_input, ai_analysis)

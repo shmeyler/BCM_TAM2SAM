@@ -1198,11 +1198,23 @@ class ComprehensiveAnalysisEngine:
                 threats=["Market threat 1", "Market threat 2"],
                 strategic_recommendations=["Focus on differentiation", "Build partnerships"],
                 executive_summary=f"""
-                **MARKET OPPORTUNITY OVERVIEW**
-                The {market_input.product_name} market represents a significant opportunity driven by {market_input.demand_driver}. With a total addressable market of $5B and steady growth trajectory, this sector presents compelling investment potential for organizations targeting {market_input.target_user}.
+                **1. MAIN QUESTION TO BE RESOLVED**
+                How can {market_input.product_name} capture a larger share of the {market_input.industry} market through improved {market_input.key_metrics} and strategic positioning within the next 2-3 years?
 
-                **COMPETITIVE LANDSCAPE**
-                The market features established players alongside emerging competitors, creating opportunities for differentiation through {market_input.key_metrics} optimization and strategic positioning in underserved segments.
+                **2. CONTEXT**  
+                The {market_input.industry} market is experiencing growth driven by {market_input.demand_driver}. {market_input.product_name} operates in a competitive environment targeting {market_input.target_user} with opportunities for expansion and differentiation.
+
+                **3. SUCCESS CRITERIA**
+                Success will be measured by market share growth, improved {market_input.key_metrics}, and enhanced competitive positioning within {market_input.geography}.
+
+                **4. SCOPE AND CONSTRAINTS**
+                Analysis focuses on {market_input.geography} market with emphasis on organic growth opportunities and strategic positioning within the {market_input.industry} sector.
+
+                **5. STAKEHOLDERS**
+                Key stakeholders include {market_input.product_name} leadership team, target customers ({market_input.target_user}), and competitive players in the market.
+
+                **6. KEY SOURCES OF INSIGHT**
+                Analysis leverages industry reports, market research, competitive intelligence, and customer feedback to provide strategic recommendations for market expansion.
 
                 **MARKET SEGMENTATION INSIGHTS**
                 Geographic and demographic segmentation reveals distinct opportunities across various market segments, with particular strength in areas experiencing rapid adoption of {market_input.transaction_type} models.

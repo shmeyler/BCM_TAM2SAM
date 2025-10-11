@@ -1249,23 +1249,23 @@ class ComprehensiveAnalysisEngine:
                 marketing_recommendations=["Invest in content marketing", "Optimize conversion funnels"],
                 competitive_digital_assessment={},
                 executive_summary=f"""
-                **1. MAIN QUESTION TO BE RESOLVED**
-                How can {market_input.product_name} capture a larger share of the {market_input.industry} market through improved {market_input.key_metrics} and strategic positioning within the next 2-3 years?
+                **1. MARKETING CHALLENGE**
+                How can {market_input.product_name} increase market share by 15-25% through enhanced digital marketing campaigns and targeted advertising strategies within the next 2-3 years?
 
-                **2. CONTEXT**  
-                The {market_input.industry} market is experiencing growth driven by {market_input.demand_driver}. {market_input.product_name} operates in a competitive environment targeting {market_input.target_user} with opportunities for expansion and differentiation.
+                **2. MARKET CONTEXT**  
+                The {market_input.industry} marketing landscape is evolving with digital-first customer acquisition driven by {market_input.demand_driver}. {market_input.product_name} needs strategic marketing positioning to effectively reach {market_input.target_user} in an increasingly competitive advertising environment.
 
-                **3. SUCCESS CRITERIA**
-                Success will be measured by market share growth, improved {market_input.key_metrics}, and enhanced competitive positioning within {market_input.geography}.
+                **3. MARKETING SUCCESS METRICS**
+                Success will be measured by brand awareness lift, lead generation improvement, customer acquisition cost reduction, campaign ROI optimization, and improved {market_input.key_metrics} through marketing initiatives.
 
-                **4. SCOPE AND CONSTRAINTS**
-                Analysis focuses on {market_input.geography} market with emphasis on organic growth opportunities and strategic positioning within the {market_input.industry} sector.
+                **4. MARKETING SCOPE & FOCUS**
+                Analysis focuses on {market_input.geography} digital marketing opportunities with emphasis on paid advertising, content marketing, and social media strategies within the {market_input.industry} sector.
 
-                **5. STAKEHOLDERS**
-                Key stakeholders include {market_input.product_name} leadership team, target customers ({market_input.target_user}), and competitive players in the market.
+                **5. KEY MARKETING STAKEHOLDERS**
+                Marketing team, brand managers, target customers ({market_input.target_user}), digital agencies, media partners, and competitive marketing teams.
 
-                **6. KEY SOURCES OF INSIGHT**
-                Analysis leverages industry reports, market research, competitive intelligence, and customer feedback to provide strategic recommendations for market expansion.
+                **6. MARKETING INSIGHT SOURCES**
+                Customer research, competitive advertising intelligence, digital analytics, campaign performance data, and marketing industry benchmarks for strategic campaign development.
 
                 **MARKET SEGMENTATION INSIGHTS**
                 Geographic and demographic segmentation reveals distinct opportunities across various market segments, with particular strength in areas experiencing rapid adoption of {market_input.transaction_type} models.

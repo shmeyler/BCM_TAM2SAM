@@ -211,8 +211,11 @@ class SpyFuService:
             
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
-                url = f"{self.base_url}/domain_stats_api/all_stats"
-                params = {"domain": domain}
+                url = f"{self.base_url}/organic_serp_api/serp_analysis_keywords"
+                params = {
+                    "r": domain,  # SpyFu uses 'r' parameter for domain
+                    "api_key": self.api_key
+                }
                 
                 response = await client.get(
                     url,

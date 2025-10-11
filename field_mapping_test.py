@@ -30,7 +30,7 @@ class FieldMappingTester:
     def __init__(self):
         print("Field Mapping Tester Initialized")
     
-    def run_field_mapping_tests(self) -> bool:
+    async def run_field_mapping_tests(self) -> bool:
         """Run all field mapping tests"""
         tests = [
             ("Strategic Analysis Fields Mapping Logic", self.test_strategic_fields_mapping),
@@ -48,7 +48,10 @@ class FieldMappingTester:
             print(f"{'=' * 60}")
             
             try:
-                success, message = test_func()
+                if test_name == "PPC Intelligence Data Structure":
+                    success, message = await test_func()
+                else:
+                    success, message = test_func()
                 status = "✅ PASSED" if success else "❌ FAILED"
                 results.append((test_name, status, message))
                 if not success:

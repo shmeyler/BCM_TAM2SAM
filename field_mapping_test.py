@@ -149,7 +149,7 @@ class FieldMappingTester:
         except Exception as e:
             return False, f"Strategic fields mapping test failed: {str(e)}"
     
-    def test_ppc_data_structure(self) -> tuple[bool, str]:
+    async def test_ppc_data_structure(self) -> tuple[bool, str]:
         """Test PPC intelligence data structure"""
         try:
             print("Testing PPC intelligence data structure...")

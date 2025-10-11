@@ -147,6 +147,8 @@ class MarketMap(BaseModel):
     marketing_threats: Optional[List[str]] = []
     marketing_recommendations: Optional[List[str]] = []
     competitive_digital_assessment: Optional[Dict[str, Any]] = {}
+    # PPC Competitive Intelligence
+    ppc_intelligence: Optional[Dict[str, Any]] = {}
     # Executive Summary
     executive_summary: str
     # Sources and Methodology

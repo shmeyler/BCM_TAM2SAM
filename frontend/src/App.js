@@ -1871,7 +1871,10 @@ const MarketMapApp = () => {
             {/* Competitive Digital Marketing Assessment */}
             {analysis.market_map.competitive_digital_assessment && Object.keys(analysis.market_map.competitive_digital_assessment).length > 0 && (
               <div className="bg-white rounded-lg shadow-md p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">📱 Competitive Digital Marketing Assessment</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                  <FaGlobe className="mr-3 text-blue-600" />
+                  Competitive Digital Marketing Assessment
+                </h3>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                   {Object.entries(analysis.market_map.competitive_digital_assessment).map(([companyName, digitalData], index) => (

@@ -1979,7 +1979,10 @@ const MarketMapApp = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Opportunities */}
               <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">🎯 Market Opportunities</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                  <FaUsers className="mr-2 text-orange-600" />
+                  Market Opportunities
+                </h3>
                 <div className="space-y-3">
                   {analysis.market_map.opportunities.map((opportunity, index) => (
                     <div key={index} className="flex items-start">

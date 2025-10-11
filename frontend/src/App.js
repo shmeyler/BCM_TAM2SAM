@@ -86,6 +86,16 @@ const getCompanyIcon = (companyName) => {
   // All icon mapping now handled by Enhanced Logo System
 };
 
+// Get Company Logo for larger displays
+const getCompanyLogo = (companyName) => {
+  return getEnhancedCompanyIcon(companyName, 32);
+};
+
+// Get Media Channel Icon for advertising analysis  
+const getMediaIcon = (channelName) => {
+  return getMediaChannelIcon(channelName);
+};
+
 const MarketMapApp = () => {
   // Authentication state
   const [user, setUser] = useState(null);

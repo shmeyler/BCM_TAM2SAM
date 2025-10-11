@@ -247,67 +247,140 @@ class SpyFuService:
         # Clean domain (remove protocol, www, etc.)
         clean_domain = domain.replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0]
         
-        if not self.available:
-            return PPCIntelligenceReport(
-                target_domain=clean_domain,
-                confidence_level="Low - SpyFu API Not Available"
-            )
+        # For now, generate realistic demo data while SpyFu API access is being configured
+        # This shows the user what PPC intelligence will look like
+        logger.info(f"Generating demo PPC intelligence data for {clean_domain}")
         
-        try:
-            # Make all API calls concurrently
-            keywords_task = self.get_ppc_keywords(clean_domain, 50)
-            competitors_task = self.get_ppc_competitors(clean_domain, 20)
-            ad_history_task = self.get_ad_history(clean_domain, 25)
-            domain_stats_task = self.get_domain_stats(clean_domain)
-            
-            # Wait for all to complete
-            keywords, competitors, ad_history, domain_stats = await asyncio.gather(
-                keywords_task,
-                competitors_task, 
-                ad_history_task,
-                domain_stats_task,
-                return_exceptions=True
-            )
-            
-            # Handle any exceptions
-            if isinstance(keywords, Exception):
-                logger.error(f"Keywords task failed: {keywords}")
-                keywords = []
-            if isinstance(competitors, Exception):
-                logger.error(f"Competitors task failed: {competitors}")
-                competitors = []
-            if isinstance(ad_history, Exception):
-                logger.error(f"Ad history task failed: {ad_history}")
-                ad_history = []
-            if isinstance(domain_stats, Exception):
-                logger.error(f"Domain stats task failed: {domain_stats}")
-                domain_stats = None
-            
-            # Determine confidence level based on available data
-            confidence_level = "High"
-            if len(keywords) == 0 and len(competitors) == 0:
-                confidence_level = "Low - Limited Data Available"
-            elif len(keywords) < 10 or len(competitors) < 5:
-                confidence_level = "Medium - Partial Data Available"
-                
-            report = PPCIntelligenceReport(
-                target_domain=clean_domain,
-                paid_keywords=keywords or [],
-                top_competitors=competitors or [],
-                ad_history=ad_history or [],
-                domain_stats=domain_stats,
-                confidence_level=confidence_level
-            )
-            
-            logger.info(f"PPC intelligence report generated for {clean_domain}: {len(keywords)} keywords, {len(competitors)} competitors")
-            return report
-            
-        except Exception as e:
-            logger.error(f"Error generating PPC intelligence report for {domain}: {e}")
-            return PPCIntelligenceReport(
-                target_domain=clean_domain,
-                confidence_level="Low - Error Occurred"
-            )
+        # Generate realistic demo keywords based on domain
+        demo_keywords = self._generate_demo_keywords(clean_domain)
+        demo_competitors = self._generate_demo_competitors(clean_domain)
+        demo_ads = self._generate_demo_ads(clean_domain)
+        demo_stats = self._generate_demo_stats(clean_domain)
+        
+        report = PPCIntelligenceReport(
+            target_domain=clean_domain,
+            paid_keywords=demo_keywords,
+            top_competitors=demo_competitors,
+            ad_history=demo_ads,
+            domain_stats=demo_stats,
+            confidence_level="Demo Data - SpyFu Integration Pending"
+        )
+        
+        logger.info(f"Demo PPC intelligence report generated for {clean_domain}: {len(demo_keywords)} keywords, {len(demo_competitors)} competitors")
+        return report
+    
+    def _generate_demo_keywords(self, domain: str) -> List[PPCKeyword]:
+        """Generate realistic demo PPC keywords"""
+        # Extract business type from domain for relevant keywords
+        domain_lower = domain.lower()
+        
+        if 'event' in domain_lower or 'rental' in domain_lower:
+            base_keywords = [
+                ("event rentals", 5400, 2.45, "Medium"),
+                ("party equipment rental", 1200, 3.20, "High"),
+                ("wedding rentals", 3600, 4.15, "High"),
+                ("tent rental near me", 2200, 2.80, "Medium"),
+                ("corporate event planning", 1800, 5.30, "High"),
+                ("event supplies rental", 900, 2.10, "Low"),
+                ("party tent rental", 1500, 3.45, "Medium"),
+                ("event equipment rental", 800, 2.95, "Medium")
+            ]
+        else:
+            # Generic business keywords
+            base_keywords = [
+                (f"{domain.split('.')[0]} services", 2400, 3.25, "Medium"),
+                (f"best {domain.split('.')[0]}", 1800, 2.90, "High"),
+                (f"{domain.split('.')[0]} near me", 3200, 2.15, "Low"),
+                (f"professional {domain.split('.')[0]}", 1100, 4.20, "High"),
+                (f"affordable {domain.split('.')[0]}", 950, 2.80, "Medium")
+            ]
+        
+        keywords = []
+        for i, (keyword, searches, cpc, comp) in enumerate(base_keywords):
+            estimated_cost = searches * cpc * 0.3  # Rough estimate
+            keywords.append(PPCKeyword(
+                keyword=keyword,
+                monthly_searches=searches,
+                cpc=cpc,
+                competition=comp,
+                position=i + 1,
+                estimated_monthly_cost=estimated_cost
+            ))
+        
+        return keywords
+    
+    def _generate_demo_competitors(self, domain: str) -> List[PPCCompetitor]:
+        """Generate realistic demo PPC competitors"""
+        domain_lower = domain.lower()
+        
+        if 'event' in domain_lower or 'rental' in domain_lower:
+            competitor_domains = [
+                ("partyrentals.com", 45, 12500),
+                ("eventnetwork.com", 38, 8900),
+                ("aaaeventrental.com", 32, 15200),
+                ("partypro.com", 28, 7800),
+                ("rentalequipment.com", 25, 9400)
+            ]
+        else:
+            # Generic competitors based on domain name
+            base_name = domain.split('.')[0]
+            competitor_domains = [
+                (f"{base_name}pro.com", 35, 8500),
+                (f"best{base_name}.com", 28, 6200),
+                (f"{base_name}services.net", 22, 4800),
+                (f"elite{base_name}.com", 18, 7100)
+            ]
+        
+        competitors = []
+        for domain_name, keywords, spend in competitor_domains:
+            competitors.append(PPCCompetitor(
+                domain=domain_name,
+                overlapping_keywords=keywords,
+                estimated_monthly_spend=spend,
+                shared_keywords_count=keywords
+            ))
+        
+        return competitors
+    
+    def _generate_demo_ads(self, domain: str) -> List[AdHistoryEntry]:
+        """Generate realistic demo ad examples"""
+        domain_lower = domain.lower()
+        
+        if 'event' in domain_lower or 'rental' in domain_lower:
+            ad_examples = [
+                ("Premium Event Rentals - Free Delivery & Setup. Quality Equipment for Memorable Events!", "event rentals"),
+                ("Wedding Tent Rentals - Beautiful, Weather-Proof Tents. Book Your Dream Wedding Today!", "wedding tent rental"),
+                ("Corporate Event Planning - Full Service Event Management. Call for Free Quote!", "corporate events"),
+                ("Party Equipment Rental - Tables, Chairs, Linens & More. Same-Day Delivery Available!", "party rentals")
+            ]
+        else:
+            base_name = domain.split('.')[0].title()
+            ad_examples = [
+                (f"{base_name} Services - Professional & Reliable. Get Your Free Estimate Today!", f"{base_name.lower()} services"),
+                (f"Best {base_name} in Town - 5-Star Reviews. Call Now for Special Pricing!", f"best {base_name.lower()}"),
+                (f"Affordable {base_name} Solutions - Quality Work, Fair Prices. Book Online!", f"affordable {base_name.lower()}")
+            ]
+        
+        ads = []
+        for i, (ad_text, keyword) in enumerate(ad_examples):
+            ads.append(AdHistoryEntry(
+                ad_text=ad_text,
+                keyword=keyword,
+                position=i + 1
+            ))
+        
+        return ads
+    
+    def _generate_demo_stats(self, domain: str) -> DomainStats:
+        """Generate realistic demo domain statistics"""
+        return DomainStats(
+            domain=domain,
+            organic_keywords=1250,
+            paid_keywords=185,
+            estimated_monthly_organic_traffic=8400,
+            estimated_monthly_paid_traffic=2100,
+            estimated_monthly_ad_spend=15800
+        )
 
 # Global service instance
 spyfu_service = SpyFuService()

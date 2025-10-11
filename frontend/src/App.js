@@ -2059,7 +2059,10 @@ const MarketMapApp = () => {
                 {/* Top Keywords */}
                 {analysis.market_map.ppc_intelligence.top_keywords && analysis.market_map.ppc_intelligence.top_keywords.length > 0 && (
                   <div className="mb-6">
-                    <h4 className="font-bold text-gray-900 mb-4">🎯 Top Performing Keywords</h4>
+                    <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+                      <ChartBarIcon className="w-5 h-5 mr-2 text-blue-600" />
+                      Top Performing Keywords
+                    </h4>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead className="bg-gray-50">

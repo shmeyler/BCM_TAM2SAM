@@ -1958,7 +1958,10 @@ const MarketMapApp = () => {
                           
                           {digitalData.marketing_gaps && digitalData.marketing_gaps.length > 0 && (
                             <div className="bg-red-50 p-3 rounded border border-red-200">
-                              <div className="text-xs font-medium text-red-700 mb-2">⚠️ GAPS</div>
+                              <div className="text-xs font-medium text-red-700 mb-2 flex items-center">
+                                <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
+                                GAPS
+                              </div>
                               <div className="space-y-1">
                                 {digitalData.marketing_gaps.slice(0, 2).map((gap, i) => (
                                   <div key={i} className="text-xs text-red-800">{gap}</div>

@@ -83,45 +83,7 @@ import { getEnhancedCompanyIcon, getMediaChannelIcon } from './components/Enhanc
 // Enhanced Company Icon Mapper (now uses real brand logos)
 const getCompanyIcon = (companyName) => {
   return getEnhancedCompanyIcon(companyName, 24);
-  
-  // Travel & Tourism  
-  if (name.includes('disney')) return <FaTicketAlt className="text-blue-600" />;
-  if (name.includes('universal')) return <FaTicketAlt className="text-blue-800" />;
-  if (name.includes('hilton')) return <FaHotel className="text-blue-700" />;
-  if (name.includes('marriott')) return <FaHotel className="text-red-600" />;
-  if (name.includes('expedia')) return <FaPlane className="text-yellow-500" />;
-  if (name.includes('booking')) return <FaHotel className="text-blue-600" />;
-  if (name.includes('tripadvisor')) return <FaMapMarkerAlt className="text-green-500" />;
-  if (name.includes('visit') || name.includes('tourism')) return <FaMapMarkerAlt className="text-red-500" />;
-  if (name.includes('vacation') || name.includes('resort')) return <FaUmbrellaBeach className="text-blue-400" />;
-  if (name.includes('hotel') || name.includes('lodge')) return <FaHotel className="text-indigo-600" />;
-  if (name.includes('airline') || name.includes('airways') || name.includes('air ')) return <FaPlane className="text-sky-500" />;
-  if (name.includes('rental') || name.includes('car')) return <FaCar className="text-gray-600" />;
-  
-  // Food & Beverage
-  if (name.includes('starbucks')) return <FaCoffee className="text-green-600" />;
-  if (name.includes('coffee') || name.includes('cafe')) return <FaCoffee className="text-brown-600" />;
-  if (name.includes('pizza')) return <FaPizzaSlice className="text-red-500" />;
-  if (name.includes('burger') || name.includes('fast food')) return <FaHamburger className="text-yellow-600" />;
-  if (name.includes('beer') || name.includes('brewery') || name.includes('brewing')) return <FaBeer className="text-amber-600" />;
-  if (name.includes('wine') || name.includes('winery')) return <FaWineGlass className="text-purple-600" />;
-  
-  // Payment & Finance
-  if (name.includes('visa')) return <SiVisa className="text-blue-600" />;
-  if (name.includes('mastercard')) return <SiMastercard className="text-red-600" />;
-  if (name.includes('amex') || name.includes('american express')) return <FaBuilding className="text-blue-800" />;
-  
-  // Generic fallbacks by industry type
-  if (name.includes('group') || name.includes('corp') || name.includes('inc')) return <FaBuilding className="text-gray-600" />;
-  if (name.includes('destinations') || name.includes('parks')) return <FaTicketAlt className="text-purple-500" />;
-  if (name.includes('entertainment') || name.includes('media')) return <FaFilm className="text-red-500" />;
-  if (name.includes('music') || name.includes('audio')) return <FaMusic className="text-indigo-500" />;
-  if (name.includes('gaming') || name.includes('game')) return <FaGamepad className="text-green-500" />;
-  if (name.includes('photo') || name.includes('camera')) return <FaCamera className="text-gray-700" />;
-  if (name.includes('tech') || name.includes('software')) return <FaWifi className="text-blue-500" />;
-  
-  // Default fallback
-  return <FaBuilding className="text-gray-500" />;
+  // All icon mapping now handled by Enhanced Logo System
 };
 
 const MarketMapApp = () => {

@@ -1078,6 +1078,8 @@ class ComprehensiveAnalysisEngine:
             segmentation = ai_analysis.get("segmentation", {})
             competitors = ai_analysis.get("competitors", [])
             opportunities = ai_analysis.get("opportunities", [])
+            if not opportunities:  # If opportunities is empty, try marketing_opportunities
+                opportunities = ai_analysis.get("marketing_opportunities", [])
             threats = ai_analysis.get("threats", [])
             recommendations = ai_analysis.get("recommendations", [])
 

@@ -1205,6 +1205,10 @@ class ComprehensiveAnalysisEngine:
                 opportunities=opportunities,
                 threats=threats,
                 strategic_recommendations=recommendations,
+                marketing_opportunities=ai_analysis.get("marketing_opportunities", []),
+                marketing_threats=ai_analysis.get("marketing_threats", []),
+                marketing_recommendations=ai_analysis.get("marketing_recommendations", []),
+                competitive_digital_assessment=ai_analysis.get("competitive_digital_assessment", {}),
                 data_sources=[
                     source.get("name", str(source)) if isinstance(source, dict) else str(source)
                     for source in ai_analysis.get("data_sources", ["Industry reports", "Market research", "Public data"])

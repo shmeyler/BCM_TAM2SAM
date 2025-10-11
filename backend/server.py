@@ -341,14 +341,17 @@ class MarketIntelligenceAgent:
             - Key Metrics: {market_input.key_metrics}
             - Known Benchmarks: {market_input.benchmarks}
 
+            MARKETING & ADVERTISING FOCUS:
+            This analysis is from a MARKETING CONSULTANT perspective, focusing on growth through marketing and advertising strategies rather than operational improvements.
+            
             CRITICAL REQUIREMENTS:
             1. Use REALISTIC market sizes - avoid $500B defaults
             2. Research REAL companies that exist in this market - MINIMUM 4 COMPETITORS ALWAYS
             3. ALWAYS include {market_input.product_name} as the primary company being analyzed in the competitive landscape
-            4. Provide SPECIFIC growth rates based on actual industry data
-            5. Use credible data sources and methodology
-            6. Geographic segmentation must be GRANULAR - include urban/suburban, specific states, DMA codes, metro areas
-            7. Strategic recommendations must be ACTIONABLE and SPECIFIC
+            4. Focus on MARKETING and ADVERTISING growth strategies, not operational efficiencies
+            5. Analyze digital marketing approaches, advertising spend, channel strategies, and brand positioning
+            6. Geographic segmentation must consider MARKETING REACH - include media markets, DMA codes, digital penetration
+            7. Strategic recommendations must be MARKETING-ACTIONABLE (campaigns, channels, messaging, targeting)
             8. ENSURE PROPER SPACING in all text - add spaces around company names, product names, and between words
 
             COMPETITIVE ANALYSIS REQUIREMENTS:

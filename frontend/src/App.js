@@ -1892,7 +1892,10 @@ const MarketMapApp = () => {
                         {/* Advertising Spend */}
                         {digitalData.advertising_spend_estimate && (
                           <div className="bg-white p-3 rounded border border-blue-100">
-                            <div className="text-xs font-medium text-blue-700 mb-1">💰 AD SPEND ESTIMATE</div>
+                            <div className="text-xs font-medium text-blue-700 mb-1 flex items-center">
+                              <FaShoppingCart className="mr-1" />
+                              AD SPEND ESTIMATE
+                            </div>
                             <div className="text-sm font-semibold text-gray-800">{digitalData.advertising_spend_estimate}</div>
                           </div>
                         )}

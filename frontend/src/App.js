@@ -1734,7 +1734,7 @@ const MarketMapApp = () => {
                     className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center"
                     disabled={isProcessing}
                   >
-                    <span className="mr-2">📊</span>
+                    <FaBrain className="mr-2 text-blue-600" />
                     Export for Resonate rAI
                   </button>
                 </div>

@@ -70,13 +70,8 @@ class SpyFuService:
         else:
             self.available = True
             
-        # Create auth header
-        self.auth_header = None
-        if self.available:
-            # SpyFu uses the API key as username with empty password for Basic Auth
-            credentials = f"{self.api_key}:"
-            encoded_credentials = base64.b64encode(credentials.encode()).decode()
-            self.auth_header = {"Authorization": f"Basic {encoded_credentials}"}
+        # SpyFu uses API key as query parameter, no auth header needed
+        self.auth_header = {}
     
     async def get_ppc_keywords(self, domain: str, limit: int = 50) -> List[PPCKeyword]:
         """Get PPC keywords for a domain"""

@@ -85,10 +85,10 @@ class SpyFuService:
             
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
-                url = f"{self.base_url}/domain_stats_api/ppc_keywords"
+                url = f"{self.base_url}/kombat_api/competing_ppc_keywords"
                 params = {
-                    "domain": domain,
-                    "limit": limit
+                    "r": domain,  # SpyFu uses 'r' parameter for domain
+                    "api_key": self.api_key
                 }
                 
                 response = await client.get(

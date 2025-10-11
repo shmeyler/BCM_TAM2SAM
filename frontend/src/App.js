@@ -77,26 +77,12 @@ const API = `${BACKEND_URL}/api`;
 
 console.log('Backend URL:', BACKEND_URL);
 
-// Dynamic Company Icon Mapper
+// Import Enhanced Logo System
+import { getEnhancedCompanyIcon, getMediaChannelIcon } from './components/EnhancedLogoSystem';
+
+// Enhanced Company Icon Mapper (now uses real brand logos)
 const getCompanyIcon = (companyName) => {
-  const name = companyName.toLowerCase();
-  
-  // Tech Companies
-  if (name.includes('apple')) return <FaApple className="text-gray-600" />;
-  if (name.includes('google')) return <FaGoogle className="text-blue-500" />;
-  if (name.includes('microsoft')) return <FaMicrosoft className="text-blue-600" />;
-  if (name.includes('amazon')) return <FaAmazon className="text-orange-500" />;
-  if (name.includes('facebook') || name.includes('meta')) return <FaFacebook className="text-blue-600" />;
-  if (name.includes('netflix')) return <FaFilm className="text-red-600" />;
-  if (name.includes('spotify')) return <FaSpotify className="text-green-500" />;
-  if (name.includes('uber')) return <FaUber className="text-black" />;
-  if (name.includes('airbnb')) return <FaAirbnb className="text-red-500" />;
-  if (name.includes('paypal')) return <FaPaypal className="text-blue-600" />;
-  if (name.includes('stripe')) return <FaStripe className="text-purple-600" />;
-  if (name.includes('salesforce')) return <FaSalesforce className="text-blue-500" />;
-  if (name.includes('slack')) return <FaSlack className="text-purple-500" />;
-  if (name.includes('dropbox')) return <FaDropbox className="text-blue-500" />;
-  if (name.includes('shopify')) return <FaShopify className="text-green-600" />;
+  return getEnhancedCompanyIcon(companyName, 24);
   
   // Travel & Tourism  
   if (name.includes('disney')) return <FaTicketAlt className="text-blue-600" />;

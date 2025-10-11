@@ -1975,6 +1975,174 @@ const MarketMapApp = () => {
               </div>
             )}
 
+            {/* PPC Competitive Intelligence */}
+            {analysis.market_map.ppc_intelligence && Object.keys(analysis.market_map.ppc_intelligence).length > 0 && (
+              <div className="bg-white rounded-lg shadow-md p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                  <FaGoogle className="mr-3 text-blue-600" />
+                  PPC Competitive Intelligence
+                  <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                    Powered by SpyFu
+                  </span>
+                </h3>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                  {/* Overview Stats */}
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                    <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+                      <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+                      PPC Overview
+                    </h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-600">{analysis.market_map.ppc_intelligence.paid_keywords_count || 0}</div>
+                        <div className="text-xs text-gray-600">Paid Keywords</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-green-600">{analysis.market_map.ppc_intelligence.competitors_count || 0}</div>
+                        <div className="text-xs text-gray-600">PPC Competitors</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-purple-600">{analysis.market_map.ppc_intelligence.ad_history_count || 0}</div>
+                        <div className="text-xs text-gray-600">Ad Variations</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-xs text-orange-600 font-medium">{analysis.market_map.ppc_intelligence.confidence_level}</div>
+                        <div className="text-xs text-gray-600">Confidence</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Domain Stats */}
+                  {analysis.market_map.ppc_intelligence.domain_stats && (
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
+                      <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+                        <span className="w-2 h-2 bg-green-600 rounded-full mr-2"></span>
+                        Domain Performance
+                      </h4>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Est. Monthly Ad Spend:</span>
+                          <span className="font-semibold text-gray-900">
+                            ${analysis.market_map.ppc_intelligence.domain_stats.estimated_monthly_ad_spend?.toLocaleString() || 0}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Organic Keywords:</span>
+                          <span className="font-semibold text-gray-900">
+                            {analysis.market_map.ppc_intelligence.domain_stats.organic_keywords?.toLocaleString() || 0}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Paid Traffic:</span>
+                          <span className="font-semibold text-gray-900">
+                            {analysis.market_map.ppc_intelligence.domain_stats.estimated_monthly_paid_traffic?.toLocaleString() || 0}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Top Keywords */}
+                {analysis.market_map.ppc_intelligence.top_keywords && analysis.market_map.ppc_intelligence.top_keywords.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="font-bold text-gray-900 mb-4">🎯 Top Performing Keywords</h4>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-2 text-left font-medium text-gray-700">Keyword</th>
+                            <th className="px-4 py-2 text-center font-medium text-gray-700">Monthly Searches</th>
+                            <th className="px-4 py-2 text-center font-medium text-gray-700">CPC</th>
+                            <th className="px-4 py-2 text-center font-medium text-gray-700">Competition</th>
+                            <th className="px-4 py-2 text-center font-medium text-gray-700">Est. Monthly Cost</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {analysis.market_map.ppc_intelligence.top_keywords.slice(0, 8).map((keyword, index) => (
+                            <tr key={index} className="border-t border-gray-100">
+                              <td className="px-4 py-2 font-medium">{keyword.keyword}</td>
+                              <td className="px-4 py-2 text-center">{keyword.monthly_searches?.toLocaleString() || 'N/A'}</td>
+                              <td className="px-4 py-2 text-center">${keyword.cpc?.toFixed(2) || '0.00'}</td>
+                              <td className="px-4 py-2 text-center">
+                                <span className={`px-2 py-1 rounded text-xs ${
+                                  keyword.competition === 'High' ? 'bg-red-100 text-red-800' :
+                                  keyword.competition === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
+                                  'bg-green-100 text-green-800'
+                                }`}>
+                                  {keyword.competition}
+                                </span>
+                              </td>
+                              <td className="px-4 py-2 text-center">${keyword.estimated_monthly_cost?.toLocaleString() || '0'}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Top PPC Competitors */}
+                {analysis.market_map.ppc_intelligence.top_ppc_competitors && analysis.market_map.ppc_intelligence.top_ppc_competitors.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="font-bold text-gray-900 mb-4">🏆 Top PPC Competitors</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {analysis.market_map.ppc_intelligence.top_ppc_competitors.slice(0, 6).map((competitor, index) => (
+                        <div key={index} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                          <div className="flex items-center mb-3">
+                            <div className="w-8 h-8 mr-3 flex items-center justify-center bg-white border border-gray-300 rounded-lg">
+                              <BrandLogo companyName={competitor.domain} size={20} />
+                            </div>
+                            <div className="font-medium text-gray-900 text-sm">{competitor.domain}</div>
+                          </div>
+                          <div className="space-y-2 text-xs">
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Shared Keywords:</span>
+                              <span className="font-semibold">{competitor.overlapping_keywords}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Est. Monthly Spend:</span>
+                              <span className="font-semibold">${competitor.estimated_monthly_spend?.toLocaleString() || '0'}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {/* Recent Ad Examples */}
+                {analysis.market_map.ppc_intelligence.recent_ads && analysis.market_map.ppc_intelligence.recent_ads.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="font-bold text-gray-900 mb-4">📝 Recent Ad Examples</h4>
+                    <div className="space-y-3">
+                      {analysis.market_map.ppc_intelligence.recent_ads.slice(0, 4).map((ad, index) => (
+                        <div key={index} className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                          <div className="text-sm font-medium text-gray-900 mb-2">"{ad.ad_text}"</div>
+                          <div className="flex justify-between text-xs text-gray-600">
+                            <span>Keyword: <strong>{ad.keyword}</strong></span>
+                            {ad.position && <span>Position: #{ad.position}</span>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                <div className="bg-gradient-to-r from-indigo-50 to-blue-50 p-4 rounded-lg border border-indigo-200">
+                  <div className="flex items-center mb-2">
+                    <span className="text-indigo-600 mr-2">🔍</span>
+                    <span className="font-medium text-indigo-900">PPC Intelligence Insights</span>
+                  </div>
+                  <p className="text-sm text-indigo-700">
+                    This competitive intelligence data is powered by SpyFu and provides real insights into competitor PPC strategies, 
+                    keyword targeting, ad spend estimates, and advertising tactics to inform your digital marketing strategy.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Strategic Analysis */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Opportunities */}

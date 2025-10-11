@@ -1768,7 +1768,7 @@ const MarketMapApp = () => {
                   
                   <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200">
                     <div className="flex items-center mb-3">
-                      <span className="text-purple-600 mr-2">📺</span>
+                      <TvIcon className="w-5 h-5 text-purple-600 mr-2" />
                       <h4 className="font-bold text-gray-900">Media Usage</h4>
                     </div>
                     <p className="text-sm text-gray-700">

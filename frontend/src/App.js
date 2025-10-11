@@ -2093,7 +2093,10 @@ const MarketMapApp = () => {
             <h3 className="text-xl font-bold text-gray-900 mb-4">📚 Resources & Footnotes</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 mb-3">📊 Data Sources</h4>
+                <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                  <FaBrain className="mr-2 text-blue-600" />
+                  Data Sources
+                </h4>
                 <ul className="space-y-2">
                   {analysis.market_map.data_sources.map((source, index) => {
                     // Map source names to URLs

@@ -702,8 +702,8 @@ class MarketIntelligenceAgent:
 
     @staticmethod
     def _get_fallback_analysis(market_input: MarketInput) -> Dict[str, Any]:
-        """Minimal fallback analysis when OpenAI fails - no curated database"""
-        logger.warning(f"Using minimal fallback analysis for {market_input.product_name}")
+        """Fallback analysis - try curated data first, then generic fallback"""
+        logger.warning(f"Using fallback analysis for {market_input.product_name}")
         
         # Determine analysis perspective  
         has_specific_brand = bool(market_input.product_name and 
@@ -714,12 +714,42 @@ class MarketIntelligenceAgent:
         # Determine if this is B2B for firmographic analysis
         is_b2b = any(term in market_input.industry.lower() for term in ['b2b', 'business', 'enterprise', 'saas', 'software', 'financial services', 'consulting', 'professional services'])
         
-        # Generate basic market analysis without curated data
-        tam = 1000000000  # $1B default TAM
-        sam = int(tam * 0.3)  # 30% SAM
-        som = int(sam * 0.1)  # 10% SOM
+        # Try to get curated market data first
+        curated_data = MarketIntelligenceAgent.get_curated_market_data(
+            market_input.product_name.lower(), 
+            market_input.industry.lower(), 
+            market_input.geography.lower()
+        )
         
-        # Generic competitors based on industry
+        if curated_data:
+            logger.info(f"Using curated market data for {market_input.product_name}")
+            # Use curated data for better analysis
+            tam = curated_data["tam"]
+            sam = int(tam * 0.3)  # 30% SAM
+            som = int(sam * 0.1)  # 10% SOM
+            
+            # Use real competitors from curated data
+            real_competitors = []
+            for i, comp_name in enumerate(curated_data["competitors"][:5]):
+                real_competitors.append({
+                    "name": comp_name,
+                    "share": [0.25, 0.20, 0.15, 0.12, 0.10][i] if i < 5 else 0.08,
+                    "strengths": ["Market presence", "Brand recognition"],
+                    "weaknesses": ["Competition", "Market saturation"],
+                    "price_range": "$150-$400",
+                    "price_tier": "Mid-Range",
+                    "innovation_focus": "Market growth",
+                    "user_segment": market_input.target_user
+                })
+            competitors = real_competitors
+        else:
+            logger.info(f"No curated data found, using generic analysis for {market_input.product_name}")
+            # Generate basic market analysis with generic data
+            tam = 1000000000  # $1B default TAM
+            sam = int(tam * 0.3)  # 30% SAM
+            som = int(sam * 0.1)  # 10% SOM
+            
+            # Generic competitors as fallback
         competitors = [
             {
                 "name": "Market Leader",

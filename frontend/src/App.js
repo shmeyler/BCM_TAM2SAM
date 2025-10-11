@@ -2012,7 +2012,10 @@ const MarketMapApp = () => {
 
             {/* Strategic Recommendations */}
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">✅ Strategic Recommendations</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                <FaBuilding className="mr-2 text-green-600" />
+                Strategic Recommendations
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {analysis.market_map.strategic_recommendations.map((recommendation, index) => (
                   <div key={index} className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">

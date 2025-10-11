@@ -205,8 +205,8 @@ class SpyFuIntegrationTester:
             if not hasattr(report, 'paid_keywords'):
                 return False, "PPC report missing paid_keywords"
             
-            if not hasattr(report, 'competitors'):
-                return False, "PPC report missing competitors"
+            if not hasattr(report, 'top_competitors'):
+                return False, "PPC report missing top_competitors"
             
             # Check if report has expected domain
             if report.target_domain != test_domain:

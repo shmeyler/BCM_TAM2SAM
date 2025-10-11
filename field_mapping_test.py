@@ -398,7 +398,7 @@ async def main():
     print("3. Field Mapping Verification")
     
     tester = FieldMappingTester()
-    success = tester.run_field_mapping_tests()
+    success = await tester.run_field_mapping_tests()
     
     if success:
         print("\n✅ All field mapping tests passed successfully!")

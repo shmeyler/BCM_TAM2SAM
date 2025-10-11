@@ -78,7 +78,7 @@ const API = `${BACKEND_URL}/api`;
 console.log('Backend URL:', BACKEND_URL);
 
 // Import Enhanced Logo System
-import { getEnhancedCompanyIcon, getMediaChannelIcon } from './components/EnhancedLogoSystem';
+import { getEnhancedCompanyIcon, getMediaChannelIcon, BrandLogo } from './components/EnhancedLogoSystem';
 
 // Enhanced Company Icon Mapper (now uses real brand logos)
 const getCompanyIcon = (companyName) => {

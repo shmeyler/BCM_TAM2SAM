@@ -59,6 +59,13 @@ import {
   SiMastercard
 } from 'react-icons/si';
 
+// Import Heroicons for professional icons
+import { 
+  ChartBarIcon,
+  TvIcon,
+  MagnifyingGlassIcon
+} from '@heroicons/react/24/outline';
+
 // Auto-detect backend URL based on current domain
 const getBackendUrl = () => {
   const hostname = window.location.hostname;

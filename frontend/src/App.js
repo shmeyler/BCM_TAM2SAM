@@ -1999,9 +1999,6 @@ const MarketMapApp = () => {
 
             {/* PPC Competitive Intelligence */}
             {analysis.market_map.ppc_intelligence && (
-              console.log('PPC Intelligence Data:', analysis.market_map.ppc_intelligence) || 
-              Object.keys(analysis.market_map.ppc_intelligence).length > 0
-            ) && (
               <div className="bg-white rounded-lg shadow-md p-8">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                   <FaGoogle className="mr-3 text-blue-600" />

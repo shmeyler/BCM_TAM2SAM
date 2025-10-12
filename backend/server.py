@@ -566,6 +566,7 @@ class MarketIntelligenceAgent:
                     }}
                 ],
                 "competitive_digital_assessment": {{
+                    // IMPORTANT: Use actual competitor company names from the competitors list above, NOT placeholder names like "competitor_1". Replace the placeholder keys with real company names like "Apple", "Fitbit", "Garmin", etc.
                     "{market_input.product_name}": {{
                         "digital_marketing_strategy": "Current digital marketing approach and channels",
                         "advertising_spend_estimate": "Estimated annual advertising budget",

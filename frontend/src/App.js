@@ -1997,6 +1997,16 @@ const MarketMapApp = () => {
               </div>
             )}
 
+            {/* Debug PPC Data */}
+            {process.env.NODE_ENV === 'development' && analysis.market_map && (
+              <div className="bg-yellow-100 border border-yellow-400 p-4 rounded-lg mb-4">
+                <h4 className="font-bold text-yellow-800">Debug: PPC Intelligence Data</h4>
+                <pre className="text-xs text-yellow-700 mt-2 overflow-auto">
+                  {JSON.stringify(analysis.market_map.ppc_intelligence, null, 2)}
+                </pre>
+              </div>
+            )}
+
             {/* PPC Competitive Intelligence */}
             {analysis.market_map.ppc_intelligence && (
               <div className="bg-white rounded-lg shadow-md p-8">

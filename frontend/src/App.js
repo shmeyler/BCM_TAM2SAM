@@ -340,7 +340,7 @@ const MarketMapApp = () => {
     try {
       // Make API call independently
       const response = await axios.post(`${API}/analyze-market`, formData, {
-        timeout: 120000,  // 120 seconds timeout (increased for executive summary generation)
+        timeout: 300000,  // 300 seconds (5 minutes) timeout for production AI processing
         withCredentials: true
       });
       

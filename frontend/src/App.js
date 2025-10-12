@@ -132,10 +132,10 @@ const MarketMapApp = () => {
     stepName: '',
     estimatedTimeLeft: 0,
     steps: [
-      { name: 'Analyzing Market Landscape with AI', duration: 45 },
-      { name: 'Processing Competitive Intelligence', duration: 30 },
-      { name: 'Generating Market Segmentation', duration: 20 },
-      { name: 'Creating Executive Summary', duration: 35 },
+      { name: 'Analyzing Market Landscape with AI', duration: 60 },
+      { name: 'Processing Competitive Intelligence', duration: 45 },
+      { name: 'Generating Market Segmentation', duration: 30 },
+      { name: 'Creating Executive Summary', duration: 50 },
       { name: 'Finalizing Visual Market Map', duration: 15 }
     ]
   });

@@ -364,7 +364,7 @@ const MarketMapApp = () => {
       
       // More detailed error handling
       if (error.code === 'ECONNABORTED') {
-        alert('Analysis is taking longer than expected. Please try again or contact support.');
+        alert('Analysis timed out after 2 minutes. This may happen with complex analyses. Please try again - most analyses complete within 2-3 minutes.');
       } else if (error.response) {
         alert(`Server error: ${error.response.status} - ${error.response.data?.detail || 'Unknown error'}`);
       } else if (error.request) {

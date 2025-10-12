@@ -624,22 +624,25 @@ class MarketIntelligenceAgent:
             Return only valid JSON with accurate, researched market intelligence.
             """
 
-            # Call Together AI API with Kimi K2 Instruct 0905
-            response = await asyncio.to_thread(
-                together_client.chat.completions.create,
-                model="moonshotai/Kimi-K2-Instruct-0905",
-                messages=[
-                    {
-                        "role": "system", 
-                        "content": "You are a market research expert. Return ONLY valid JSON with no markdown formatting or additional text."
-                    },
-                    {
-                        "role": "user", 
-                        "content": prompt
-                    }
-                ],
-                temperature=0.1,
-                max_tokens=8000
+            # Call Together AI API with Kimi K2 Instruct 0905 (with 4-minute timeout for production)
+            response = await asyncio.wait_for(
+                asyncio.to_thread(
+                    together_client.chat.completions.create,
+                    model="moonshotai/Kimi-K2-Instruct-0905",
+                    messages=[
+                        {
+                            "role": "system", 
+                            "content": "You are a market research expert. Return ONLY valid JSON with no markdown formatting or additional text."
+                        },
+                        {
+                            "role": "user", 
+                            "content": prompt
+                        }
+                    ],
+                    temperature=0.1,
+                    max_tokens=8000
+                ),
+                timeout=240.0  # 4 minute timeout for Together AI API call
             )
             
             content = response.choices[0].message.content.strip()

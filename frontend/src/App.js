@@ -132,11 +132,11 @@ const MarketMapApp = () => {
     stepName: '',
     estimatedTimeLeft: 0,
     steps: [
-      { name: 'Analyzing Market Landscape with AI', duration: 25 },
-      { name: 'Processing Competitive Intelligence', duration: 15 },
-      { name: 'Generating Market Segmentation', duration: 10 },
-      { name: 'Creating Executive Summary', duration: 20 },
-      { name: 'Finalizing Visual Market Map', duration: 10 }
+      { name: 'Analyzing Market Landscape with AI', duration: 45 },
+      { name: 'Processing Competitive Intelligence', duration: 30 },
+      { name: 'Generating Market Segmentation', duration: 20 },
+      { name: 'Creating Executive Summary', duration: 35 },
+      { name: 'Finalizing Visual Market Map', duration: 15 }
     ]
   });
   const [analysis, setAnalysis] = useState(null);

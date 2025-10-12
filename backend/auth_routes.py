@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from motor.motor_asyncio import AsyncIOMotorClient
 import httpx
 import logging
+import os
 from datetime import datetime, timezone
 from typing import Optional, List
 from auth_models import User, Session, SessionData, UserResponse, AdminUserUpdate

@@ -334,25 +334,24 @@ const MarketMapApp = () => {
       estimatedTimeLeft: prev.steps.reduce((sum, step) => sum + step.duration, 0)
     }));
 
+    // Start progress simulation (decorative only - don't wait for it)
+    simulateProgress();
+
     try {
-      // Start progress simulation
-      const progressPromise = simulateProgress();
-      
-      // Start actual API call
-      const apiPromise = axios.post(`${API}/analyze-market`, formData, {
+      // Make API call independently
+      const response = await axios.post(`${API}/analyze-market`, formData, {
         timeout: 120000,  // 120 seconds timeout (increased for executive summary generation)
         withCredentials: true
       });
-
-      // Wait for both to complete
-      const [_, response] = await Promise.all([progressPromise, apiPromise]);
       
       console.log('Market analysis response:', response.data);
+      
+      // Immediately update state when API completes
       setAnalysis(response.data);
       setCurrentStep(4);
       loadHistory();
-
-      // Reset progress
+      
+      // Stop progress simulation
       setAnalysisProgress(prev => ({
         ...prev,
         currentStep: prev.totalSteps,

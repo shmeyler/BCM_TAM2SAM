@@ -577,27 +577,27 @@ class MarketIntelligenceAgent:
                         "marketing_strengths": ["strength1", "strength2"],
                         "marketing_gaps": ["gap1", "gap2"]
                     }},
-                    "competitor_1": {{
-                        "digital_marketing_strategy": "Competitor's digital approach",
-                        "advertising_spend_estimate": "Estimated budget",
-                        "primary_channels": ["channels they use"],
-                        "social_media_presence": "Social strategy assessment",
-                        "content_marketing": "Content approach",
-                        "paid_advertising": "Paid strategy",
-                        "seo_positioning": "SEO strength",
-                        "marketing_strengths": ["what they do well"],
-                        "marketing_gaps": ["their weaknesses"]
+                    "[USE ACTUAL COMPETITOR NAME FROM COMPETITORS LIST - e.g., Apple, Fitbit, Garmin]": {{
+                        "digital_marketing_strategy": "Competitor's digital marketing approach and channel strategy",
+                        "advertising_spend_estimate": "Estimated annual advertising budget",
+                        "primary_channels": ["primary marketing channels they use"],
+                        "social_media_presence": "Assessment of social media strategy and engagement levels",
+                        "content_marketing": "Content strategy and thought leadership approach",
+                        "paid_advertising": "Paid search, display, social advertising strategy",
+                        "seo_positioning": "Organic search presence and keyword strategy",
+                        "marketing_strengths": ["specific marketing strengths"],
+                        "marketing_gaps": ["identified marketing weaknesses"]
                     }},
-                    "competitor_2": {{
-                        "digital_marketing_strategy": "Competitor's digital approach",
-                        "advertising_spend_estimate": "Estimated budget", 
-                        "primary_channels": ["channels they use"],
-                        "social_media_presence": "Social strategy assessment",
-                        "content_marketing": "Content approach",
-                        "paid_advertising": "Paid strategy",
-                        "seo_positioning": "SEO strength",
-                        "marketing_strengths": ["what they do well"],
-                        "marketing_gaps": ["their weaknesses"]
+                    "[USE SECOND ACTUAL COMPETITOR NAME FROM COMPETITORS LIST]": {{
+                        "digital_marketing_strategy": "Second competitor's digital marketing approach",
+                        "advertising_spend_estimate": "Estimated annual advertising budget", 
+                        "primary_channels": ["primary marketing channels they use"],
+                        "social_media_presence": "Assessment of social media strategy and engagement levels",
+                        "content_marketing": "Content strategy and thought leadership approach",
+                        "paid_advertising": "Paid search, display, social advertising strategy",
+                        "seo_positioning": "Organic search presence and keyword strategy",
+                        "marketing_strengths": ["specific marketing strengths"],
+                        "marketing_gaps": ["identified marketing weaknesses"]
                     }}
                 }},
                 "opportunities": [list of 4-5 marketing-specific market opportunities],

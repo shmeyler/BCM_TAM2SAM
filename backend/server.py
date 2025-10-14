@@ -357,6 +357,8 @@ class MarketIntelligenceAgent:
             CRITICAL REQUIREMENTS:
             1. Use REALISTIC market sizes - avoid $500B defaults
             2. Research REAL companies that exist in this market - MINIMUM 4 COMPETITORS ALWAYS
+            3. For Fitness Tracker analysis, use real companies like Apple (Apple Watch), Fitbit, Garmin, Samsung, Xiaomi, etc.
+            4. Base analysis on actual market knowledge and include recognized industry players with their actual brand names
             3. ALWAYS include {market_input.product_name} as the primary company being analyzed in the competitive landscape
             4. Focus on MARKETING and ADVERTISING growth strategies, not operational efficiencies
             5. Analyze digital marketing approaches, advertising spend, channel strategies, and brand positioning

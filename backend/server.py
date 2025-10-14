@@ -371,6 +371,8 @@ class MarketIntelligenceAgent:
             - Include at least 3-4 other major competitors in the {market_input.industry} space
             - Provide realistic market share estimates for all competitors including {market_input.product_name}
             - Compare {market_input.product_name} strengths and weaknesses against competitors
+            
+            IMPORTANT: When analyzing competitors, use actual company names that exist in this industry. Research and include major market players by their real brand names.
 
             MARKET SIZE GUIDELINES BY CATEGORY:
             - Software niches: $1B-$50B TAM

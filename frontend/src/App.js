@@ -1089,7 +1089,7 @@ const MarketMapApp = () => {
                           </div>
                           {analysisProgress.estimatedTimeLeft > 0 && (
                             <div className="text-sm text-gray-600">
-                              Estimated time remaining: {analysisProgress.estimatedTimeLeft} seconds
+                              Estimated time remaining: {formatTimeRemaining(analysisProgress.estimatedTimeLeft)}
                             </div>
                           )}
                         </div>

@@ -539,34 +539,34 @@ class MarketIntelligenceAgent:
                         "user_segment": "{market_input.target_user}"
                     }},
                     {{
-                        "name": "major competitor 1 name",
-                        "share": [market share as decimal],
-                        "strengths": ["strength1", "strength2"],
-                        "weaknesses": ["weakness1", "weakness2"],
-                        "price_range": "actual price range",
-                        "price_tier": "Premium/Mid-Range/Budget",
-                        "innovation_focus": "focus area",
-                        "user_segment": "target segment"
+                        "name": "Apple (for fitness: Apple Watch)",
+                        "share": [market share as decimal - use real market research data],
+                        "strengths": ["specific Apple strengths like ecosystem integration", "brand loyalty"],
+                        "weaknesses": ["specific Apple weaknesses like premium pricing", "limited customization"],
+                        "price_range": "actual Apple price range",
+                        "price_tier": "Premium",
+                        "innovation_focus": "health tracking, ecosystem integration",
+                        "user_segment": "premium consumers, Apple ecosystem users"
                     }},
                     {{
-                        "name": "major competitor 2 name", 
-                        "share": [market share as decimal],
-                        "strengths": ["strength1", "strength2"],
-                        "weaknesses": ["weakness1", "weakness2"],
-                        "price_range": "actual price range",
-                        "price_tier": "Premium/Mid-Range/Budget",
-                        "innovation_focus": "focus area",
-                        "user_segment": "target segment"
+                        "name": "Fitbit (now Google)", 
+                        "share": [market share as decimal - use real market research data],
+                        "strengths": ["fitness tracking accuracy", "battery life"],
+                        "weaknesses": ["limited smartwatch features", "declining market share"],
+                        "price_range": "actual Fitbit price range",
+                        "price_tier": "Mid-Range",
+                        "innovation_focus": "health and fitness tracking",
+                        "user_segment": "fitness enthusiasts, health-conscious consumers"
                     }},
                     {{
-                        "name": "major competitor 3 name",
-                        "share": [market share as decimal],
-                        "strengths": ["strength1", "strength2"],
-                        "weaknesses": ["weakness1", "weakness2"],
-                        "price_range": "actual price range",
-                        "price_tier": "Premium/Mid-Range/Budget",
-                        "innovation_focus": "focus area",
-                        "user_segment": "target segment"
+                        "name": "Garmin",
+                        "share": [market share as decimal - use real market research data],
+                        "strengths": ["GPS accuracy", "long battery life", "sports-specific features"],
+                        "weaknesses": ["limited smart features", "complex user interface"],
+                        "price_range": "actual Garmin price range",
+                        "price_tier": "Premium/Mid-Range",
+                        "innovation_focus": "GPS technology, sports analytics",
+                        "user_segment": "serious athletes, outdoor enthusiasts"
                     }}
                 ],
                 "competitive_digital_assessment": {{

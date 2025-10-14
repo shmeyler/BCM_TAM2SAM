@@ -107,6 +107,21 @@ const getMediaIcon = (channelName) => {
   return getMediaChannelIcon(channelName);
 };
 
+// Helper function to format time in a user-friendly way
+const formatTimeRemaining = (seconds) => {
+  if (seconds <= 0) return '';
+  if (seconds < 60) return `${seconds} seconds`;
+  
+  const minutes = Math.ceil(seconds / 60);
+  if (minutes === 1) return '1 minute';
+  if (minutes <= 5) return `${minutes} minutes`;
+  
+  // For longer times, show a range
+  const minMinutes = Math.floor(minutes * 0.8);
+  const maxMinutes = Math.ceil(minutes * 1.2);
+  return `${minMinutes}-${maxMinutes} minutes`;
+};
+
 const MarketMapApp = () => {
   // Authentication state
   const [user, setUser] = useState(null);

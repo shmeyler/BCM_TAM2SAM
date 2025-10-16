@@ -1192,9 +1192,12 @@ const MarketMapApp = () => {
             {/* Executive Summary Section - Moved to Top */}
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-lg p-8 border border-blue-100">
               <div className="text-center mb-8">
-                <h3 className="text-3xl font-bold text-gray-900 mb-3">Executive Summary</h3>
-                <div className="w-24 h-1 bg-blue-500 mx-auto"></div>
-                <p className="text-gray-600 mt-3">Strategic Overview and Key Insights</p>
+                <h3 className="text-4xl font-bold text-gray-900 mb-4" 
+                    style={{fontFamily: "'Georgia', 'Times New Roman', serif"}}>
+                  Executive Summary
+                </h3>
+                <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
+                <p className="text-gray-600 mt-4 text-lg font-medium">Strategic Overview and Key Insights</p>
               </div>
               
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">

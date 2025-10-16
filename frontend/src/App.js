@@ -1328,25 +1328,31 @@ const MarketMapApp = () => {
                           {analysis.market_map.confidence_level.toUpperCase()}
                         </span>
                       </div>
-                      <div>
-                        <span className="font-medium text-gray-600">Data Sources:</span>
-                        <div className="ml-2 space-y-1">
-                          {analysis.market_map.data_sources.map((source, index) => (
-                            <div key={index}>
+                      <div className="flex flex-col space-y-1">
+                        <span className="font-semibold text-gray-800 uppercase tracking-wide text-xs">Data Sources</span>
+                        <div className="space-y-2">
+                          {analysis.market_map.data_sources.slice(0, 3).map((source, index) => (
+                            <div key={index} className="flex items-center">
+                              <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 flex-shrink-0"></div>
                               {source.url ? (
                                 <a 
                                   href={source.url} 
                                   target="_blank" 
                                   rel="noopener noreferrer"
-                                  className="text-blue-600 hover:text-blue-800 underline text-xs"
+                                  className="text-blue-600 hover:text-blue-800 underline text-sm font-medium transition-colors"
                                 >
-                                  {source.name}
+                                  {source.name || source}
                                 </a>
                               ) : (
-                                <span className="text-gray-700 text-xs">{source}</span>
+                                <span className="text-gray-600 text-sm font-medium">{source}</span>
                               )}
                             </div>
                           ))}
+                          {analysis.market_map.data_sources.length > 3 && (
+                            <div className="text-xs text-gray-500 italic">
+                              +{analysis.market_map.data_sources.length - 3} more sources
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>

@@ -1307,19 +1307,23 @@ const MarketMapApp = () => {
                   </div>
                   
                   {/* Analysis Metadata */}
-                  <div className="mt-6 pt-6 border-t border-gray-200">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                      <div>
-                        <span className="font-medium text-gray-600">Analysis Date:</span>
-                        <span className="ml-2 text-gray-700">
-                          {new Date(analysis.market_map.timestamp).toLocaleDateString()}
+                  <div className="mt-8 pt-6 border-t border-gray-200 bg-gray-50 -mx-8 px-8 pb-6 rounded-b-lg">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                      <div className="flex flex-col space-y-1">
+                        <span className="font-semibold text-gray-800 uppercase tracking-wide text-xs">Analysis Date</span>
+                        <span className="text-gray-600 font-medium">
+                          {new Date(analysis.market_map.timestamp).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
                         </span>
                       </div>
-                      <div>
-                        <span className="font-medium text-gray-600">Confidence Level:</span>
-                        <span className={`ml-2 px-2 py-1 rounded text-xs font-medium ${
-                          analysis.market_map.confidence_level === 'high' ? 'bg-green-100 text-green-700' :
-                          analysis.market_map.confidence_level === 'medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'
+                      <div className="flex flex-col space-y-1">
+                        <span className="font-semibold text-gray-800 uppercase tracking-wide text-xs">Confidence Level</span>
+                        <span className={`inline-flex px-3 py-1 rounded-full text-sm font-semibold w-fit ${
+                          analysis.market_map.confidence_level === 'high' ? 'bg-green-100 text-green-800 border border-green-200' :
+                          analysis.market_map.confidence_level === 'medium' ? 'bg-yellow-100 text-yellow-800 border border-yellow-200' : 'bg-red-100 text-red-800 border border-red-200'
                         }`}>
                           {analysis.market_map.confidence_level.toUpperCase()}
                         </span>

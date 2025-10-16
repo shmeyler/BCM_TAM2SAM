@@ -1272,9 +1272,34 @@ const MarketMapApp = () => {
               {/* Detailed Executive Summary Text */}
               {analysis.market_map && analysis.market_map.executive_summary ? (
                 <div className="bg-white rounded-lg p-8 shadow-sm border">
-                  <div className="prose prose-lg max-w-none">
-                    <div className="text-gray-700 leading-relaxed whitespace-pre-line text-base">
-                      {analysis.market_map.executive_summary}
+                  <div className="prose prose-xl max-w-none">
+                    <div className="text-gray-800 leading-relaxed whitespace-pre-line font-serif text-lg tracking-wide" 
+                         style={{
+                           fontFamily: "'Georgia', 'Times New Roman', serif",
+                           lineHeight: '1.7',
+                           letterSpacing: '0.3px'
+                         }}>
+                      {analysis.market_map.executive_summary.split('\n\n').map((paragraph, index) => (
+                        <div key={index} className="mb-6">
+                          {paragraph.split('\n').map((line, lineIndex) => {
+                            // Check if line is a header (starts with ** and ends with **)
+                            if (line.startsWith('**') && line.endsWith('**')) {
+                              const headerText = line.replace(/\*\*/g, '');
+                              return (
+                                <h4 key={lineIndex} className="text-xl font-bold text-gray-900 mt-8 mb-4 font-sans border-b-2 border-blue-100 pb-2">
+                                  {headerText}
+                                </h4>
+                              );
+                            }
+                            // Regular text line
+                            return line.trim() ? (
+                              <p key={lineIndex} className="mb-3">
+                                {line}
+                              </p>
+                            ) : null;
+                          })}
+                        </div>
+                      ))}
                     </div>
                   </div>
                   

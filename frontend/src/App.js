@@ -1276,30 +1276,46 @@ const MarketMapApp = () => {
               {analysis.market_map && analysis.market_map.executive_summary ? (
                 <div className="bg-white rounded-lg p-8 shadow-sm border">
                   <div className="prose prose-xl max-w-none">
-                    <div className="text-gray-800 leading-relaxed whitespace-pre-line font-serif text-lg tracking-wide" 
+                    <div className="text-gray-800 leading-relaxed font-serif text-lg tracking-wide" 
                          style={{
                            fontFamily: "'Georgia', 'Times New Roman', serif",
-                           lineHeight: '1.7',
-                           letterSpacing: '0.3px'
+                           lineHeight: '1.8',
+                           letterSpacing: '0.4px'
                          }}>
-                      {analysis.market_map.executive_summary.split('\n\n').map((paragraph, index) => (
-                        <div key={index} className="mb-6">
-                          {paragraph.split('\n').map((line, lineIndex) => {
+                      {analysis.market_map.executive_summary.split('\n\n').map((section, sectionIndex) => (
+                        <div key={sectionIndex} className="mb-8">
+                          {section.split('\n').map((line, lineIndex) => {
+                            const trimmedLine = line.trim();
+                            if (!trimmedLine) return null;
+
                             // Check if line is a header (starts with ** and ends with **)
-                            if (line.startsWith('**') && line.endsWith('**')) {
-                              const headerText = line.replace(/\*\*/g, '');
+                            if (trimmedLine.startsWith('**') && trimmedLine.endsWith('**')) {
+                              const headerText = trimmedLine.replace(/\*\*/g, '');
                               return (
-                                <h4 key={lineIndex} className="text-xl font-bold text-gray-900 mt-8 mb-4 font-sans border-b-2 border-blue-100 pb-2">
+                                <h4 key={lineIndex} className="text-2xl font-bold text-gray-900 mt-10 mb-6 font-sans border-b-2 border-blue-200 pb-3">
                                   {headerText}
                                 </h4>
                               );
                             }
-                            // Regular text line
-                            return line.trim() ? (
-                              <p key={lineIndex} className="mb-3">
-                                {line}
+
+                            // Check if line contains bullet-style content (starts with -, •, or numbers)
+                            if (trimmedLine.match(/^[-•*]\s+/) || trimmedLine.match(/^\d+\.\s+/)) {
+                              return (
+                                <div key={lineIndex} className="flex items-start mb-4 ml-4">
+                                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-3 mr-4 flex-shrink-0"></div>
+                                  <p className="text-gray-700 flex-1 leading-relaxed">
+                                    {trimmedLine.replace(/^[-•*]\s+/, '').replace(/^\d+\.\s+/, '')}
+                                  </p>
+                                </div>
+                              );
+                            }
+
+                            // Regular paragraph
+                            return (
+                              <p key={lineIndex} className="mb-6 text-gray-700 leading-relaxed">
+                                {trimmedLine}
                               </p>
-                            ) : null;
+                            );
                           })}
                         </div>
                       ))}

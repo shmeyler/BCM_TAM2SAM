@@ -1323,54 +1323,53 @@ const MarketMapApp = () => {
                   </div>
                   
                   {/* Analysis Metadata */}
-                  <div className="mt-8 pt-6 border-t border-gray-200 bg-gray-50 -mx-8 px-8 pb-6 rounded-b-lg">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                      <div className="flex flex-col space-y-1">
-                        <span className="font-semibold text-gray-800 uppercase tracking-wide text-xs">Analysis Date</span>
-                        <span className="text-gray-600 font-medium">
-                          {new Date(analysis.market_map.timestamp).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                        </span>
-                      </div>
-                      <div className="flex flex-col space-y-1">
-                        <span className="font-semibold text-gray-800 uppercase tracking-wide text-xs">Confidence Level</span>
-                        <span className={`inline-flex px-3 py-1 rounded-full text-sm font-semibold w-fit ${
-                          analysis.market_map.confidence_level === 'high' ? 'bg-green-100 text-green-800 border border-green-200' :
-                          analysis.market_map.confidence_level === 'medium' ? 'bg-yellow-100 text-yellow-800 border border-yellow-200' : 'bg-red-100 text-red-800 border border-red-200'
-                        }`}>
-                          {analysis.market_map.confidence_level.toUpperCase()}
-                        </span>
-                      </div>
-                      <div className="flex flex-col space-y-1">
-                        <span className="font-semibold text-gray-800 uppercase tracking-wide text-xs">Data Sources</span>
-                        <div className="space-y-2">
-                          {analysis.market_map.data_sources.slice(0, 3).map((source, index) => (
-                            <div key={index} className="flex items-center">
-                              <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 flex-shrink-0"></div>
-                              {source.url ? (
-                                <a 
-                                  href={source.url} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="text-blue-600 hover:text-blue-800 underline text-sm font-medium transition-colors"
-                                >
-                                  {source.name || source}
-                                </a>
-                              ) : (
-                                <span className="text-gray-600 text-sm font-medium">{source}</span>
-                              )}
-                            </div>
-                          ))}
-                          {analysis.market_map.data_sources.length > 3 && (
-                            <div className="text-xs text-gray-500 italic">
-                              +{analysis.market_map.data_sources.length - 3} more sources
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                  <div className="mt-8 pt-4 border-t border-gray-200 flex flex-wrap items-center justify-between text-sm">
+                    <div className="flex items-center space-x-4">
+                      <span className="text-gray-600">
+                        Analysis Date: <span className="font-medium">{new Date(analysis.market_map.timestamp).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}</span>
+                      </span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        analysis.market_map.confidence_level === 'high' ? 'bg-green-100 text-green-700' :
+                        analysis.market_map.confidence_level === 'medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'
+                      }`}>
+                        {analysis.market_map.confidence_level.toUpperCase()} CONFIDENCE
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Footnote Sources */}
+                  <div className="mt-6 pt-4 border-t border-gray-100 bg-gray-50 -mx-8 px-8 py-4">
+                    <div className="text-xs text-gray-500">
+                      <span className="font-medium">Sources: </span>
+                      {analysis.market_map.data_sources.slice(0, 4).map((source, index) => {
+                        const sourceName = typeof source === 'string' ? source : source.name || source;
+                        const sourceUrl = typeof source === 'object' && source.url ? source.url : null;
+                        
+                        return (
+                          <span key={index}>
+                            {index > 0 && ', '}
+                            {sourceUrl ? (
+                              <a 
+                                href={sourceUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:text-blue-700 underline"
+                              >
+                                {sourceName}
+                              </a>
+                            ) : (
+                              <span>{sourceName}</span>
+                            )}
+                          </span>
+                        );
+                      })}
+                      {analysis.market_map.data_sources.length > 4 && (
+                        <span className="italic"> and {analysis.market_map.data_sources.length - 4} other sources</span>
+                      )}
                     </div>
                   </div>
                 </div>
